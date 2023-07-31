@@ -2,9 +2,10 @@ import { useEffect, useState } from "react";
 import apiClient from "../services/api-client";
 import { CanceledError } from "axios";
 
-interface Event {
+export interface Event {
   id: number;
   name: string;
+  image: string;
 }
 
 interface GetEventsResponse {
