@@ -2,29 +2,26 @@ import { useEffect, useState } from "react";
 import apiClient from "../services/api-client";
 import { CanceledError } from "axios";
 
-export interface Event {
+export interface Club {
   id: number;
   name: string;
   image: string;
-  clubs: number[];
-  event_start_date: string;
-  location: string;
 }
 
-interface GetEventsResponse {
+interface GetClubsResponse {
   count: number;
-  results: Event[];
+  results: Club[];
 }
 
-const useEvents = () => {
-  const [events, setEvents] = useState<Event[]>([]);
+const useClubs = () => {
+  const [clubs, setEvents] = useState<Club[]>([]);
   const [error, setError] = useState("");
 
   useEffect(() => {
     const controller = new AbortController();
 
     apiClient
-      .get<GetEventsResponse>("/events.json", { signal: controller.signal })
+      .get<GetClubsResponse>("/clubs.json", { signal: controller.signal })
       .then((res) => setEvents(res.data.results))
       .catch((err) => {
         if (err instanceof CanceledError) return;
@@ -34,7 +31,7 @@ const useEvents = () => {
     return () => controller.abort();
   }, []);
 
-  return { events, error };
+  return { clubs, error };
 };
 
-export default useEvents;
+export default useClubs;
