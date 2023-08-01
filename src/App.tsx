@@ -6,18 +6,19 @@ function App() {
   return (
     <Grid
       templateAreas={{
-        base: `"nav" "main"`,
-        lg: `"nav nav" "side main"`,
+        base: '"nav" "main"',
+        lg: '"nav nav" "side main"',
       }}
+      templateColumns={{ base: "1fr", lg: "200px 1fr" }}
     >
       <GridItem area="nav">
-        <NavBar/>
+        <NavBar />
       </GridItem>
       <GridItem area="main">
-        <EventsGrid/>
+        <EventsGrid />
       </GridItem>
       <Show above="lg">
-        <GridItem area="side" bg='purple.300'>
+        <GridItem area="side" bg="purple.300">
           side
         </GridItem>
       </Show>

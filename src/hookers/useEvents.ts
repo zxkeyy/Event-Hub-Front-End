@@ -20,22 +20,27 @@ interface GetEventsResponse {
 const useEvents = () => {
   const [events, setEvents] = useState<Event[]>([]);
   const [error, setError] = useState("");
+  const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {
     const controller = new AbortController();
 
+    //setLoading(true)
     apiClient
       .get<GetEventsResponse>("/events.json", { signal: controller.signal })
-      .then((res) => setEvents(res.data.results))
+      .then((res) => {
+        setEvents(res.data.results);
+      })
       .catch((err) => {
         if (err instanceof CanceledError) return;
         setError(err.message);
-      });
+      })
+      .finally(() => setLoading(false));
 
     return () => controller.abort();
   }, []);
 
-  return { events, error };
+  return { events, error, isLoading };
 };
 
 export default useEvents;
