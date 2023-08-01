@@ -5,7 +5,7 @@ import useClubs from "../hookers/useClubs";
 import EventCardSkeleton from "./EventCardSkeleton";
 
 const EventsGrid = () => {
-  const { events, error, isLoading } = useEvents();
+  const { data: events, error, isLoading } = useEvents();
 
   const skeletons = [1, 2, 3, 4, 5, 6, 7, 8, 9 ,10]
 
