@@ -1,10 +1,8 @@
 import {
-  Box,
   Card,
   CardBody,
   Grid,
   GridItem,
-  HStack,
   Heading,
   Image,
   Text,
@@ -18,16 +16,16 @@ interface Props {
 
 const EventCard = ({ event }: Props) => {
   return (
-    <Card borderRadius={0} width={300} overflow="hidden">
+    <Card borderRadius={0} overflow="hidden">
       <Image aspectRatio={3 / 2} src={event.image} />
       <CardBody padding={0}>
         <Grid
           templateAreas={`"date title" "date location" "description description"`}
-          templateColumns={"100px 1fr"}
+          templateColumns={"0.5fr 1fr"}
           paddingTop={5}
         >
           <GridItem area="title">
-            <Heading fontSize="xl">{event.name}</Heading>
+            <Heading fontWeight='black' fontSize='md'>{event.name}</Heading>
           </GridItem>
           <GridItem area="date">
             <DateIcon date={event.start_date} />

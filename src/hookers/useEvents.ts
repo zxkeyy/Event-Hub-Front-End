@@ -1,6 +1,3 @@
-import { useEffect, useState } from "react";
-import apiClient from "../services/api-client";
-import { CanceledError } from "axios";
 import useData from "./useData";
 
 export interface Event {
@@ -13,6 +10,6 @@ export interface Event {
   description: string;
 }
 
-const useEvents = () => useData<Event>('/events');
+const useEvents = (selectedWilaya: number | null) => useData<Event>('/events', {params: {wilaya: selectedWilaya}}, [selectedWilaya]);
 
 export default useEvents;

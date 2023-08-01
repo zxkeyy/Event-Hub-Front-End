@@ -4,18 +4,26 @@ import EventCard from "./EventCard";
 import useClubs from "../hookers/useClubs";
 import EventCardSkeleton from "./EventCardSkeleton";
 
-const EventsGrid = () => {
-  const { data: events, error, isLoading } = useEvents();
+interface Props{
+  selectedWilaya: number | null
+}
 
-  const skeletons = [1, 2, 3, 4, 5, 6, 7, 8, 9 ,10]
+const EventsGrid = ({selectedWilaya}: Props) => {
+  const { data: events, error, isLoading } = useEvents(selectedWilaya);
+
+  const skeletons = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
   return (
     <>
       {error && <Text>{error}</Text>}
-      <SimpleGrid columns={{sm:1, md:2, lg:3, xl: 5}} spacing={10} padding='10px'>
-        {isLoading && skeletons.map(skeleton => <EventCardSkeleton key={skeleton}/>)}
+      <SimpleGrid
+        columns={{ base: 2, md: 3, lg: 4, xl: 5 }}
+        spacing={{base:1, md: 5}}
+      >
+        {isLoading &&
+          skeletons.map((skeleton) => <EventCardSkeleton key={skeleton} />)}
         {events.map((event) => (
-          <EventCard key={event.id} event={event}/>
+          <EventCard key={event.id} event={event} />
         ))}
       </SimpleGrid>
     </>

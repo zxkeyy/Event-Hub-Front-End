@@ -13,7 +13,7 @@ const DateIcon = ({date}: Props) => {
 
   return (
     <div>
-        <Text align='center' fontWeight='extrabold' fontSize='md' color='purple.300'>{months[parseInt(month)]}</Text>
+        <Text align='center' fontWeight='extrabold' fontSize='md' color='purple.500'>{months[parseInt(month)]}</Text>
         <Text align='center' fontWeight='bold' fontSize='3xl'>{day}</Text>
     </div>
   )

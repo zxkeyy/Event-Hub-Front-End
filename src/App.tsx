@@ -1,27 +1,27 @@
-import { Grid, GridItem, Show } from "@chakra-ui/react";
+import { Box, Grid, GridItem, HStack, Heading } from "@chakra-ui/react";
 import NavBar from "./components/NavBar";
 import EventsGrid from "./components/EventsGrid";
+import SelectWilaya from "./components/SelectWilaya";
+import { useState } from "react";
 
 function App() {
+  const [selectedWilaya, setSelectedWilaya] = useState<number | null>(null)
+
   return (
-    <Grid
-      templateAreas={{
-        base: '"nav" "main"',
-        lg: '"nav nav" "side main"',
-      }}
-      templateColumns={{ base: "1fr", lg: "200px 1fr" }}
-    >
+    <Grid templateAreas={'"nav" "main"'}>
       <GridItem area="nav">
         <NavBar />
       </GridItem>
       <GridItem area="main">
-        <EventsGrid />
+        <Box padding={20}>
+          <HStack paddingBottom={10}>
+            <Heading>Events in</Heading>
+            <SelectWilaya onSelectWilaya={(n) => setSelectedWilaya(n)}/>
+          </HStack>
+
+          <EventsGrid selectedWilaya={selectedWilaya}/>
+        </Box>
       </GridItem>
-      <Show above="lg">
-        <GridItem area="side" bg="purple.300">
-          side
-        </GridItem>
-      </Show>
     </Grid>
   );
 }
