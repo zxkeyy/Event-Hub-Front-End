@@ -7,8 +7,9 @@ export interface Event {
   name: string;
   image: string;
   clubs: number[];
-  event_start_date: string;
-  location: string;
+  start_date: string;
+  location_name: string;
+  description: string;
 }
 
 interface GetEventsResponse {

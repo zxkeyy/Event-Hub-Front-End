@@ -17,7 +17,7 @@ function App() {
         <EventsGrid/>
       </GridItem>
       <Show above="lg">
-        <GridItem area="side" bg="gold">
+        <GridItem area="side" bg='purple.300'>
           side
         </GridItem>
       </Show>
