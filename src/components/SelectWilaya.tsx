@@ -1,5 +1,4 @@
 import { Select } from "@chakra-ui/react";
-import React from "react";
 
 const wilayas = [
   "Adrar",
@@ -63,7 +62,7 @@ const wilayas = [
 ];
 
 interface Props{
-    onSelectWilaya: (wilaya: number) => void
+    onSelectWilaya: (wilaya: number | null) => void
 }
 
 const SelectWilaya = ({onSelectWilaya}: Props) => {
@@ -77,6 +76,7 @@ const SelectWilaya = ({onSelectWilaya}: Props) => {
         color="purple.500"
         size="lg"
         variant="flushed"
+        onChange={() => onSelectWilaya(null)}
       >
         {[...Array(58).keys()].map((n) => (
           <option onClick={() => onSelectWilaya(n+1)} key={n+1} value={n+1}>{wilayas[n]}</option>
