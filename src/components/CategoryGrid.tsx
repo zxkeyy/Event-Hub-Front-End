@@ -1,5 +1,5 @@
 import useCategories, { Category } from "../hookers/useCategories";
-import { Button, SkeletonText, Text, Wrap, WrapItem } from "@chakra-ui/react";
+import { Button, Skeleton, Text, Wrap, WrapItem } from "@chakra-ui/react";
 
 interface Props {
   onClickCategory: (category: Category | null) => void;
@@ -13,7 +13,7 @@ const CategoryGrid = ({ selectedCategory, onClickCategory }: Props) => {
     <>
       {error && <Text>{error}</Text>}
       <Wrap>
-        {isLoading && <SkeletonText/>}
+        {isLoading && <Skeleton height={10} width={200}/>}
         {categories.map((category) => (
           <WrapItem key={category.id}>
             <Button
