@@ -1,5 +1,6 @@
+import { useQuery } from "@tanstack/react-query";
 import useEventQueryStore from "../store";
-import useData from "./useData";
+import apiClient, { GetResponse } from "../services/api-client";
 
 export interface Event {
   id: number;
@@ -9,11 +10,18 @@ export interface Event {
   start_date: string;
   location_name: string;
   description: string;
+  slug: string;
 }
 
 const useEvents = () => {
   const eventQuery = useEventQueryStore((s) => s.eventQuery);
-  return useData<Event>("/events", { params: eventQuery }, [eventQuery]);
+  return useQuery<GetResponse<Event>, Error>({
+    queryKey: ["events", eventQuery],
+    queryFn: () =>
+      apiClient
+        .get<GetResponse<Event>>("/events", { params: eventQuery })
+        .then((res) => res.data),
+  });
 };
 
 export default useEvents;

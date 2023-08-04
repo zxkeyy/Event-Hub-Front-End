@@ -3,16 +3,15 @@ import { Button, Skeleton, Text, Wrap, WrapItem } from "@chakra-ui/react";
 import useEventQueryStore from "../store";
 
 const CategoryGrid = () => {
-  const { data: categories, error, isLoading } = useCategories();
+  const { data: categories, isLoading, error } = useCategories();
   const selectedCategoryId = useEventQueryStore((s) => s.eventQuery.category);
   const setSelectedCategoryId = useEventQueryStore((s) => s.setCategory);
 
   return (
     <>
-      {error && <Text>{error}</Text>}
       <Wrap>
         {isLoading && <Skeleton height={10} width={200} />}
-        {categories.map((category) => (
+        {categories?.results.map((category) => (
           <WrapItem key={category.id}>
             <Button
               size={{ base: "sm", md: "md" }}
