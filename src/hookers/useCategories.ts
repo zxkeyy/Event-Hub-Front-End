@@ -1,6 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
-import apiClient, { GetResponse } from "../services/api-client";
+import APIClient, { GetResponse } from "../services/api-client";
 import { Event } from "./useEvents";
+
+const apiClient = new APIClient<Category>("/categories");
 
 export interface Category {
   id: number;
@@ -12,10 +14,7 @@ export interface Category {
 const useCategories = () =>
   useQuery<GetResponse<Category>, Error>({
     queryKey: ["categories"],
-    queryFn: () =>
-      apiClient
-        .get<GetResponse<Category>>("/categories")
-        .then((res) => res.data),
+    queryFn: apiClient.getAll,
     staleTime: 24 * 60 * 60 * 1000, //24h so mosh is happy
   });
 

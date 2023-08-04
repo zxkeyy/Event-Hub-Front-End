@@ -1,6 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import useEventQueryStore from "../store";
-import apiClient, { GetResponse } from "../services/api-client";
+import APIClient, { GetResponse } from "../services/api-client";
+
+const apiClient = new APIClient<Event>("/events");
 
 export interface Event {
   id: number;
@@ -17,10 +19,7 @@ const useEvents = () => {
   const eventQuery = useEventQueryStore((s) => s.eventQuery);
   return useQuery<GetResponse<Event>, Error>({
     queryKey: ["events", eventQuery],
-    queryFn: () =>
-      apiClient
-        .get<GetResponse<Event>>("/events", { params: eventQuery })
-        .then((res) => res.data),
+    queryFn: () => apiClient.getAll({ params: eventQuery }),
   });
 };
 
