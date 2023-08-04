@@ -1,4 +1,5 @@
 import { Select } from "@chakra-ui/react";
+import useEventQueryStore from "../store";
 
 const wilayas = [
   "Adrar",
@@ -61,11 +62,10 @@ const wilayas = [
   "Ain Guezzam",
 ];
 
-interface Props {
-  onSelectWilaya: (wilaya: number | null) => void;
-}
 
-const SelectWilaya = ({ onSelectWilaya }: Props) => {
+const SelectWilaya = () => {
+  const setWilaya = useEventQueryStore(s => s.setWilaya)
+
   return (
     <>
       <Select
@@ -76,11 +76,11 @@ const SelectWilaya = ({ onSelectWilaya }: Props) => {
         color="purple.500"
         size={{ base: "md" , md: "lg"}}
         variant="flushed"
-        onChange={() => onSelectWilaya(null)}
+        onChange={() => setWilaya(null)}
       >
         {[...Array(58).keys()].map((n) => (
           <option
-            onClick={() => onSelectWilaya(n + 1)}
+            onClick={() => setWilaya(n + 1)}
             key={n + 1}
             value={n + 1}
           >

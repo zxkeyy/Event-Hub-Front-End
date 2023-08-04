@@ -2,19 +2,9 @@ import { SimpleGrid, Text } from "@chakra-ui/react";
 import useEvents from "../hookers/useEvents";
 import EventCard from "./EventCard";
 import EventCardSkeleton from "./EventCardSkeleton";
-import { Category } from "../hookers/useCategories";
 
-interface Props {
-  selectedWilaya: number | null;
-  selectedCategory: Category | null;
-}
-
-const EventsGrid = ({ selectedWilaya, selectedCategory }: Props) => {
-  const {
-    data: events,
-    error,
-    isLoading,
-  } = useEvents(selectedWilaya, selectedCategory);
+const EventsGrid = () => {
+  const { data: events, error, isLoading } = useEvents();
 
   const skeletons = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 

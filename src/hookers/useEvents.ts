@@ -1,4 +1,4 @@
-import { Category } from "./useCategories";
+import useEventQueryStore from "../store";
 import useData from "./useData";
 
 export interface Event {
@@ -11,14 +11,9 @@ export interface Event {
   description: string;
 }
 
-const useEvents = (
-  selectedWilaya: number | null,
-  selectedCategory: Category | null
-) =>
-  useData<Event>(
-    "/events",
-    { params: { wilaya: selectedWilaya, category: selectedCategory?.id } },
-    [selectedWilaya, selectedCategory]
-  );
+const useEvents = () => {
+  const eventQuery = useEventQueryStore((s) => s.eventQuery);
+  return useData<Event>("/events", { params: eventQuery }, [eventQuery]);
+};
 
 export default useEvents;
