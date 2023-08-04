@@ -18,9 +18,9 @@ function App() {
         <NavBar />
       </GridItem>
       <GridItem area="main">
-        <Box padding={20}>
+        <Box padding={{base: 4, md: 20}}>
           <HStack paddingBottom={10}>
-            <Heading>Events in</Heading>
+            <Heading size={{base: "md", md: "lg"}}>Events in</Heading>
             <SelectWilaya
               onSelectWilaya={(wilaya) => setSelectedWilaya(wilaya)}
             />

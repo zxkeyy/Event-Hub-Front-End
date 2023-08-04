@@ -61,25 +61,31 @@ const wilayas = [
   "Ain Guezzam",
 ];
 
-interface Props{
-    onSelectWilaya: (wilaya: number | null) => void
+interface Props {
+  onSelectWilaya: (wilaya: number | null) => void;
 }
 
-const SelectWilaya = ({onSelectWilaya}: Props) => {
+const SelectWilaya = ({ onSelectWilaya }: Props) => {
   return (
     <>
       <Select
         placeholder="Any"
         width="fit-content"
         fontWeight="bold"
-        fontSize="4xl"
+        fontSize={{base: "xl",md:"4xl"}}
         color="purple.500"
-        size="lg"
+        size={{ base: "md" , md: "lg"}}
         variant="flushed"
         onChange={() => onSelectWilaya(null)}
       >
         {[...Array(58).keys()].map((n) => (
-          <option onClick={() => onSelectWilaya(n+1)} key={n+1} value={n+1}>{wilayas[n]}</option>
+          <option
+            onClick={() => onSelectWilaya(n + 1)}
+            key={n + 1}
+            value={n + 1}
+          >
+            {wilayas[n]}
+          </option>
         ))}
       </Select>
     </>

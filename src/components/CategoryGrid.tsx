@@ -17,6 +17,7 @@ const CategoryGrid = ({ selectedCategory, onClickCategory }: Props) => {
         {categories.map((category) => (
           <WrapItem key={category.id}>
             <Button
+            size={{base: "sm", md:"md"}}
               variant={selectedCategory === category ? "solid" : "outline"}
               bgColor={selectedCategory === category ? "purple.500" : ""}
               onClick={() => {
