@@ -3,7 +3,7 @@ import { Button, Skeleton, Text, Wrap, WrapItem } from "@chakra-ui/react";
 import useEventQueryStore from "../store";
 
 const CategoryGrid = () => {
-  const { data: categories, isLoading, error } = useCategories();
+  const { data: categories, isLoading } = useCategories();
   const selectedCategoryId = useEventQueryStore((s) => s.eventQuery.category);
   const setSelectedCategoryId = useEventQueryStore((s) => s.setCategory);
 
