@@ -10,8 +10,10 @@ export interface Event {
   image: string;
   clubs: number[];
   start_date: string;
+  end_date: string;
   location_name: string;
   description: string;
+  body: string
   slug: string;
 }
 

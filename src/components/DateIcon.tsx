@@ -1,5 +1,4 @@
 import { Text } from '@chakra-ui/react';
-import React from 'react'
 
 interface Props{
     date: string;
@@ -13,7 +12,7 @@ const DateIcon = ({date}: Props) => {
 
   return (
     <div>
-        <Text align='center' fontWeight='extrabold' fontSize='md' color='purple.500'>{months[parseInt(month)]}</Text>
+        <Text align='center' fontWeight='extrabold' fontSize='md' color='purple.500'>{months[parseInt(month) - 1]}</Text>
         <Text align='center' fontWeight='bold' fontSize='3xl'>{day}</Text>
     </div>
   )

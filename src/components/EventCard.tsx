@@ -26,7 +26,7 @@ const EventCard = ({ event }: Props) => {
           transition: "transform .15s ease-in",
         }}
       >
-        <Image aspectRatio={3 / 2} src={event.image} />
+        <Image aspectRatio={2 / 1} src={event.image} />
         <CardBody padding={0}>
           <Grid
             templateAreas={`"date title" "date location" "description description"`}
