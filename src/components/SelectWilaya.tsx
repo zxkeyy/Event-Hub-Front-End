@@ -65,6 +65,7 @@ const wilayas = [
 
 const SelectWilaya = () => {
   const setWilaya = useEventQueryStore(s => s.setWilaya)
+  const selectedWilaya = useEventQueryStore(s => s.eventQuery.wilaya)
 
   return (
     <>
@@ -77,12 +78,14 @@ const SelectWilaya = () => {
         size={{ base: "md" , md: "lg"}}
         variant="flushed"
         onChange={() => setWilaya(null)}
+        value={selectedWilaya ? selectedWilaya : 0}
       >
         {[...Array(58).keys()].map((n) => (
           <option
             onClick={() => setWilaya(n + 1)}
             key={n + 1}
             value={n + 1}
+            
           >
             {wilayas[n]}
           </option>

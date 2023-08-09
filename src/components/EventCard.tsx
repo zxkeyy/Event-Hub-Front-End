@@ -10,6 +10,7 @@ import {
 import { Event } from "../hookers/useEvents";
 import DateIcon from "./DateIcon";
 import { Link } from "react-router-dom";
+import fallBackImage from "../assets/image-not-found.png"
 
 interface Props {
   event: Event;
@@ -26,7 +27,7 @@ const EventCard = ({ event }: Props) => {
           transition: "transform .15s ease-in",
         }}
       >
-        <Image aspectRatio={2 / 1} src={event.image} />
+        <Image aspectRatio={2 / 1} src={event.image} fallbackSrc={fallBackImage}/>
         <CardBody padding={0}>
           <Grid
             templateAreas={`"date title" "date location" "description description"`}

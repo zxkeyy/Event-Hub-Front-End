@@ -6,7 +6,7 @@ const apiClient = new APIClient<Event>("/events");
 
 const useEvent = (slug: string) =>
   useQuery({
-    queryKey: ["events", slug],
+    queryKey: ["event", slug],
     queryFn: () => apiClient.get(slug),
   });
 

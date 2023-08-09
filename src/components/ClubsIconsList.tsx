@@ -1,5 +1,5 @@
-import useClubs, { Club } from "../hookers/useClubs";
-import { Center, HStack, Icon, Image, Text } from "@chakra-ui/react";
+import { Club } from "../hookers/useClubs";
+import { HStack, Image } from "@chakra-ui/react";
 
 interface Props {
   clubIds: number[];

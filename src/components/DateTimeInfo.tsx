@@ -35,7 +35,7 @@ const parseDate = (date: string) => {
   }
 
   let parsedDate =
-    months[parseInt(month) - 1] + " " + day + ", " + year + " at " + time;
+    months[parseInt(month) - 1] + " " + day + ", " + year + " | " + time;
   return parsedDate;
 };
 
@@ -50,11 +50,11 @@ const DateTimeInfo = ({ startDate, endDate }: Props) => {
         <BsCalendar4Week size={35} />
       </GridItem>
       <GridItem area="startDate">
-        <Text fontWeight="semibold">Start: {parseDate(startDate)}</Text>
+        <Text fontWeight="semibold">{parseDate(startDate)} -</Text>
       </GridItem>
       <GridItem area="endDate">
         {endDate && (
-          <Text fontWeight="semibold">End: {parseDate(endDate)}</Text>
+          <Text fontWeight="semibold">{parseDate(endDate)}</Text>
         )}
       </GridItem>
     </Grid>

@@ -1,5 +1,5 @@
 import useCategories from "../hookers/useCategories";
-import { Button, Skeleton, Text, Wrap, WrapItem } from "@chakra-ui/react";
+import { Button, Skeleton, Wrap, WrapItem } from "@chakra-ui/react";
 import useEventQueryStore from "../store";
 
 const CategoryGrid = () => {

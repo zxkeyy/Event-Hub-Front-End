@@ -14,6 +14,8 @@ import { BsList } from "react-icons/bs";
 import { ReactMarkdown } from "react-markdown/lib/react-markdown";
 import DateTimeInfo from "../components/DateTimeInfo";
 import LocationInfo from "../components/LocationInfo";
+import OrganizersInfo from "../components/OrganizersInfo";
+import fallBackImage from "../assets/image-not-found.png"
 
 const EventDetailPage = () => {
   const { slug } = useParams();
@@ -36,6 +38,7 @@ const EventDetailPage = () => {
             <Image
               borderRadius={3}
               src={event.image}
+              fallbackSrc={fallBackImage}
               aspectRatio={2 / 1}
               maxWidth={940}
               width={{ base: "100%" }}
@@ -50,6 +53,11 @@ const EventDetailPage = () => {
               <Heading fontSize="5xl" fontFamily="sans-serif">
                 {event.name}
               </Heading>
+              <Box padding={4} paddingLeft={0}>
+                <OrganizersInfo organizerIds={event.clubs}/>
+              </Box>
+              
+
               <Box padding={4} paddingLeft={0}>
                 <Box
                   border="1px"
