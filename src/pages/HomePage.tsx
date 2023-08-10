@@ -2,7 +2,6 @@ import { HStack, Heading, Box } from "@chakra-ui/react";
 import CategoryGrid from "../components/CategoryGrid";
 import EventsGrid from "../components/EventsGrid";
 import SelectWilaya from "../components/SelectWilaya";
-import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import "leaflet/dist/leaflet.css"
 
 const HomePage = () => {

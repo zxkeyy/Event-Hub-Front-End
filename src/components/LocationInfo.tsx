@@ -9,7 +9,9 @@ interface Props {
 }
 
 const LocationInfo = ({ locationId, locationName }: Props) => {
-  const { data, isLoading, error } = useMapLookup(locationId);
+  const { data, error } = useMapLookup(locationId);
+
+  if(error) throw(error);
 
   return (
     <Box>
