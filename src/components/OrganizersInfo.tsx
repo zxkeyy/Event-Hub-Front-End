@@ -11,7 +11,6 @@ const OrganizersInfo = ({ organizerIds }: Props) => {
   const [organizers, setOrganizers] = useState<Club[]>([]);
 
   for (const id of organizerIds) {
-    console.log(id);
     const club = useClub(id).data;
     if (club && !organizers.includes(club)) {
       setOrganizers([...organizers, club]);
@@ -23,27 +22,26 @@ const OrganizersInfo = ({ organizerIds }: Props) => {
       <Heading fontSize="md">Organized By:</Heading>
       <Center padding={2}>
         <HStack>
-          {
-            organizers.map((organizer, index) => (
-                <Box
-                  bgColor={"purple.800"}
-                  borderRadius={"full"}
-                  boxSize="fit-content"
-                  paddingX={4}
-                  paddingY={2}
-                  key={index}
-                >
-                  <HStack>
-                    <Image
-                      src={organizer.image}
-                      fallbackSrc={fallBackImage}
-                      borderRadius="full"
-                      boxSize={8}
-                    />
-                    <Text>{organizer.name}</Text>
-                  </HStack>
-                </Box>
-            ))}
+          {organizers.map((organizer, index) => (
+            <Box
+              bgColor={"purple.800"}
+              borderRadius={"full"}
+              boxSize="fit-content"
+              paddingX={4}
+              paddingY={2}
+              key={index}
+            >
+              <HStack>
+                <Image
+                  src={organizer.image}
+                  fallbackSrc={fallBackImage}
+                  borderRadius="full"
+                  boxSize={8}
+                />
+                <Text>{organizer.name}</Text>
+              </HStack>
+            </Box>
+          ))}
         </HStack>
       </Center>
     </Box>

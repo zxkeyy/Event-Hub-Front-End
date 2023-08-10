@@ -35,7 +35,7 @@ const EventCard = ({ event }: Props) => {
             paddingTop={5}
           >
             <GridItem area="title">
-              <Heading fontWeight="black" fontSize="md">
+              <Heading fontWeight="black" fontSize="md" noOfLines={1} paddingRight={4}>
                 {event.name}
               </Heading>
             </GridItem>
@@ -43,7 +43,7 @@ const EventCard = ({ event }: Props) => {
               <DateIcon date={event.start_date} />
             </GridItem>
             <GridItem area="location">
-              <Text fontSize="md" color="gray">
+              <Text fontSize="sm" color="gray" noOfLines={1} paddingRight={4}>
                 {event.location_name}
               </Text>
             </GridItem>

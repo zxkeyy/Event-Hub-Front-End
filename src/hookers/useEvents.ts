@@ -12,6 +12,7 @@ export interface Event {
   start_date: string;
   end_date: string;
   location_name: string;
+  location_id: string;
   description: string;
   body: string
   slug: string;

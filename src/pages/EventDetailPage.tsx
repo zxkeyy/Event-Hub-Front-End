@@ -15,7 +15,7 @@ import { ReactMarkdown } from "react-markdown/lib/react-markdown";
 import DateTimeInfo from "../components/DateTimeInfo";
 import LocationInfo from "../components/LocationInfo";
 import OrganizersInfo from "../components/OrganizersInfo";
-import fallBackImage from "../assets/image-not-found.png"
+import fallBackImage from "../assets/image-not-found.png";
 
 const EventDetailPage = () => {
   const { slug } = useParams();
@@ -54,9 +54,8 @@ const EventDetailPage = () => {
                 {event.name}
               </Heading>
               <Box padding={4} paddingLeft={0}>
-                <OrganizersInfo organizerIds={event.clubs}/>
+                <OrganizersInfo organizerIds={event.clubs} />
               </Box>
-              
 
               <Box padding={4} paddingLeft={0}>
                 <Box
@@ -82,12 +81,12 @@ const EventDetailPage = () => {
               </Box>
             </GridItem>
             <GridItem>
-                <DateTimeInfo
-                  startDate={event.start_date}
-                  endDate={event.end_date}
-                />
-                <hr/>
-                <LocationInfo location={event.location_name} />
+              <DateTimeInfo
+                startDate={event.start_date}
+                endDate={event.end_date}
+              />
+              <hr />
+              <LocationInfo locationId={event.location_id} locationName={event.location_name}/>
             </GridItem>
           </SimpleGrid>
         </Box>
