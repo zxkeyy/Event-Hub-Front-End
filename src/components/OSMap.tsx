@@ -20,7 +20,7 @@ const OSMap = ({ locationData }: Props) => {
       <Marker
         position={[parseFloat(locationData.lat), parseFloat(locationData.lon)]}
       >
-        <Popup>{locationData.name}</Popup>
+        <Popup>{locationData.display_name}</Popup>
       </Marker>
     </MapContainer>
   );
