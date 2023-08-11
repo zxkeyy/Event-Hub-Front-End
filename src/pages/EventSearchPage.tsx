@@ -5,7 +5,7 @@ import EventSearchFilters from "../components/EventSearchFilters";
 const EventSearchPage = () => {
   return (
     <Grid templateAreas={'"filters content"'} templateColumns={"0.3fr 1fr"}>
-      <GridItem area="filters" bgColor="red">
+      <GridItem area="filters">
         <EventSearchFilters/>
       </GridItem>
       <GridItem area="content" padding={10}>
