@@ -1,6 +1,5 @@
 import { Box, HStack, Text } from "@chakra-ui/react";
 import { BsGeoAlt } from "react-icons/bs";
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import useMapLookup from "../hookers/useMapLookup";
 import OSMap from "./OSMap";
 

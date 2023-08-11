@@ -1,9 +1,20 @@
-import React from 'react'
+import { Grid, GridItem } from "@chakra-ui/react";
+import EventsGrid from "../components/EventsGrid";
 
 const EventSearchPage = () => {
   return (
-    <div>EventSearchPage</div>
-  )
-}
+    <Grid templateAreas={'"filters content"'} templateColumns={"0.3fr 1fr"}>
+      <GridItem area="filters" bgColor="red">
+        hi
+      </GridItem>
+      <GridItem area="content" padding={10}>
+        <EventsGrid
+          columns={{ base: 2, md: 3, lg: 4, xl: 4 }}
+          spacing={{ base: 1, md: 5 }}
+        />
+      </GridItem>
+    </Grid>
+  );
+};
 
-export default EventSearchPage
+export default EventSearchPage;

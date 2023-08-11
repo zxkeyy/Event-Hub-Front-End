@@ -15,7 +15,7 @@ const HomePage = () => {
       <Box padding={3}>
         <CategoryGrid />
       </Box>
-      <EventsGrid />
+      <EventsGrid columns={{ base: 2, md: 3, lg: 4, xl: 5 }} spacing={{ base: 1, md: 5 }}/>
     </Box>
   );
 };
