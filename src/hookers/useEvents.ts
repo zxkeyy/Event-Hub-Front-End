@@ -14,7 +14,7 @@ export interface Event {
   location_name: string;
   location_id: string;
   description: string;
-  body: string
+  body: string;
   slug: string;
 }
 
@@ -22,7 +22,13 @@ const useEvents = () => {
   const eventQuery = useEventQueryStore((s) => s.eventQuery);
   return useQuery<GetResponse<Event>, Error>({
     queryKey: ["events", eventQuery],
-    queryFn: () => apiClient.getAll({ params: eventQuery }),
+    queryFn: () =>
+      apiClient.getAll({
+        params: eventQuery,
+        paramsSerializer: {
+          indexes: null, // by default: false
+        },
+      }),
   });
 };
 

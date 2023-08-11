@@ -12,14 +12,15 @@ const CategorySelectList = ({ listLength }: Props) => {
   const selectedCategoryId = useEventQueryStore((s) => s.eventQuery.category);
   const setSelectedCategoryId = useEventQueryStore((s) => s.setCategory);
 
-  const [seeAll, setSeeAll] = useState(1);
+  const [seeAll, setSeeAll] = useState(0);
 
   return (
     <Stack>
-      {seeAll === 0 && (
+      {seeAll === 1 && (
         <>
-          {categories?.results.slice(0, listLength).map((category) => (
+          {categories?.results.map((category) => (
             <Box
+              key={category.id}
               onChange={() =>
                 selectedCategoryId != null && selectedCategoryId === category.id
                   ? setSelectedCategoryId(null)
@@ -34,16 +35,17 @@ const CategorySelectList = ({ listLength }: Props) => {
               </Checkbox>
             </Box>
           ))}
-          <Link onClick={() => setSeeAll(1)}>
+          <Link onClick={() => setSeeAll(0)}>
             <Text as="u">See less</Text>
           </Link>
         </>
       )}
 
-      {seeAll === 1 && (
+      {seeAll === 0 && (
         <>
-          {categories?.results.map((category) => (
+          {categories?.results.slice(0, listLength).map((category) => (
             <Box
+              key={category.id}
               onChange={() =>
                 selectedCategoryId != null && selectedCategoryId === category.id
                   ? setSelectedCategoryId(null)
@@ -59,7 +61,7 @@ const CategorySelectList = ({ listLength }: Props) => {
             </Box>
           ))}
           {categories && categories?.results.length > listLength && (
-            <Link onClick={() => setSeeAll(0)}>
+            <Link onClick={() => setSeeAll(1)}>
               <Text as="u">See all</Text>
             </Link>
           )}
