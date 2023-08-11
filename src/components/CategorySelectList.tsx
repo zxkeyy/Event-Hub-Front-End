@@ -1,4 +1,4 @@
-import { Box, Checkbox, Link, Stack, Text } from "@chakra-ui/react";
+import { Box, Checkbox, Link, Skeleton, Stack, Text } from "@chakra-ui/react";
 import useCategories from "../hookers/useCategories";
 import useEventQueryStore from "../store";
 import { useState } from "react";
@@ -8,11 +8,20 @@ interface Props {
 }
 
 const CategorySelectList = ({ listLength }: Props) => {
-  const { data: categories } = useCategories();
+  const { data: categories, isLoading } = useCategories();
   const selectedCategoryId = useEventQueryStore((s) => s.eventQuery.category);
   const setSelectedCategoryId = useEventQueryStore((s) => s.setCategory);
 
   const [seeAll, setSeeAll] = useState(0);
+
+  if (isLoading)
+    return (
+      <Stack>
+        {[...Array(listLength).keys()].map((n) => (
+          <Skeleton key={n} width={150} height={6} />
+        ))}
+      </Stack>
+    );
 
   return (
     <Stack>

@@ -15,7 +15,14 @@ const TagsSelectList = ({ listLength }: Props) => {
   const [seeAll, setSeeAll] = useState(0);
 
   if (selectedTags === undefined) return;
-
+  if (isLoading)
+    return (
+      <Stack>
+        {[...Array(listLength).keys()].map((n) => (
+          <Skeleton key={n} width={150} height={6} />
+        ))}
+      </Stack>
+    );
   return (
     <Stack>
       {seeAll === 1 && (
