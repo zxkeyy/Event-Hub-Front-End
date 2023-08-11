@@ -70,7 +70,7 @@ const SelectWilaya2 = () => {
     <Select
       placeholder="Any"
       width="fit-content"
-      fontWeight="bold"
+      
       fontSize={{ base: "sm", md: "md" }}
       size={{ base: "sm", md: "md" }}
       variant="filled"

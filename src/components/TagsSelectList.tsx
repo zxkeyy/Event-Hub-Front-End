@@ -1,4 +1,4 @@
-import { Box, Checkbox, Link, Stack, Text } from "@chakra-ui/react";
+import { Box, Checkbox, Link, Skeleton, Stack, Text } from "@chakra-ui/react";
 import useEventQueryStore from "../store";
 import useTags from "../hookers/useTags";
 import { useState } from "react";
@@ -8,13 +8,14 @@ interface Props {
 }
 
 const TagsSelectList = ({ listLength }: Props) => {
-  const { data: tags } = useTags();
+  const { data: tags, isLoading } = useTags();
   const selectedTags = useEventQueryStore((s) => s.eventQuery.tags);
   const setSelectedTags = useEventQueryStore((s) => s.setTags);
 
   const [seeAll, setSeeAll] = useState(0);
 
-  if (selectedTags === undefined) return <>hell</>;
+  if (selectedTags === undefined) return;
+
   return (
     <Stack>
       {seeAll === 1 && (
@@ -24,7 +25,7 @@ const TagsSelectList = ({ listLength }: Props) => {
               key={tag.id}
               onChange={() =>
                 selectedTags?.length != 0 && selectedTags?.includes(tag.id)
-                  ? setSelectedTags([])
+                  ? setSelectedTags(selectedTags.filter((id) => id != tag.id))
                   : setSelectedTags([...selectedTags, tag.id])
               }
             >
@@ -49,7 +50,7 @@ const TagsSelectList = ({ listLength }: Props) => {
               key={tag.id}
               onChange={() =>
                 selectedTags?.length != 0 && selectedTags?.includes(tag.id)
-                  ? setSelectedTags([])
+                  ? setSelectedTags(selectedTags.filter((id) => id != tag.id))
                   : setSelectedTags([...selectedTags, tag.id])
               }
             >

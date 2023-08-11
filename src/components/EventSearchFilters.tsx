@@ -18,11 +18,11 @@ const EventSearchFilters = () => {
       <Heading>Filters</Heading>
       <Divider />
 
-      <Accordion allowMultiple>
+      <Accordion defaultIndex={[0, 1, 2]} allowMultiple>
         <AccordionItem>
           <h2>
             <AccordionButton>
-              <Box as="span" flex="1" textAlign="left">
+              <Box as="span" flex="1" textAlign="left" fontWeight="bold">
                 Wilaya
               </Box>
               <AccordionIcon />
@@ -36,7 +36,7 @@ const EventSearchFilters = () => {
         <AccordionItem>
           <h2>
             <AccordionButton>
-              <Box as="span" flex="1" textAlign="left">
+              <Box as="span" flex="1" textAlign="left" fontWeight="bold">
                 Category
               </Box>
               <AccordionIcon />
@@ -50,15 +50,27 @@ const EventSearchFilters = () => {
         <AccordionItem>
           <h2>
             <AccordionButton>
-              <Box as="span" flex="1" textAlign="left">
+              <Box as="span" flex="1" textAlign="left" fontWeight="bold">
                 Tags
               </Box>
               <AccordionIcon />
             </AccordionButton>
           </h2>
           <AccordionPanel pb={4}>
-            <TagsSelectList listLength={5}/>
+            <TagsSelectList listLength={5} />
           </AccordionPanel>
+        </AccordionItem>
+
+        <AccordionItem>
+          <h2>
+            <AccordionButton>
+              <Box as="span" flex="1" textAlign="left" fontWeight="bold">
+                Date
+              </Box>
+              <AccordionIcon />
+            </AccordionButton>
+          </h2>
+          <AccordionPanel pb={4}></AccordionPanel>
         </AccordionItem>
       </Accordion>
     </Box>
