@@ -1,11 +1,12 @@
 import { Grid, GridItem } from "@chakra-ui/react";
 import EventsGrid from "../components/EventsGrid";
+import EventSearchFilters from "../components/EventSearchFilters";
 
 const EventSearchPage = () => {
   return (
     <Grid templateAreas={'"filters content"'} templateColumns={"0.3fr 1fr"}>
       <GridItem area="filters" bgColor="red">
-        hi
+        <EventSearchFilters/>
       </GridItem>
       <GridItem area="content" padding={10}>
         <EventsGrid

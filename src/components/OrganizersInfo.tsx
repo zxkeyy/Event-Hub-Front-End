@@ -1,4 +1,4 @@
-import { Box, Center, HStack, Heading, Image, Text } from "@chakra-ui/react";
+import { Avatar, Box, Center, HStack, Heading, Image, Text } from "@chakra-ui/react";
 import { Club } from "../hookers/useClubs";
 import { useState } from "react";
 import useClub from "../hookers/useClub";
@@ -32,10 +32,8 @@ const OrganizersInfo = ({ organizerIds }: Props) => {
               key={index}
             >
               <HStack>
-                <Image
+                <Avatar
                   src={organizer.image}
-                  fallbackSrc={fallBackImage}
-                  borderRadius="full"
                   boxSize={8}
                 />
                 <Text>{organizer.name}</Text>

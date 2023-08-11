@@ -3,6 +3,7 @@ import useEvent from "../hookers/useEvent";
 import {
   Box,
   Center,
+  Divider,
   GridItem,
   HStack,
   Heading,
@@ -85,7 +86,7 @@ const EventDetailPage = () => {
                 startDate={event.start_date}
                 endDate={event.end_date}
               />
-              <hr />
+              <Divider/>
               <LocationInfo locationId={event.location_id} locationName={event.location_name}/>
             </GridItem>
           </SimpleGrid>
