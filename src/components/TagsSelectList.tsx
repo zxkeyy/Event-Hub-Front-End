@@ -45,7 +45,7 @@ const TagsSelectList = ({ listLength }: Props) => {
             </Box>
           ))}
           <Link onClick={() => setSeeAll(0)}>
-            <Text as="u">See less</Text>
+            <Text fontSize="sm" as="u">See less</Text>
           </Link>
         </>
       )}
@@ -71,7 +71,7 @@ const TagsSelectList = ({ listLength }: Props) => {
           ))}
           {tags && tags?.results.length > listLength && (
             <Link onClick={() => setSeeAll(1)}>
-              <Text as="u">See all</Text>
+              <Text fontSize="sm" as="u">See all</Text>
             </Link>
           )}
         </>

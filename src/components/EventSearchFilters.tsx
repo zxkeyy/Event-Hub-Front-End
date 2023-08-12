@@ -11,6 +11,7 @@ import {
 import SelectWilaya2 from "./SelectWilaya2";
 import CategorySelectList from "./CategorySelectList";
 import TagsSelectList from "./TagsSelectList";
+import DateFilter from "./DateFilter";
 
 const EventSearchFilters = () => {
   return (
@@ -18,7 +19,7 @@ const EventSearchFilters = () => {
       <Heading>Filters</Heading>
       <Divider />
 
-      <Accordion defaultIndex={[0, 1, 2]} allowMultiple>
+      <Accordion defaultIndex={[0, 1, 2, 3]} allowMultiple>
         <AccordionItem>
           <h2>
             <AccordionButton>
@@ -70,7 +71,9 @@ const EventSearchFilters = () => {
               <AccordionIcon />
             </AccordionButton>
           </h2>
-          <AccordionPanel pb={4}></AccordionPanel>
+          <AccordionPanel pb={4}>
+            <DateFilter />
+          </AccordionPanel>
         </AccordionItem>
       </Accordion>
     </Box>
