@@ -11,6 +11,7 @@ interface EventQuery {
 
 interface EventQueryStore {
   eventQuery: EventQuery;
+  clearQuery: () => void;
   setWilaya: (wilaya: number | null) => void;
   setCategory: (category: number | null) => void;
   setSearch: (search: string | null) => void;
@@ -21,6 +22,7 @@ interface EventQueryStore {
 
 const useEventQueryStore = create<EventQueryStore>((set) => ({
   eventQuery: { tags: [] },
+  clearQuery: () => set(() => ({ eventQuery: { tags: [] } })),
   setSearch: (search) => set(() => ({ eventQuery: { search, tags: [] } })),
   setWilaya: (wilaya) =>
     set((store) => ({ eventQuery: { ...store.eventQuery, wilaya } })),

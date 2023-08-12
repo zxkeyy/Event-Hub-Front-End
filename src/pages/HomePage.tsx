@@ -2,9 +2,13 @@ import { HStack, Heading, Box } from "@chakra-ui/react";
 import CategoryGrid from "../components/CategoryGrid";
 import EventsGrid from "../components/EventsGrid";
 import SelectWilaya from "../components/SelectWilaya";
-import "leaflet/dist/leaflet.css"
+import "leaflet/dist/leaflet.css";
+import useEventQueryStore from "../store";
 
 const HomePage = () => {
+  const clearQuery = useEventQueryStore((s) => s.clearQuery);
+  clearQuery();
+
   return (
     <Box padding={{ base: 4, md: 20 }}>
       <HStack paddingBottom={10}>
@@ -15,7 +19,10 @@ const HomePage = () => {
       <Box padding={3}>
         <CategoryGrid />
       </Box>
-      <EventsGrid columns={{ base: 2, md: 3, lg: 4, xl: 5 }} spacing={{ base: 1, md: 5 }}/>
+      <EventsGrid
+        columns={{ base: 2, md: 3, lg: 4, xl: 5 }}
+        spacing={{ base: 1, md: 5 }}
+      />
     </Box>
   );
 };
