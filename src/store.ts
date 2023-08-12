@@ -3,7 +3,7 @@ import { create } from "zustand";
 interface EventQuery {
   wilaya?: number | null;
   category?: number | null;
-  searchText?: string;
+  search?: string;
   tags: number[];
 }
 
@@ -11,13 +11,13 @@ interface EventQueryStore {
   eventQuery: EventQuery;
   setWilaya: (wilaya: number | null) => void;
   setCategory: (category: number | null) => void;
-  setSearchText: (searchText: string) => void;
+  setSearch: (search: string) => void;
   setTags: (tags: number[]) => void;
 }
 
 const useEventQueryStore = create<EventQueryStore>((set) => ({
   eventQuery: { tags: [] },
-  setSearchText: (searchText) => set(() => ({ eventQuery: { searchText, tags:[] } })),
+  setSearch: (search) => set(() => ({ eventQuery: { search, tags:[] } })),
   setWilaya: (wilaya) =>
     set((store) => ({ eventQuery: { ...store.eventQuery, wilaya } })),
   setCategory: (category) =>
