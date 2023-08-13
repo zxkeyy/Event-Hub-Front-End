@@ -1,5 +1,5 @@
 import { Box, HStack, Image } from "@chakra-ui/react";
-import logo from "../assets/logo.jpeg";
+import logo from "../assets/logo.png";
 import ColorModeSwitch from "./ColorModeSwitch";
 import SearchField from "./SearchField";
 import { Link } from "react-router-dom";
