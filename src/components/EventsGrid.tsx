@@ -1,4 +1,4 @@
-import { SimpleGrid, Text } from "@chakra-ui/react";
+import { Box, SimpleGrid, Text } from "@chakra-ui/react";
 import useEvents from "../hookers/useEvents";
 import EventCard from "./EventCard";
 import EventCardSkeleton from "./EventCardSkeleton";
@@ -24,7 +24,9 @@ const EventsGrid = ({ columns, spacing }: Props) => {
       </SimpleGrid>
 
       {events?.results.length === 0 && isLoading === false && (
-        <Text>No events to show here.</Text>
+        <Box padding={10}>
+          <Text fontSize="xl" fontWeight="bold">Sorry we couldn't find any events to show here.</Text>
+        </Box>
       )}
     </>
   );
