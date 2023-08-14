@@ -1,6 +1,6 @@
 import { create } from "zustand";
 
-interface EventQuery {
+export interface EventQuery {
   wilaya?: number | null;
   category?: number | null;
   search?: string | null;
