@@ -20,8 +20,10 @@ const EventCard2 = ({ event }: Props) => {
   return (
     <Link to={"/events/" + event.slug}>
       <Card
+        bgColor="purple.900"
         borderRadius={10}
         overflow="hidden"
+        boxShadow="2xl"
         _hover={{
           transform: "scale(1.03)",
           transition: "transform .15s ease-in",

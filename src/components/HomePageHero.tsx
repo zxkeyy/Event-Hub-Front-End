@@ -6,7 +6,7 @@ const HomePageHero = () => {
       bgImage={
         "https://unsplash.com/photos/9XngoIpxcEo/download?ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNjkyMTk3ODg5fA&force=true&w=2400"
       }
-      height={screen.availHeight - 150} // -150 for NavBar
+      height={screen.availHeight - 162} // -150 for NavBar
       bgSize="cover"
       bgPos="center"
       bgAttachment="fixed"

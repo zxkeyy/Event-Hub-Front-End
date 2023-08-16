@@ -1,6 +1,16 @@
-import { Box, Button, Center, HStack, Heading, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Center,
+  Divider,
+  HStack,
+  Heading,
+  Text,
+} from "@chakra-ui/react";
 import useEventQueryStore from "../store";
 import HomePageHero from "../components/HomePageHero";
+import SelectWilaya from "../components/SelectWilaya";
+import EventCarousel from "../components/EventCarousel";
 
 const HomePage2 = () => {
   const clearQuery = useEventQueryStore((s) => s.clearQuery);
@@ -8,7 +18,17 @@ const HomePage2 = () => {
   return (
     <>
       <HomePageHero />
-      <Box bgColor="black" height={screen.availHeight}></Box>
+      <Box bgColor="#170630" display="flex" justifyContent="center">
+        <Box height="3xl" width="60%" paddingY={10}>
+          <Heading>RECOMMENDED</Heading>
+          <Divider />
+          <HStack paddingY={10}>
+            <Heading>Events In</Heading>
+            <SelectWilaya />
+          </HStack>
+          <EventCarousel />
+        </Box>
+      </Box>
     </>
   );
 };

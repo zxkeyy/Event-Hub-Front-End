@@ -70,7 +70,7 @@ const SelectWilaya = () => {
   return (
     <>
       <Select
-        placeholder="Any"
+        placeholder="Any wilaya"
         width="fit-content"
         fontWeight="bold"
         fontSize={{base: "xl",md:"4xl"}}
