@@ -2,6 +2,7 @@ import { Box, SimpleGrid, Text } from "@chakra-ui/react";
 import useEvents from "../hookers/useEvents";
 import EventCard from "./EventCard";
 import EventCardSkeleton from "./EventCardSkeleton";
+import EventCard2 from "./EventCard2";
 
 interface Props {
   columns: {};
@@ -19,7 +20,7 @@ const EventsGrid = ({ columns, spacing }: Props) => {
         {isLoading &&
           skeletons.map((skeleton) => <EventCardSkeleton key={skeleton} />)}
         {events?.results.map((event) => (
-          <EventCard key={event.id} event={event} />
+          <EventCard2 key={event.id} event={event} />
         ))}
       </SimpleGrid>
 

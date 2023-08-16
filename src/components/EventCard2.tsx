@@ -8,19 +8,19 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { Event } from "../hookers/useEvents";
-import DateIcon from "./DateIcon";
 import { Link } from "react-router-dom";
 import fallBackImage from "../assets/image-not-found.png";
+import parseDate from "../services/parse-date";
 
 interface Props {
   event: Event;
 }
 
-const EventCard = ({ event }: Props) => {
+const EventCard2 = ({ event }: Props) => {
   return (
     <Link to={"/events/" + event.slug}>
       <Card
-        borderRadius={0}
+        borderRadius={10}
         overflow="hidden"
         _hover={{
           transform: "scale(1.03)",
@@ -28,33 +28,21 @@ const EventCard = ({ event }: Props) => {
         }}
       >
         <Image
-          aspectRatio={2 / 1}
+          aspectRatio={1 / 1}
           src={event.image}
           fallbackSrc={fallBackImage}
         />
-        <CardBody padding={0}>
+        <CardBody padding={3}>
           <Grid
-            templateAreas={`"date title" "date location" "description description"`}
+            templateAreas={`"title title" "date date" "description description"`}
             templateColumns={"0.5fr 1fr"}
             paddingTop={5}
           >
             <GridItem area="title">
-              <Heading
-                fontWeight="black"
-                fontSize="md"
-                noOfLines={1}
-                paddingRight={4}
-              >
-                {event.name}
-              </Heading>
+              <Heading size="md">{event.name}</Heading>
             </GridItem>
             <GridItem area="date">
-              <DateIcon date={event.start_date} />
-            </GridItem>
-            <GridItem area="location">
-              <Text fontSize="sm" color="gray" noOfLines={1} paddingRight={4}>
-                {event.location_name}
-              </Text>
+              <Text color="gray.600">{parseDate(event.start_date)}</Text>
             </GridItem>
           </Grid>
         </CardBody>
@@ -63,4 +51,4 @@ const EventCard = ({ event }: Props) => {
   );
 };
 
-export default EventCard;
+export default EventCard2;
