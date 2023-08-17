@@ -18,7 +18,7 @@ const HomePage2 = () => {
   return (
     <>
       <HomePageHero />
-      <Box bgColor="#170630" display="flex" justifyContent="center">
+      <Box style={{background: "linear-gradient(90deg, rgba(20,1,32,1) 0%, rgba(46,8,78,1) 81%, rgba(48,0,84,1) 100%)"}} display="flex" justifyContent="center">
         <Box height="3xl" width="60%" paddingY={10}>
           <Heading>RECOMMENDED</Heading>
           <Divider />

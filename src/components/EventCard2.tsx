@@ -1,4 +1,5 @@
 import {
+  Button,
   Card,
   CardBody,
   Grid,
@@ -11,6 +12,8 @@ import { Event } from "../hookers/useEvents";
 import { Link } from "react-router-dom";
 import fallBackImage from "../assets/image-not-found.png";
 import parseDate from "../services/parse-date";
+import { FaShare } from "react-icons/fa";
+import { BsStar } from "react-icons/bs";
 
 interface Props {
   event: Event;
@@ -36,15 +39,45 @@ const EventCard2 = ({ event }: Props) => {
         />
         <CardBody padding={3}>
           <Grid
-            templateAreas={`"date date" "title title" "description description"`}
-            templateColumns={"0.5fr 1fr"}
+            templateAreas={`"date date" "title title" "location location" "primary secondary"`}
+            templateColumns={"1fr 0.02fr"}
             paddingTop={0}
           >
             <GridItem area="title">
-              <Heading size="md">{event.name}</Heading>
+              <Heading size="md" fontSize="md">
+                {event.name}
+              </Heading>
             </GridItem>
             <GridItem area="date">
-              <Text fontSize="xs" color="">{parseDate(event.start_date, event.end_date).toUpperCase()}</Text>
+              <Text fontSize="xs" color="">
+                {parseDate(event.start_date, event.end_date).toUpperCase()}
+              </Text>
+            </GridItem>
+            <GridItem area="location">
+              <Text fontSize="xs" color="gray.500" noOfLines={1}>
+                {event.location_name}
+              </Text>
+            </GridItem>
+            <GridItem area="primary" padding={2}>
+              <Button
+                width="full"
+                colorScheme="purple"
+                fontSize="sm"
+                bgColor="purple.400"
+                leftIcon={<BsStar />}
+              >
+                Intrested
+              </Button>
+            </GridItem>
+            <GridItem area="secondary" padding={2}>
+              <Button
+                width="full"
+                colorScheme="purple"
+                fontSize="sm"
+                bgColor="purple.400"
+              >
+                <FaShare />
+              </Button>
             </GridItem>
           </Grid>
         </CardBody>
