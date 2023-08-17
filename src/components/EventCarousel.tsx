@@ -4,7 +4,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import useEvents from "../hookers/useEvents";
 import EventCard2 from "./EventCard2";
-import { Box, HStack, Skeleton, Text } from "@chakra-ui/react";
+import { Box, Skeleton } from "@chakra-ui/react";
 
 const EventCarousel = () => {
   const { data: events, isLoading } = useEvents();

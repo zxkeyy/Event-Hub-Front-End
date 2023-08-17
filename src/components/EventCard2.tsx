@@ -36,15 +36,15 @@ const EventCard2 = ({ event }: Props) => {
         />
         <CardBody padding={3}>
           <Grid
-            templateAreas={`"title title" "date date" "description description"`}
+            templateAreas={`"date date" "title title" "description description"`}
             templateColumns={"0.5fr 1fr"}
-            paddingTop={5}
+            paddingTop={0}
           >
             <GridItem area="title">
               <Heading size="md">{event.name}</Heading>
             </GridItem>
             <GridItem area="date">
-              <Text color="gray.600">{parseDate(event.start_date)}</Text>
+              <Text fontSize="xs" color="">{parseDate(event.start_date, event.end_date).toUpperCase()}</Text>
             </GridItem>
           </Grid>
         </CardBody>

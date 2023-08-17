@@ -1,4 +1,4 @@
-const months = [
+const MONTHS = [
   "January",
   "Febuary",
   "March",
@@ -12,23 +12,102 @@ const months = [
   "November",
   "December",
 ];
+const MONTHS2 = [
+  "Jan",
+  "Feb",
+  "Mar",
+  "Apr",
+  "May",
+  "Jun",
+  "Jul",
+  "Aug",
+  "Sep",
+  "Oct",
+  "Nov",
+  "Dec",
+];
+const DAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
-const parseDate = (date: string) => {
-  const year = date.slice(0, 4);
-  const month = date.slice(5, 7);
-  const day = date.slice(8, 10);
-  const hour = date.slice(11, 13);
-  const minuit = date.slice(14, 16);
-  let time;
-  if (parseInt(hour) > 12) {
-    time = (parseInt(hour) - 12).toString() + ":" + minuit + " PM";
-  } else {
-    time = parseInt(hour).toString() + ":" + minuit + " AM";
+const parseDate = (start_date: string, end_date: string) => {
+  const startDateObj = new Date(start_date);
+
+  if (!end_date) {
+    return (
+      DAYS[startDateObj.getDay()] +
+      ", " +
+      MONTHS2[startDateObj.getMonth()] +
+      " " +
+      startDateObj.getDate().toString() +
+      ", " +
+      startDateObj.getHours().toString().padStart(2, "0") +
+      ":" +
+      startDateObj.getMinutes().toString().padStart(2, "0")
+    );
   }
 
-  let parsedDate =
-    months[parseInt(month) - 1] + " " + day + ", " + year + " | " + time;
-  return parsedDate;
+  const endDateObj = new Date(end_date);
+
+  if (startDateObj.getFullYear() != endDateObj.getFullYear()) {
+    return (
+      DAYS[startDateObj.getDay()] +
+      ", " +
+      MONTHS2[startDateObj.getMonth()] +
+      " " +
+      startDateObj.getDate().toString() +
+      ", " +
+      startDateObj.getFullYear() +
+      " - " +
+      DAYS[endDateObj.getDay()] +
+      ", " +
+      MONTHS2[endDateObj.getMonth()] +
+      " " +
+      endDateObj.getDate().toString() +
+      ", " +
+      endDateObj.getFullYear()
+    );
+  }
+
+  if (startDateObj.getMonth() != endDateObj.getMonth()) {
+    return (
+      DAYS[startDateObj.getDay()] +
+      ", " +
+      MONTHS2[startDateObj.getMonth()] +
+      " " +
+      startDateObj.getDate().toString() +
+      " - " +
+      MONTHS2[endDateObj.getMonth()] +
+      " " +
+      endDateObj.getDate().toString()
+    );
+  }
+
+  if (startDateObj.getDay() != endDateObj.getDay()) {
+    return (
+      DAYS[startDateObj.getDay()] +
+      ", " +
+      MONTHS2[startDateObj.getMonth()] +
+      " " +
+      startDateObj.getDate().toString().padStart(2, "0") +
+      " - " +
+      endDateObj.getDate().toString().padStart(2, "0")
+    );
+  }
+
+  return (
+    DAYS[startDateObj.getDay()] +
+    ", " +
+    MONTHS2[startDateObj.getMonth()] +
+    " " +
+    startDateObj.getDate().toString() +
+    ", " +
+    startDateObj.getHours().toString().padStart(2, "0") +
+    ":" +
+    startDateObj.getMinutes().toString().padStart(2, "0") +
+    " - " +
+    endDateObj.getHours().toString().padStart(2, "0") +
+    ":" +
+    endDateObj.getMinutes().toString().padStart(2, "0")
+  );
 };
 
 export default parseDate;
