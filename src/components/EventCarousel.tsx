@@ -5,6 +5,7 @@ import "slick-carousel/slick/slick-theme.css";
 import useEvents from "../hookers/useEvents";
 import EventCard2 from "./EventCard2";
 import { Box, Skeleton } from "@chakra-ui/react";
+import EventCard2Skeleton from "./EventCard2Skeleton";
 
 const EventCarousel = () => {
   const { data: events, isLoading } = useEvents();
@@ -48,16 +49,14 @@ const EventCarousel = () => {
 
   return (
     <Slider {...settings} className="slider-parent">
-      {isLoading && (
-        <>
-          <Skeleton width={200} height={300} />
-          <Skeleton width={200} height={300} />
-          <Skeleton width={200} height={300} />
-          <Skeleton width={200} height={300} />
-        </>
-      )}
+      {isLoading &&
+        [...Array(4).keys()].map((n) => (
+          <Box key={n} padding={2}>
+            <EventCard2Skeleton />
+          </Box>
+        ))}
       {events?.results.map((event) => (
-        <Box padding={2}>
+        <Box key={event.id} padding={2}>
           <EventCard2 event={event} />
         </Box>
       ))}
