@@ -6,7 +6,6 @@ import {
   Skeleton,
   SkeletonText,
 } from "@chakra-ui/react";
-import React from "react";
 
 const EventCard2Skeleton = () => {
   return (
@@ -35,9 +34,7 @@ const EventCard2Skeleton = () => {
           <GridItem area="primary" padding={2}>
             <Skeleton width="100%" height={35} />
           </GridItem>
-          <GridItem area="secondary" padding={2}>
-            
-          </GridItem>
+          <GridItem area="secondary" padding={2}></GridItem>
         </Grid>
       </CardBody>
     </Card>

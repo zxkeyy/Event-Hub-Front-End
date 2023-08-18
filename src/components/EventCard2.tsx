@@ -43,20 +43,20 @@ const EventCard2 = ({ event }: Props) => {
             templateColumns={"1fr 0.02fr"}
             paddingTop={0}
           >
-            <GridItem area="title">
-              <Heading size="md" fontSize="md">
-                {event.name}
-              </Heading>
-            </GridItem>
-            <GridItem area="date">
+            <GridItem area="title" height={79}>
               <Text fontSize="xs" color="">
                 {parseDate(event.start_date, event.end_date).toUpperCase()}
               </Text>
-            </GridItem>
-            <GridItem area="location">
+              <Heading size="md" fontSize="md" noOfLines={2}>
+                {event.name}
+              </Heading>
               <Text fontSize="xs" color="gray.500" noOfLines={1}>
                 {event.location_name}
               </Text>
+            </GridItem>
+            <GridItem area="date">
+            </GridItem>
+            <GridItem area="location">
             </GridItem>
             <GridItem area="primary" padding={2}>
               <Button

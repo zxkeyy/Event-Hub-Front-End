@@ -1,12 +1,4 @@
-import {
-  Box,
-  Button,
-  Center,
-  Divider,
-  HStack,
-  Heading,
-  Text,
-} from "@chakra-ui/react";
+import { Box, Divider, HStack, Heading } from "@chakra-ui/react";
 import useEventQueryStore from "../store";
 import HomePageHero from "../components/HomePageHero";
 import SelectWilaya from "../components/SelectWilaya";
