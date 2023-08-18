@@ -20,7 +20,7 @@ const EventCard2Skeleton = () => {
         transition: "transform .15s ease-in",
       }}
     >
-      <Skeleton height={270} />
+      <Skeleton aspectRatio={1} width="100%" />
       <CardBody padding={3}>
         <Grid
           templateAreas={`"date date" "title title" "location location" "primary secondary"`}
@@ -33,10 +33,10 @@ const EventCard2Skeleton = () => {
           <GridItem area="date"></GridItem>
           <GridItem area="location"></GridItem>
           <GridItem area="primary" padding={2}>
-            <Skeleton width={150} height={30} />
+            <Skeleton width="100%" height={35} />
           </GridItem>
           <GridItem area="secondary" padding={2}>
-            <Skeleton width={50} height={30} />
+            
           </GridItem>
         </Grid>
       </CardBody>
