@@ -5,6 +5,7 @@ import EventDetailPage from "./pages/EventDetailPage";
 import ErrorPage from "./pages/ErrorPage";
 import EventSearchPage from "./pages/EventSearchPage";
 import HomePage2 from "./pages/HomePage2";
+import EventDetailPage2 from "./pages/EventDetailPage2";
 
 const router = createBrowserRouter([
   {
@@ -15,7 +16,8 @@ const router = createBrowserRouter([
       { index: true, element: <HomePage2 /> },
       { path: "old", element: <HomePage /> },
       { path: "events", element: <EventSearchPage /> },
-      { path: "events/:slug", element: <EventDetailPage /> },
+      { path: "old/events/:slug", element: <EventDetailPage2 /> },
+      { path: "events/:slug", element: <EventDetailPage2 /> },
     ],
   },
 ]);
