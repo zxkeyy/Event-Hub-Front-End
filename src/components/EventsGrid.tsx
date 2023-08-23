@@ -1,7 +1,5 @@
 import { Box, SimpleGrid, Text } from "@chakra-ui/react";
 import useEvents from "../hookers/useEvents";
-import EventCard from "./EventCard";
-import EventCardSkeleton from "./EventCardSkeleton";
 import EventCard2 from "./EventCard2";
 import EventCard2Skeleton from "./EventCard2Skeleton";
 

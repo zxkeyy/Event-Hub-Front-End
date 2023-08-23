@@ -2,11 +2,13 @@ import {
   Button,
   Card,
   CardBody,
+  Divider,
   Grid,
   GridItem,
   Heading,
   Image,
   Text,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import { Event } from "../hookers/useEvents";
 import { Link } from "react-router-dom";
@@ -20,13 +22,18 @@ interface Props {
 }
 
 const EventCard2 = ({ event }: Props) => {
+  const bgColor = useColorModeValue("white", "purple.900");
+  const borderColor = useColorModeValue("gray.300", "gray.800");
+
   return (
     <Link to={"/events/" + event.slug}>
       <Card
-        bgColor="purple.900"
+        bgColor={bgColor}
+        border="1px"
         borderRadius={10}
+        borderColor={borderColor}
         overflow="hidden"
-        boxShadow="2xl"
+        shadow="md"
         _hover={{
           transform: "scale(1.03)",
           transition: "transform .15s ease-in",
@@ -54,9 +61,9 @@ const EventCard2 = ({ event }: Props) => {
                 {event.location_name}
               </Text>
             </GridItem>
-            <GridItem area="date">
-            </GridItem>
+            <GridItem area="date"></GridItem>
             <GridItem area="location">
+              <Divider />
             </GridItem>
             <GridItem area="primary" padding={2}>
               <Button

@@ -20,6 +20,7 @@ const EventCarousel = () => {
     swipeToSlide: true,
     initialSlide: 0,
     autoplay: true,
+    
     responsive: [
       {
         breakpoint: 1600,
