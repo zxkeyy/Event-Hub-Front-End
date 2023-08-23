@@ -35,7 +35,7 @@ const EventDetailPage2 = () => {
               marginTop={2}
             >
               <Heading fontSize="xl">Organizers</Heading>
-              <Divider />
+              <Divider paddingY={1}/>
               {event.clubs.map((clubId) => (
                 <ClubCard key={clubId} clubId={clubId} />
               ))}

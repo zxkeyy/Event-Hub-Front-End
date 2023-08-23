@@ -16,7 +16,7 @@ const router = createBrowserRouter([
       { index: true, element: <HomePage2 /> },
       { path: "old", element: <HomePage /> },
       { path: "events", element: <EventSearchPage /> },
-      { path: "old/events/:slug", element: <EventDetailPage2 /> },
+      { path: "old/events/:slug", element: <EventDetailPage /> },
       { path: "events/:slug", element: <EventDetailPage2 /> },
     ],
   },

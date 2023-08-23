@@ -19,6 +19,7 @@ const ClubCard = ({ clubId }: Props) => {
       display="flex"
       alignItems="center"
       flexDirection="column"
+      boxShadow="2xl"
     >
       <Avatar size="2xl" src={club?.image} />
       <Text fontWeight="bold" padding={2}>{club?.name}</Text>

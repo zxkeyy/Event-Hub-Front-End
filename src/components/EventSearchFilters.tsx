@@ -15,7 +15,13 @@ import DateFilter from "./DateFilter";
 
 const EventSearchFilters = () => {
   return (
-    <Box border="1px" borderColor="gray.600" borderRadius={10} padding={10}>
+    <Box
+      bgColor="purple.900"
+      border="1px"
+      borderColor="gray.600"
+      borderRadius={15}
+      padding={10}
+    >
       <Heading>Filters</Heading>
       <Divider />
 

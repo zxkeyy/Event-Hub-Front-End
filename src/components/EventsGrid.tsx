@@ -3,6 +3,7 @@ import useEvents from "../hookers/useEvents";
 import EventCard from "./EventCard";
 import EventCardSkeleton from "./EventCardSkeleton";
 import EventCard2 from "./EventCard2";
+import EventCard2Skeleton from "./EventCard2Skeleton";
 
 interface Props {
   columns: {};
@@ -18,7 +19,7 @@ const EventsGrid = ({ columns, spacing }: Props) => {
     <>
       <SimpleGrid columns={columns} spacing={spacing}>
         {isLoading &&
-          skeletons.map((skeleton) => <EventCardSkeleton key={skeleton} />)}
+          skeletons.map((skeleton) => <EventCard2Skeleton key={skeleton} />)}
         {events?.results.map((event) => (
           <EventCard2 key={event.id} event={event} />
         ))}
@@ -26,7 +27,9 @@ const EventsGrid = ({ columns, spacing }: Props) => {
 
       {events?.results.length === 0 && isLoading === false && (
         <Box padding={10}>
-          <Text fontSize="xl" fontWeight="bold">Sorry we couldn't find any events to show here.</Text>
+          <Text fontSize="xl" fontWeight="bold">
+            Sorry we couldn't find any events to show here.
+          </Text>
         </Box>
       )}
     </>
