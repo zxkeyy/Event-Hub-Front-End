@@ -1,8 +1,9 @@
 import { useParams } from "react-router-dom";
 import useEvent from "../hookers/useEvent";
-import { Box, Stack } from "@chakra-ui/react";
+import { Box, Divider, Heading, Stack } from "@chakra-ui/react";
 import MarkdownDetailsBox from "../components/MarkdownDetailsBox";
 import EventDetailsCard from "../components/EventDetailsCard";
+import ClubCard from "../components/ClubCard";
 
 const EventDetailPage2 = () => {
   const { slug } = useParams();
@@ -21,9 +22,26 @@ const EventDetailPage2 = () => {
       display="flex"
       justifyContent="center"
     >
-      <Box width={{ base: "95%", xl: "80%" }} paddingY={{base: 3, md: 10}}>
+      <Box width={{ base: "95%", xl: "80%" }} paddingY={{ base: 3, md: 10 }}>
         <Stack direction={{ base: "column", md: "row" }} alignItems="start">
-          <EventDetailsCard event={event} />
+          <Box width={{ base: "100%", md: "40%", lg: "30%" }}>
+            <EventDetailsCard event={event} />
+            <Box
+              border="1px"
+              borderRadius={15}
+              borderColor="whiteAlpha.200"
+              bgColor="purple.900"
+              padding={5}
+              marginTop={2}
+            >
+              <Heading fontSize="xl">Organizers</Heading>
+              <Divider />
+              {event.clubs.map((clubId) => (
+                <ClubCard key={clubId} clubId={clubId} />
+              ))}
+            </Box>
+          </Box>
+
           <MarkdownDetailsBox markdown={event.body} />
         </Stack>
       </Box>

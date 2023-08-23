@@ -18,10 +18,7 @@ const EventDetailsCard = ({ event }: Props) => {
       borderRadius={15}
       borderColor="whiteAlpha.200"
       bgColor="purple.900"
-      width={{ base: "100%", md: "40%", lg: "30%" }}
       padding={5}
-      position="sticky"
-      bottom="2"
     >
       <Image src={event.image} width="100%" borderRadius={10} />
       <Box paddingTop={5}>
