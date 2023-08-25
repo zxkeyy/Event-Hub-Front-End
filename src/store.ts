@@ -6,6 +6,8 @@ export interface EventQuery {
   search?: string | null;
   start_date__lt?: string | null;
   start_date__gt?: string | null;
+  end_date__lt?: string | null;
+  end_date__gt?: string | null;
   tags?: number[];
   ordering?: string;
   limit?: number;
