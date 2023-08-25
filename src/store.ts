@@ -6,7 +6,9 @@ export interface EventQuery {
   search?: string | null;
   start_date__lt?: string | null;
   start_date__gt?: string | null;
-  tags: number[];
+  tags?: number[];
+  ordering?: string;
+  limit?: number;
 }
 
 interface EventQueryStore {
@@ -21,9 +23,9 @@ interface EventQueryStore {
 }
 
 const useEventQueryStore = create<EventQueryStore>((set) => ({
-  eventQuery: { tags: [] },
-  clearQuery: () => set(() => ({ eventQuery: { tags: [] } })),
-  setSearch: (search) => set(() => ({ eventQuery: { search, tags: [] } })),
+  eventQuery: {},
+  clearQuery: () => set(() => ({ eventQuery: {} })),
+  setSearch: (search) => set(() => ({ eventQuery: { search } })),
   setWilaya: (wilaya) =>
     set((store) => ({ eventQuery: { ...store.eventQuery, wilaya } })),
   setCategory: (category) =>

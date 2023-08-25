@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import useEventQueryStore from "../store";
+import useEventQueryStore, { EventQuery } from "../store";
 import APIClient, { GetResponse } from "../services/api-client";
 
 const apiClient = new APIClient<Event>("/events");
@@ -18,8 +18,9 @@ export interface Event {
   slug: string;
 }
 
-const useEvents = () => {
-  const eventQuery = useEventQueryStore((s) => s.eventQuery);
+
+const useEvents = (query?: EventQuery) => {
+  const eventQuery = query ? query : useEventQueryStore((s) => s.eventQuery);
   return useQuery<GetResponse<Event>, Error>({
     queryKey: ["events", eventQuery],
     queryFn: () =>

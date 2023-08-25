@@ -28,6 +28,20 @@ const HomePage2 = () => {
           <EventCarousel />
         </Box>
       </Box>
+      <Box
+        style={{
+          background:
+            "linear-gradient(90deg, rgba(10,1,22,1) 0%, rgba(54,8,50,1) 81%, rgba(44,0,60,1) 100%)",
+        }}
+        display="flex"
+        justifyContent="center"
+      >
+        <Box height="1xl" width={{ base: "85%", md: "60%" }} paddingY={10}>
+          <Heading>HAPPENING SOON</Heading>
+          <Divider marginBottom={5}/>
+          <EventCarousel query={{ordering: "start_date", limit: 5}}/>
+        </Box>
+      </Box>
     </>
   );
 };

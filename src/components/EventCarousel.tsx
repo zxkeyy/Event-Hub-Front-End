@@ -4,11 +4,18 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import useEvents from "../hookers/useEvents";
 import EventCard2 from "./EventCard2";
-import { Box } from "@chakra-ui/react";
+import { Box, Text } from "@chakra-ui/react";
 import EventCard2Skeleton from "./EventCard2Skeleton";
+import { EventQuery } from "../store";
 
-const EventCarousel = () => {
-  const { data: events, isLoading } = useEvents();
+interface Props {
+  query?: EventQuery;
+}
+const EventCarousel = ({ query }: Props = {}) => {
+  const { data: events, isLoading } = useEvents(query ? query : undefined);
+
+  if (events?.count === 0)
+    return <Text>Sorry we couldn't find any events to show here.</Text>;
 
   const settings = {
     className: "center",
@@ -20,7 +27,7 @@ const EventCarousel = () => {
     swipeToSlide: true,
     initialSlide: 0,
     autoplay: true,
-    
+
     responsive: [
       {
         breakpoint: 1600,
