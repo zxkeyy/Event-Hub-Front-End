@@ -81,7 +81,8 @@ const SelectWilaya2 = () => {
         rightIcon={<BsChevronDown />}
         variant="solid"
         textAlign="start"
-        width={200}
+        width="100%"
+        overflow="hidden"
       >
         {selectedWilaya ? wilayas[selectedWilaya - 1] : "All"}
       </MenuButton>

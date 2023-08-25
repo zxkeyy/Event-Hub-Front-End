@@ -22,7 +22,11 @@ const EventDetailPage2 = () => {
       display="flex"
       justifyContent="center"
     >
-      <Box width={{ base: "95%", xl: "80%" }} paddingY={{ base: 3, md: 10 }}>
+      <Box
+        width={{ base: "95%", xl: "80%" }}
+        paddingY={{ base: 3, md: 10 }}
+        
+      >
         <Stack direction={{ base: "column", md: "row" }} alignItems="start">
           <Box width={{ base: "100%", md: "40%", lg: "30%" }}>
             <EventDetailsCard event={event} />
@@ -35,7 +39,7 @@ const EventDetailPage2 = () => {
               marginTop={2}
             >
               <Heading fontSize="xl">Organizers</Heading>
-              <Divider paddingY={1}/>
+              <Divider paddingY={1} />
               {event.clubs.map((clubId) => (
                 <ClubCard key={clubId} clubId={clubId} />
               ))}

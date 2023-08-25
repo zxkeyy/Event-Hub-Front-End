@@ -9,7 +9,7 @@ const DateFilter = () => {
   const refLt = useRef<HTMLInputElement>(null);
 
   return (
-    <Box>
+    <Box width="100%">
       <Text fontWeight="bold" fontSize="sm" paddingTop={2} paddingBottom={1}>
         From:
       </Text>

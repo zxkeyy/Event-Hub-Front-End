@@ -5,8 +5,6 @@ import {
   AccordionItem,
   AccordionPanel,
   Box,
-  Divider,
-  Heading,
 } from "@chakra-ui/react";
 import SelectWilaya2 from "./SelectWilaya2";
 import CategorySelectList from "./CategorySelectList";
@@ -21,64 +19,82 @@ const EventSearchFilters = () => {
       borderColor="gray.600"
       borderRadius={15}
       padding={10}
+      width="full"
     >
-      <Heading>Filters</Heading>
-      <Divider />
-
-      <Accordion defaultIndex={[0, 1, 2, 3]} allowMultiple>
+      <Accordion defaultIndex={[0]} allowToggle>
         <AccordionItem>
-          <h2>
-            <AccordionButton>
-              <Box as="span" flex="1" textAlign="left" fontWeight="bold">
-                Wilaya
+          <h1>
+            <AccordionButton width="100%">
+              <Box
+                as="span"
+                flex="1"
+                textAlign="left"
+                fontSize="xl"
+                fontWeight="bold"
+              >
+                Filters
               </Box>
               <AccordionIcon />
             </AccordionButton>
-          </h2>
+          </h1>
           <AccordionPanel pb={4}>
-            <SelectWilaya2 />
-          </AccordionPanel>
-        </AccordionItem>
+            <Accordion defaultIndex={[0, 1, 2, 3]} allowMultiple>
+              <AccordionItem>
+                <h2>
+                  <AccordionButton>
+                    <Box as="span" flex="1" textAlign="left" fontWeight="bold">
+                      Wilaya
+                    </Box>
+                    <AccordionIcon />
+                  </AccordionButton>
+                </h2>
+                <AccordionPanel pb={4}>
+                  <SelectWilaya2 />
+                </AccordionPanel>
+              </AccordionItem>
 
-        <AccordionItem>
-          <h2>
-            <AccordionButton>
-              <Box as="span" flex="1" textAlign="left" fontWeight="bold">
-                Category
-              </Box>
-              <AccordionIcon />
-            </AccordionButton>
-          </h2>
-          <AccordionPanel pb={4}>
-            <CategorySelectList listLength={5} />
-          </AccordionPanel>
-        </AccordionItem>
+              <AccordionItem>
+                <h2>
+                  <AccordionButton>
+                    <Box as="span" flex="1" textAlign="left" fontWeight="bold">
+                      Category
+                    </Box>
+                    <AccordionIcon />
+                  </AccordionButton>
+                </h2>
+                <AccordionPanel pb={4}>
+                  <CategorySelectList listLength={5} />
+                </AccordionPanel>
+              </AccordionItem>
 
-        <AccordionItem>
-          <h2>
-            <AccordionButton>
-              <Box as="span" flex="1" textAlign="left" fontWeight="bold">
-                Tags
-              </Box>
-              <AccordionIcon />
-            </AccordionButton>
-          </h2>
-          <AccordionPanel pb={4}>
-            <TagsSelectList listLength={5} />
-          </AccordionPanel>
-        </AccordionItem>
+              <AccordionItem>
+                <h2>
+                  <AccordionButton>
+                    <Box as="span" flex="1" textAlign="left" fontWeight="bold">
+                      Tags
+                    </Box>
+                    <AccordionIcon />
+                  </AccordionButton>
+                </h2>
+                <AccordionPanel pb={4}>
+                  <TagsSelectList listLength={5} />
+                </AccordionPanel>
+              </AccordionItem>
 
-        <AccordionItem>
-          <h2>
-            <AccordionButton>
-              <Box as="span" flex="1" textAlign="left" fontWeight="bold">
-                Date
-              </Box>
-              <AccordionIcon />
-            </AccordionButton>
-          </h2>
-          <AccordionPanel pb={4}>
-            <DateFilter />
+              <AccordionItem>
+                <h2>
+                  <AccordionButton>
+                    <Box as="span" flex="1" textAlign="left" fontWeight="bold">
+                      Date
+                    </Box>
+                    <AccordionIcon />
+                  </AccordionButton>
+                </h2>
+                <AccordionPanel pb={4}>
+                  <DateFilter />
+                </AccordionPanel>
+              </AccordionItem>
+            </Accordion>
           </AccordionPanel>
         </AccordionItem>
       </Accordion>
