@@ -1,4 +1,4 @@
-import { Box, HStack, Image } from "@chakra-ui/react";
+import { Box, Button, HStack, Image, Text } from "@chakra-ui/react";
 import logo from "../assets/logo.png";
 import ColorModeSwitch from "./ColorModeSwitch";
 import SearchField from "./SearchField";
@@ -6,14 +6,24 @@ import { Link } from "react-router-dom";
 
 const NavBar = () => {
   return (
-    <HStack bgColor="purple.800" padding={2} position="sticky" top="0" zIndex={9999999}>
-      <Box boxSize="60px" minWidth="60px">
+    <HStack
+      bgColor="purple.800"
+      padding={2}
+      position="sticky"
+      top="0"
+      zIndex={9999999}
+    >
+      <Box boxSize="40px" minWidth="40px">
         <Link to="/" content="fit">
-          <Image src={logo} boxSize="60px" />
+          <Image src={logo} boxSize="40px" />
         </Link>
       </Box>
 
       <SearchField />
+
+      <Button variant="ghost" fontSize="xs" >LOG IN</Button>
+      <Text fontSize="xs" fontWeight="bold" textColor="gray.300">or</Text>
+      <Button variant="ghost" fontSize="xs" >SIGN UP</Button>
       <ColorModeSwitch />
     </HStack>
   );

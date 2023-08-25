@@ -56,7 +56,7 @@ const HomePage2 = () => {
         justifyContent="center"
       >
         <Box height="1xl" width={{ base: "85%", md: "60%" }} paddingY={10}>
-          <Heading>HAPPENING SOON</Heading>
+          <Heading>STARTING SOON</Heading>
           <Divider marginBottom={5} />
           <EventCarousel
             query={{
