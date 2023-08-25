@@ -1,5 +1,13 @@
-import { Select } from "@chakra-ui/react";
+import {
+  Button,
+  Menu,
+  MenuButton,
+  MenuDivider,
+  MenuItem,
+  MenuList,
+} from "@chakra-ui/react";
 import useEventQueryStore from "../store";
+import { BsChevronDown } from "react-icons/bs";
 
 const wilayas = [
   "Adrar",
@@ -62,36 +70,31 @@ const wilayas = [
   "Ain Guezzam",
 ];
 
-
 const SelectWilaya = () => {
-  const setWilaya = useEventQueryStore(s => s.setWilaya)
-  const selectedWilaya = useEventQueryStore(s => s.eventQuery.wilaya)
+  const setWilaya = useEventQueryStore((s) => s.setWilaya);
+  const selectedWilaya = useEventQueryStore((s) => s.eventQuery.wilaya);
 
   return (
-    <>
-      <Select
-        placeholder="Any wilaya"
-        width="fit-content"
-        fontWeight="bold"
-        fontSize={{base: "xl",md:"4xl"}}
-        color="purple.500"
-        size={{ base: "md" , md: "lg"}}
-        variant="flushed"
-        onChange={() => setWilaya(null)}
-        value={selectedWilaya ? selectedWilaya : 0}
+    <Menu>
+      <MenuButton
+        as={Button}
+        rightIcon={<BsChevronDown />}
+        variant="ghost"
+        textColor="purple.500"
+        fontSize={{ base: "xl", md: "4xl" }}
       >
+        {selectedWilaya ? wilayas[selectedWilaya - 1] : "Any Wilaya"}
+      </MenuButton>
+      <MenuList maxHeight={300} overflowY="scroll">
+        <MenuItem onClick={() => setWilaya(null)}>Any</MenuItem>
+        <MenuDivider />
         {[...Array(58).keys()].map((n) => (
-          <option
-            onClick={() => setWilaya(n + 1)}
-            key={n + 1}
-            value={n + 1}
-            
-          >
+          <MenuItem key={n + 1} onClick={() => setWilaya(n + 1)}>
             {wilayas[n]}
-          </option>
+          </MenuItem>
         ))}
-      </Select>
-    </>
+      </MenuList>
+    </Menu>
   );
 };
 
