@@ -3,9 +3,15 @@ import useEventQueryStore from "../store";
 import HomePageHero from "../components/HomePageHero";
 import SelectWilaya from "../components/SelectWilaya";
 import EventCarousel from "../components/EventCarousel";
+import { handleLogin } from "../services/Auth";
+import useUser from "../hookers/useUser";
 
 const HomePage2 = () => {
   const clearQuery = useEventQueryStore((s) => s.clearQuery);
+
+
+  //handleLogin("admin", "2004");
+
   clearQuery();
   return (
     <>
@@ -42,7 +48,7 @@ const HomePage2 = () => {
           <EventCarousel
             query={{
               ordering: "-created_at",
-              limit: 5
+              limit: 5,
             }}
           />
         </Box>
@@ -50,7 +56,7 @@ const HomePage2 = () => {
       <Box
         style={{
           background:
-          "linear-gradient(90deg, rgba(20,1,32,1) 0%, rgba(46,8,78,1) 81%, rgba(48,0,84,1) 100%)",
+            "linear-gradient(90deg, rgba(20,1,32,1) 0%, rgba(46,8,78,1) 81%, rgba(48,0,84,1) 100%)",
         }}
         display="flex"
         justifyContent="center"
@@ -86,7 +92,6 @@ const HomePage2 = () => {
           />
         </Box>
       </Box>
-      
     </>
   );
 };
