@@ -3,14 +3,9 @@ import useEventQueryStore from "../store";
 import HomePageHero from "../components/HomePageHero";
 import SelectWilaya from "../components/SelectWilaya";
 import EventCarousel from "../components/EventCarousel";
-import { handleLogin } from "../services/Auth";
-import useUser from "../hookers/useUser";
 
 const HomePage2 = () => {
   const clearQuery = useEventQueryStore((s) => s.clearQuery);
-
-
-  //handleLogin("admin", "2004");
 
   clearQuery();
   return (

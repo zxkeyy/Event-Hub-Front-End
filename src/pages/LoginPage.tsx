@@ -7,12 +7,25 @@ import {
   Box,
 } from "@chakra-ui/react";
 import { useState } from "react";
-import { handleLogin } from "../services/Auth";
+import Auth from "../services/Auth";
 
 const LoginPage = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const handleLogin = async (username: string, password: string) => {
+    try {
+      await Auth.login(username, password);
+      window.location.href = "/";
+    } catch (error: any) {
+      if (error.response && error.response.status === 400) {
+        console.log(error);
+        setErrorMessage(error.response.data);
+      }
+    }
+  };
 
   return (
     <Box
@@ -45,7 +58,10 @@ const LoginPage = () => {
               </Button>
             </InputRightElement>
           </InputGroup>
-          <Button colorScheme="teal" onClick={() => handleLogin(username, password)}>
+          <Button
+            colorScheme="purple"
+            onClick={() => handleLogin(username, password)}
+          >
             Login
           </Button>
         </Stack>

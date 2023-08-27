@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import AuthClient from "../services/auth-client";
+import Auth from "../services/Auth";
 
 const authClient = new AuthClient();
 
@@ -9,12 +10,16 @@ export interface User {
 }
 
 const useUser = () => {
-  if (!localStorage.getItem("notatoken")) return null;
-  return useQuery({
-    queryKey: ["user"],
-    queryFn: () => authClient.get("users/me").catch(() => "hi"),
-    retry: false,
-  });
+  if (!Auth.getToken()) return null;
+  try {
+    return useQuery({
+      queryKey: ["user"],
+      queryFn: () => authClient.get("users/me"),
+    });
+  } catch (error) {
+    Auth.logout();
+    return null;
+  }
 };
 
 export default useUser;

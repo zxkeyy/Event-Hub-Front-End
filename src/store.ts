@@ -1,5 +1,9 @@
 import { create } from "zustand";
 
+export interface UserInfo{
+  loggedIn: boolean;
+}
+
 export interface EventQuery {
   wilaya?: number | null;
   category?: number | null;

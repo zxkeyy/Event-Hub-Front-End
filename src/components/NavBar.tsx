@@ -4,6 +4,7 @@ import ColorModeSwitch from "./ColorModeSwitch";
 import SearchField from "./SearchField";
 import { Link } from "react-router-dom";
 import useUser from "../hookers/useUser";
+import Auth from "../services/Auth";
 
 const NavBar = () => {
   const user = useUser();
@@ -23,16 +24,33 @@ const NavBar = () => {
       </Box>
 
       <SearchField />
+      {!Auth.getToken() && (
+        <>
+          <Link to="/login" content="fit">
+            <Button variant="ghost" fontSize="xs">
+              LOG IN {!user?.isLoading && !user?.error && user?.data.username}
+            </Button>
+          </Link>
+          <Text fontSize="xs" fontWeight="bold" textColor="gray.300">
+            or
+          </Text>
+          <Link to="/register" content="fit">
+            <Button variant="ghost" fontSize="xs">
+              SIGN UP
+            </Button>
+          </Link>
+        </>
+      )}
+      {Auth.getToken() && (
+        <>
+          <Link to="/profile" content="fit">
+            <Button variant="ghost" fontSize="xs">
+              {!user?.isLoading && !user?.error && user?.data.username}
+            </Button>
+          </Link>
+        </>
+      )}
 
-      <Button variant="ghost" fontSize="xs">
-        LOG IN {!user?.isLoading && !user?.error && user?.data.username}
-      </Button>
-      <Text fontSize="xs" fontWeight="bold" textColor="gray.300">
-        or
-      </Text>
-      <Button variant="ghost" fontSize="xs">
-        SIGN UP
-      </Button>
       <ColorModeSwitch />
     </HStack>
   );

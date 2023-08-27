@@ -1,23 +1,43 @@
 import AuthClient from "./auth-client";
-import axios from "axios";
 
 const authClient = new AuthClient();
+const TOKEN_KEY = "notatoken";
 
-export const handleLogin = async (username: string, password: string) => {
+export const login = async (username: string, password: string) => {
+  const response = await authClient.post(
+    {
+      username,
+      password,
+    },
+    "token/login"
+  );
+
+  const token = response.auth_token;
+  localStorage.setItem(TOKEN_KEY, token);
+};
+
+export const logout = () => {
+  localStorage.removeItem(TOKEN_KEY);
+};
+
+export const getToken = () => {
+  return localStorage.getItem(TOKEN_KEY);
+};
+
+export const validateCurrentToken = async () => {
   try {
-    const response = await axios.post(
-      "http://127.0.0.1:8000/auth/token/login",
-      {
-        username,
-        password,
-      }
-    );
-
-    const token = response.data.auth_token;
-    localStorage.setItem("notatoken", token);
-
-    window.location.href = "/";
+    if (!localStorage.getItem(TOKEN_KEY)) return false;
+    await authClient.get("/users/me");
+    return true;
   } catch (error) {
-    console.error("Login error:", error);
+    logout();
+    return false;
   }
+};
+
+export default {
+  login,
+  logout,
+  getToken,
+  validateCurrentToken,
 };
