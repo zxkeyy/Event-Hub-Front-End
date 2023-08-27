@@ -8,6 +8,8 @@ import HomePage2 from "./pages/HomePage2";
 import EventDetailPage2 from "./pages/EventDetailPage2";
 import HomePage2white from "./pages/Homepage2white";
 import LoginPage from "./pages/LoginPage";
+import LogoutPage from "./pages/LogoutPage";
+import RegisterPage from "./pages/RegisterPage";
 
 const router = createBrowserRouter([
   {
@@ -16,7 +18,9 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       { index: true, element: <HomePage2 /> },
+      { path: "register", element: <RegisterPage /> },
       { path: "login", element: <LoginPage /> },
+      { path: "logout", element: <LogoutPage /> },
       { path: "white", element: <HomePage2white /> },
       { path: "old", element: <HomePage /> },
       { path: "events", element: <EventSearchPage /> },

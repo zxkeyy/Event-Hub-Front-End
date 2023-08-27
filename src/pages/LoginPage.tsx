@@ -5,6 +5,11 @@ import {
   InputRightElement,
   Button,
   Box,
+  Heading,
+  Divider,
+  Alert,
+  AlertDescription,
+  AlertIcon,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import Auth from "../services/Auth";
@@ -15,14 +20,18 @@ const LoginPage = () => {
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
+  if (Auth.getToken()) {
+    window.location.href = "/";
+  }
+
   const handleLogin = async (username: string, password: string) => {
     try {
       await Auth.login(username, password);
       window.location.href = "/";
     } catch (error: any) {
       if (error.response && error.response.status === 400) {
-        console.log(error);
-        setErrorMessage(error.response.data);
+        console.log(error.response.data.non_field_errors[0]);
+        setErrorMessage(error.response.data.non_field_errors[0]);
       }
     }
   };
@@ -32,10 +41,12 @@ const LoginPage = () => {
       display="flex"
       justifyContent="center"
       alignItems="center"
-      height="100vh"
+      height={"100vh"}
     >
       <Box width="300px" padding="4">
         <Stack spacing="3">
+          <Heading>Login</Heading>
+          <Divider />
           <Input
             placeholder="Username"
             value={username}
@@ -58,6 +69,13 @@ const LoginPage = () => {
               </Button>
             </InputRightElement>
           </InputGroup>
+          {errorMessage && (
+            <Alert status="error" variant="left-accent">
+              <AlertIcon />
+              <AlertDescription>{errorMessage}</AlertDescription>
+            </Alert>
+          )}
+
           <Button
             colorScheme="purple"
             onClick={() => handleLogin(username, password)}

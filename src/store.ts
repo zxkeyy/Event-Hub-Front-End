@@ -1,8 +1,18 @@
 import { create } from "zustand";
 
-export interface UserInfo{
+export interface UserInfo {
   loggedIn: boolean;
 }
+
+interface UserInfoStore {
+  userInfo: UserInfo;
+  setLoggedIn: (loggedIn: boolean) => void;
+}
+
+export const useUserInfoStore = create<UserInfoStore>((set) => ({
+  userInfo: { loggedIn: false },
+  setLoggedIn: (loggedIn) => set(() => ({ userInfo: { loggedIn} })),
+}));
 
 export interface EventQuery {
   wilaya?: number | null;

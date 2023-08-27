@@ -1,4 +1,16 @@
-import { Box, Button, HStack, Image, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  HStack,
+  Image,
+  Menu,
+  MenuButton,
+  MenuDivider,
+  MenuGroup,
+  MenuItem,
+  MenuList,
+  Text,
+} from "@chakra-ui/react";
 import logo from "../assets/logo.png";
 import ColorModeSwitch from "./ColorModeSwitch";
 import SearchField from "./SearchField";
@@ -8,7 +20,7 @@ import Auth from "../services/Auth";
 
 const NavBar = () => {
   const user = useUser();
-  //{!isLoading && user.username}
+
   return (
     <HStack
       bgColor="purple.800"
@@ -24,6 +36,11 @@ const NavBar = () => {
       </Box>
 
       <SearchField />
+      <Link to="/register" content="fit">
+        <Button variant="ghost" fontSize="xs">
+          Create Event
+        </Button>
+      </Link>
       {!Auth.getToken() && (
         <>
           <Link to="/login" content="fit">
@@ -42,13 +59,22 @@ const NavBar = () => {
         </>
       )}
       {Auth.getToken() && (
-        <>
-          <Link to="/profile" content="fit">
-            <Button variant="ghost" fontSize="xs">
-              {!user?.isLoading && !user?.error && user?.data.username}
-            </Button>
-          </Link>
-        </>
+        <Menu>
+          <MenuButton as={Button} variant="link" fontSize="xs">
+            {!user?.isLoading && !user?.error && user?.data.username}
+          </MenuButton>
+          <MenuList>
+            <MenuGroup title="Profile">
+              <MenuDivider />
+              <Link to="/profile" content="fit">
+                <MenuItem>My Account</MenuItem>
+              </Link>
+              <Link to="/logout" content="fit">
+                <MenuItem>Log out </MenuItem>
+              </Link>
+            </MenuGroup>
+          </MenuList>
+        </Menu>
       )}
 
       <ColorModeSwitch />

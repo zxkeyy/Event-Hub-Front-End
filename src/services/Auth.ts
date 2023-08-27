@@ -3,6 +3,23 @@ import AuthClient from "./auth-client";
 const authClient = new AuthClient();
 const TOKEN_KEY = "notatoken";
 
+export const register = async (
+  username: string,
+  email: string,
+  password: string
+) => {
+  await authClient.post(
+    {
+      username,
+      email,
+      password,
+    },
+    "users/"
+  );
+
+  logout();
+};
+
 export const login = async (username: string, password: string) => {
   const response = await authClient.post(
     {
@@ -36,6 +53,7 @@ export const validateCurrentToken = async () => {
 };
 
 export default {
+  register,
   login,
   logout,
   getToken,
