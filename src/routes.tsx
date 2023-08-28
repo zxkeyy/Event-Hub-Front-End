@@ -10,6 +10,7 @@ import HomePage2white from "./pages/Homepage2white";
 import LoginPage from "./pages/LoginPage";
 import LogoutPage from "./pages/LogoutPage";
 import RegisterPage from "./pages/RegisterPage";
+import CreateEventPage from "./pages/CreateEventPage";
 
 const router = createBrowserRouter([
   {
@@ -24,6 +25,7 @@ const router = createBrowserRouter([
       { path: "white", element: <HomePage2white /> },
       { path: "old", element: <HomePage /> },
       { path: "events", element: <EventSearchPage /> },
+      { path: "create-event", element: <CreateEventPage /> },
       { path: "old/events/:slug", element: <EventDetailPage /> },
       { path: "events/:slug", element: <EventDetailPage2 /> },
     ],
