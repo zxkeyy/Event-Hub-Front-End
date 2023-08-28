@@ -36,7 +36,7 @@ const NavBar = () => {
       </Box>
 
       <SearchField />
-      <Link to="/register" content="fit">
+      <Link to="/events/add" content="fit">
         <Button variant="ghost" fontSize="xs">
           Create Event
         </Button>

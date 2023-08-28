@@ -44,45 +44,49 @@ const LoginPage = () => {
       height={"100vh"}
     >
       <Box width="300px" padding="4">
-        <Stack spacing="3">
-          <Heading>Login</Heading>
-          <Divider />
-          <Input
-            placeholder="Username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-          <InputGroup>
+        <form
+          onSubmit={(req) => {
+            req.preventDefault();
+            handleLogin(username, password);
+          }}
+        >
+          <Stack spacing="3">
+            <Heading>Login</Heading>
+            <Divider />
             <Input
-              type={showPassword ? "text" : "password"}
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
             />
-            <InputRightElement width="4.5rem">
-              <Button
-                h="1.75rem"
-                size="sm"
-                onClick={() => setShowPassword(!showPassword)}
-              >
-                {showPassword ? "Hide" : "Show"}
-              </Button>
-            </InputRightElement>
-          </InputGroup>
-          {errorMessage && (
-            <Alert status="error" variant="left-accent">
-              <AlertIcon />
-              <AlertDescription>{errorMessage}</AlertDescription>
-            </Alert>
-          )}
+            <InputGroup>
+              <Input
+                type={showPassword ? "text" : "password"}
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              <InputRightElement width="4.5rem">
+                <Button
+                  h="1.75rem"
+                  size="sm"
+                  onClick={() => setShowPassword(!showPassword)}
+                >
+                  {showPassword ? "Hide" : "Show"}
+                </Button>
+              </InputRightElement>
+            </InputGroup>
+            {errorMessage && (
+              <Alert status="error" variant="left-accent">
+                <AlertIcon />
+                <AlertDescription>{errorMessage}</AlertDescription>
+              </Alert>
+            )}
 
-          <Button
-            colorScheme="purple"
-            onClick={() => handleLogin(username, password)}
-          >
-            Login
-          </Button>
-        </Stack>
+            <Button colorScheme="purple" type="submit">
+              Login
+            </Button>
+          </Stack>
+        </form>
       </Box>
     </Box>
   );
