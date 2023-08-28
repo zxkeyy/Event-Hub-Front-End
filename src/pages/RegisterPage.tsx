@@ -70,92 +70,97 @@ const RegisterPage = () => {
       height={"100vh"}
     >
       <Box width="400px" padding="4">
-        <Stack spacing="3">
-          <Heading>Register</Heading>
-          <Divider />
-          <Input
-            placeholder="Username"
-            required
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-          <Input
-            placeholder="Email"
-            required
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <InputGroup>
+        <form
+          onSubmit={(req) => {
+            req.preventDefault();
+            handleRegister(username, email, password, confirmPassword);
+          }}
+        >
+          <Stack spacing="3">
+            <Heading>Register</Heading>
+            <Divider />
             <Input
-              type={showPassword ? "text" : "password"}
+              placeholder="Username"
               required
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
             />
-            <InputRightElement width="4.5rem">
-              <Button
-                h="1.75rem"
-                size="sm"
-                onClick={() => setShowPassword(!showPassword)}
-              >
-                {showPassword ? "Hide" : "Show"}
-              </Button>
-            </InputRightElement>
-          </InputGroup>
-          <InputGroup>
             <Input
-              type={showPassword ? "text" : "password"}
-              placeholder="Confirm Password"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
+              placeholder="Email"
+              required
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
-            <InputRightElement width="4.5rem">
-              <Button
-                h="1.75rem"
-                size="sm"
-                onClick={() => setShowPassword(!showPassword)}
-              >
-                {showPassword ? "Hide" : "Show"}
-              </Button>
-            </InputRightElement>
-          </InputGroup>
-          {(nonFieldError || usernameError || emailError || passwordError) && (
-            <Alert status="error" variant="left-accent">
-              <AlertIcon />
-              <AlertDescription>
-                {nonFieldError && nonFieldError + "\n"}
-                {usernameError && (
-                  <>
-                    <b>Username: </b> <p>{usernameError + "\n"}</p>
-                  </>
-                )}
-                {emailError && (
-                  <>
-                    <b>Email: </b>
-                    <p>{emailError + "\n"}</p>
-                  </>
-                )}
-                {passwordError && (
-                  <>
-                    <b>Password: </b>
-                    <p>{passwordError + "\n"}</p>
-                  </>
-                )}
-              </AlertDescription>
-            </Alert>
-          )}
+            <InputGroup>
+              <Input
+                type={showPassword ? "text" : "password"}
+                required
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              <InputRightElement width="4.5rem">
+                <Button
+                  h="1.75rem"
+                  size="sm"
+                  onClick={() => setShowPassword(!showPassword)}
+                >
+                  {showPassword ? "Hide" : "Show"}
+                </Button>
+              </InputRightElement>
+            </InputGroup>
+            <InputGroup>
+              <Input
+                type={showPassword ? "text" : "password"}
+                placeholder="Confirm Password"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+              />
+              <InputRightElement width="4.5rem">
+                <Button
+                  h="1.75rem"
+                  size="sm"
+                  onClick={() => setShowPassword(!showPassword)}
+                >
+                  {showPassword ? "Hide" : "Show"}
+                </Button>
+              </InputRightElement>
+            </InputGroup>
+            {(nonFieldError ||
+              usernameError ||
+              emailError ||
+              passwordError) && (
+              <Alert status="error" variant="left-accent">
+                <AlertIcon />
+                <AlertDescription>
+                  {nonFieldError && nonFieldError + "\n"}
+                  {usernameError && (
+                    <>
+                      <b>Username: </b> <p>{usernameError + "\n"}</p>
+                    </>
+                  )}
+                  {emailError && (
+                    <>
+                      <b>Email: </b>
+                      <p>{emailError + "\n"}</p>
+                    </>
+                  )}
+                  {passwordError && (
+                    <>
+                      <b>Password: </b>
+                      <p>{passwordError + "\n"}</p>
+                    </>
+                  )}
+                </AlertDescription>
+              </Alert>
+            )}
 
-          <Button
-            colorScheme="purple"
-            onClick={() =>
-              handleRegister(username, email, password, confirmPassword)
-            }
-          >
-            Register
-          </Button>
-        </Stack>
+            <Button colorScheme="purple" type="submit">
+              Register
+            </Button>
+          </Stack>
+        </form>
       </Box>
     </Box>
   );
