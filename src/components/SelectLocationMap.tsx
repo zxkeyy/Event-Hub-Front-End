@@ -12,15 +12,19 @@ import useMapReverseLookup from "../hookers/useMapReverseLookup";
 interface Props {
   position: { lat: number; lng: number };
   locationName: string;
+  locationId: string;
   setPosition: (positon: { lat: number; lng: number }) => void;
   setLocationName: (name: string) => void;
+  setLocationId: (id: string) => void;
 }
 
 const SelectLocationMap = ({
   position,
   locationName,
+  locationId,
   setPosition,
   setLocationName,
+  setLocationId,
 }: Props) => {
   const center = { lat: 36.7538, lng: 3.0588 };
 
@@ -34,6 +38,12 @@ const SelectLocationMap = ({
       click: (e) => {
         setPosition(e.latlng);
         lookupData ? setLocationName(lookupData?.name) : "";
+        lookupData
+          ? setLocationId(
+              lookupData?.osm_type.charAt(0).toUpperCase() +
+                lookupData.osm_id.toString()
+            )
+          : "";
       },
     });
     return null;
@@ -49,6 +59,12 @@ const SelectLocationMap = ({
           if (marker != null) {
             setPosition(marker.getLatLng());
             lookupData ? setLocationName(lookupData?.name) : "";
+            lookupData
+              ? setLocationId(
+                  lookupData?.osm_type.charAt(0).toUpperCase() +
+                    lookupData.osm_id.toString()
+                )
+              : "";
           }
         },
       }),

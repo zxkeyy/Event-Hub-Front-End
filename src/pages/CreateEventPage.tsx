@@ -26,6 +26,7 @@ const CreateEventPage = () => {
   const [isOnline, setIsOnline] = useState(false);
   const [startDate, setStartDate] = useState(new Date());
   const [locationName, setLocationName] = useState("");
+  const [locationId, setLocationId] = useState("")
 
   return (
     <Box
@@ -127,10 +128,12 @@ const CreateEventPage = () => {
                 <SelectLocationMap
                   position={position}
                   locationName={locationName}
+                  locationId={locationId}
                   setPosition={(position: { lat: number; lng: number }) =>
                     setPosition(position)
                   }
                   setLocationName={(name) => setLocationName(name)}
+                  setLocationId={(id) => setLocationId(id)}
                 />
               </Box>
             </Box>
