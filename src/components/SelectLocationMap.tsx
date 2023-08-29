@@ -1,3 +1,4 @@
+import { Input, Text } from "@chakra-ui/react";
 import { useCallback, useMemo, useRef, useState } from "react";
 import {
   TileLayer,
@@ -6,25 +7,33 @@ import {
   MapContainer,
   useMapEvents,
 } from "react-leaflet";
+import useMapReverseLookup from "../hookers/useMapReverseLookup";
 
 interface Props {
-  position: {
-    lat: number;
-    lng: number;
-  };
-  setPosition: (positon:{ lat: number, lng: number }) => void;
+  position: { lat: number; lng: number };
+  locationName: string;
+  setPosition: (positon: { lat: number; lng: number }) => void;
+  setLocationName: (name: string) => void;
 }
 
-const SelectLocationMap = ({ position, setPosition }: Props) => {
-  const center = {
-    lat: 36.7538,
-    lng: 3.0588,
-  };
+const SelectLocationMap = ({
+  position,
+  locationName,
+  setPosition,
+  setLocationName,
+}: Props) => {
+  const center = { lat: 36.7538, lng: 3.0588 };
+
+  const { data: lookupData, error } = useMapReverseLookup(
+    position.lat,
+    position.lng
+  );
 
   function ClickComponent() {
     const map = useMapEvents({
       click: (e) => {
         setPosition(e.latlng);
+        lookupData ? setLocationName(lookupData?.name) : "";
       },
     });
     return null;
@@ -39,6 +48,7 @@ const SelectLocationMap = ({ position, setPosition }: Props) => {
           const marker = markerRef.current;
           if (marker != null) {
             setPosition(marker.getLatLng());
+            lookupData ? setLocationName(lookupData?.name) : "";
           }
         },
       }),
@@ -60,19 +70,34 @@ const SelectLocationMap = ({ position, setPosition }: Props) => {
   }
 
   return (
-    <MapContainer
-      center={center}
-      zoom={5}
-      scrollWheelZoom={false}
-      style={{ height: "300px", width: "100%" }}
-    >
-      <TileLayer
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-      />
-      <ClickComponent />
-      <DraggableMarker />
-    </MapContainer>
+    <>
+      <Text fontSize="xs" textColor="gray.400">
+        location:{" "}
+        {position.lat.toString().substring(0, 7) +
+          ", " +
+          position.lng.toString().substring(0, 7)}
+      </Text>
+      <MapContainer
+        center={center}
+        zoom={5}
+        scrollWheelZoom={false}
+        style={{ height: "300px", width: "100%" }}
+      >
+        <TileLayer
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        />
+        <ClickComponent />
+        <DraggableMarker />
+      </MapContainer>
+      <Text paddingTop={2} fontSize="sm">
+        {"Location name (editable)"}
+      </Text>
+      <Input
+        value={locationName}
+        onChange={(e) => setLocationName(e.currentTarget.value)}
+      ></Input>
+    </>
   );
 };
 

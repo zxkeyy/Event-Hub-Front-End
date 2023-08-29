@@ -12,10 +12,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 import AvatarEditor from "react-avatar-editor";
-import logo from "../assets/logo.png";
-import logo2 from "../assets/image-not-found.png";
 import { useRef, useState } from "react";
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import SelectLocationMap from "../components/SelectLocationMap";
 import useMapReverseLookup from "../hookers/useMapReverseLookup";
 
@@ -25,10 +22,6 @@ const CreateEventPage = () => {
   const editorRef = useRef<AvatarEditor>(null);
   const uploadImageRef = useRef<HTMLInputElement>(null);
   const [position, setPosition] = useState({ lat: 36.7538, lng: 3.0588 });
-  const { data: lookupData, error } = useMapReverseLookup(
-    position.lat,
-    position.lng
-  );
 
   const [isOnline, setIsOnline] = useState(false);
   const [startDate, setStartDate] = useState(new Date());
@@ -131,24 +124,14 @@ const CreateEventPage = () => {
                 </Select>
               </Box>
               <Box width="100%">
-                <Text fontSize="xs" textColor="gray.400">
-                  location:{" "}
-                  {position.lat.toString().substring(0, 7) +
-                    ", " +
-                    position.lng.toString().substring(0, 7)}
-                </Text>
                 <SelectLocationMap
                   position={position}
-                  setPosition={(position: { lat: number; lng: number }) => {
-                    setPosition(position);
-                    lookupData ? setLocationName(lookupData?.name) : "";
-                  }}
+                  locationName={locationName}
+                  setPosition={(position: { lat: number; lng: number }) =>
+                    setPosition(position)
+                  }
+                  setLocationName={(name) => setLocationName(name)}
                 />
-                <Text paddingTop={2} fontSize="sm">{"Location name (editable)"}</Text>
-                <Input
-                  value={locationName}
-                  onChange={(e) => setLocationName(e.currentTarget.value)}
-                ></Input>
               </Box>
             </Box>
           </Box>
