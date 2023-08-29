@@ -3,18 +3,14 @@ import {
   Button,
   Divider,
   Heading,
-  Image,
   Input,
-  InputGroup,
-  InputLeftAddon,
   Select,
-  Stack,
   Text,
 } from "@chakra-ui/react";
 import AvatarEditor from "react-avatar-editor";
 import { useRef, useState } from "react";
 import SelectLocationMap from "../components/SelectLocationMap";
-import useMapReverseLookup from "../hookers/useMapReverseLookup";
+
 
 const CreateEventPage = () => {
   const [image, setImage] = useState<string>("");
