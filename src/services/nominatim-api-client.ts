@@ -2,8 +2,7 @@ import axios, { AxiosRequestConfig } from "axios";
 
 const axiosInstance = axios.create({
   baseURL: "https://nominatim.openstreetmap.org",
-  params: {
-  },
+  params: {},
 });
 
 class APIClient<T> {
@@ -14,6 +13,10 @@ class APIClient<T> {
   }
 
   get = (config: AxiosRequestConfig) => {
+    return axiosInstance.get<T>(this.endpoint, config).then((res) => res.data);
+  };
+
+  getlist = (config: AxiosRequestConfig) => {
     return axiosInstance
       .get<T[]>(this.endpoint, config)
       .then((res) => res.data);

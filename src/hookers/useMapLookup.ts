@@ -21,6 +21,7 @@ const apiClient = new APIClient<LocationData>("/lookup");
 const useMapLookup = (id: string) =>
   useQuery({
     queryKey: ["map lookup", id],
-    queryFn: () => apiClient.get({ params: { osm_ids: id, format: "json" } }),
+    queryFn: () =>
+      apiClient.getlist({ params: { osm_ids: id, format: "json" } }),
   });
 export default useMapLookup;
