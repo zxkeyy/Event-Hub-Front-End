@@ -106,9 +106,8 @@ const CreateEventPage = () => {
 
   const { data: categories, isLoading } = useCategories();
 
-
   const [isOnline, setIsOnline] = useState(false);
-  const [name, setName] = useState("")
+  const [name, setName] = useState("");
   const [startDate, setStartDate] = useState(new Date());
   const [wilaya, setWilaya] = useState<number | null>(null);
   const [locationName, setLocationName] = useState("");
@@ -191,7 +190,12 @@ const CreateEventPage = () => {
               </Button>
               <Box width="100%">
                 <Text fontSize="sm">Event name</Text>
-                <Input placeholder="Event name" type="text"></Input>
+                <Input
+                  placeholder="Event name"
+                  type="text"
+                  value={name}
+                  onChange={(e) => setName(e.currentTarget.value)}
+                ></Input>
               </Box>
               <Box width="100%">
                 <Text fontSize="sm">Start Date and Time</Text>
