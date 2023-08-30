@@ -204,7 +204,7 @@ const CreateEventPage = () => {
               </Box>
               <Box width="100%">
                 <Text fontSize="sm">End Date and Time</Text>
-                <Input placeholder="End Date" type="datetime-local"></Input>
+                <Input placeholder="End Date" type="datetime-local" onChange={(e) => setEndDate(new Date(e.currentTarget.value))}></Input>
               </Box>
               <Box width="100%">
                 <Text fontSize="sm">Event Location</Text>
