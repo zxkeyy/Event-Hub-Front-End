@@ -109,6 +109,7 @@ const CreateEventPage = () => {
   const [isOnline, setIsOnline] = useState(false);
   const [name, setName] = useState("");
   const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date());
   const [wilaya, setWilaya] = useState<number | null>(null);
   const [locationName, setLocationName] = useState("");
   const [locationId, setLocationId] = useState("");
@@ -199,7 +200,7 @@ const CreateEventPage = () => {
               </Box>
               <Box width="100%">
                 <Text fontSize="sm">Start Date and Time</Text>
-                <Input placeholder="Start Date" type="datetime-local"></Input>
+                <Input placeholder="Start Date" type="datetime-local" onChange={(e) => setStartDate(new Date(e.currentTarget.value))}></Input>
               </Box>
               <Box width="100%">
                 <Text fontSize="sm">End Date and Time</Text>
