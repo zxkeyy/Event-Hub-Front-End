@@ -14,7 +14,7 @@ const TagsSelectList = ({ listLength }: Props) => {
 
   const [seeAll, setSeeAll] = useState(0);
 
-  if (selectedTags === undefined) return;
+  if (selectedTags === undefined) setSelectedTags([]);
   if (isLoading)
     return (
       <Stack>
@@ -33,7 +33,7 @@ const TagsSelectList = ({ listLength }: Props) => {
               onChange={() =>
                 selectedTags?.length != 0 && selectedTags?.includes(tag.id)
                   ? setSelectedTags(selectedTags.filter((id) => id != tag.id))
-                  : setSelectedTags([...selectedTags, tag.id])
+                  : setSelectedTags([...selectedTags!, tag.id])
               }
             >
               <Checkbox
@@ -45,7 +45,9 @@ const TagsSelectList = ({ listLength }: Props) => {
             </Box>
           ))}
           <Link onClick={() => setSeeAll(0)}>
-            <Text fontSize="sm" as="u">See less</Text>
+            <Text fontSize="sm" as="u">
+              See less
+            </Text>
           </Link>
         </>
       )}
@@ -58,7 +60,7 @@ const TagsSelectList = ({ listLength }: Props) => {
               onChange={() =>
                 selectedTags?.length != 0 && selectedTags?.includes(tag.id)
                   ? setSelectedTags(selectedTags.filter((id) => id != tag.id))
-                  : setSelectedTags([...selectedTags, tag.id])
+                  : setSelectedTags([...selectedTags!, tag.id])
               }
             >
               <Checkbox
@@ -71,7 +73,9 @@ const TagsSelectList = ({ listLength }: Props) => {
           ))}
           {tags && tags?.results.length > listLength && (
             <Link onClick={() => setSeeAll(1)}>
-              <Text fontSize="sm" as="u">See all</Text>
+              <Text fontSize="sm" as="u">
+                See all
+              </Text>
             </Link>
           )}
         </>
