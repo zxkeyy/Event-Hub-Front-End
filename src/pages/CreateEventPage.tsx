@@ -34,6 +34,7 @@ import {
 } from "react-icons/bs";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import useCategories from "../hookers/useCategories";
 
 const wilayas = [
   "Adrar",
@@ -103,12 +104,17 @@ const CreateEventPage = () => {
   const uploadImageRef = useRef<HTMLInputElement>(null);
   const [position, setPosition] = useState({ lat: 36.7538, lng: 3.0588 });
 
+  const { data: categories, isLoading } = useCategories();
+
+
   const [isOnline, setIsOnline] = useState(false);
+  const [name, setName] = useState("")
   const [startDate, setStartDate] = useState(new Date());
   const [wilaya, setWilaya] = useState<number | null>(null);
   const [locationName, setLocationName] = useState("");
   const [locationId, setLocationId] = useState("");
   const [body, setBody] = useState("");
+  const [category, setCategory] = useState<number>();
 
   return (
     <Box
@@ -159,7 +165,7 @@ const CreateEventPage = () => {
                 <AvatarEditor
                   ref={editorRef}
                   image={image}
-                  style={{ width: "100%", "padding-top": "100%" }}
+                  style={{ width: "100%", paddingTop: "100%" }}
                   border={0}
                   color={[255, 255, 255, 0.6]} // RGBA
                   scale={1}
@@ -208,7 +214,7 @@ const CreateEventPage = () => {
                 {!isOnline && (
                   <>
                     <InputGroup marginTop={2}>
-                      <Input value={locationName}></Input>
+                      <Input value={locationName} readOnly></Input>
                       <InputRightElement>
                         <IconButton
                           size="sm"
@@ -268,17 +274,17 @@ const CreateEventPage = () => {
                   </TabList>
                   <TabPanels>
                     <TabPanel paddingX={1}>
-                      <Text fontSize="xs" textColor="whiteAlpha.600">
-                        <Link
-                          isExternal
-                          href="https://www.markdownguide.org/getting-started/"
-                        >
-                          <HStack>
-                            <Text>learn more about Markdown</Text>
-                            <BsInfoCircle />
-                          </HStack>
-                        </Link>
-                      </Text>
+                      <Link
+                        fontSize="xs"
+                        textColor="whiteAlpha.600"
+                        isExternal
+                        href="https://www.markdownguide.org/getting-started/"
+                      >
+                        <HStack>
+                          <Text>learn more about Markdown</Text>
+                          <BsInfoCircle />
+                        </HStack>
+                      </Link>
 
                       <Textarea
                         width="100%"
@@ -305,6 +311,44 @@ const CreateEventPage = () => {
                     </TabPanel>
                   </TabPanels>
                 </Tabs>
+              </Box>
+              <Box width="100%">
+                {categories && (
+                  <>
+                    <Text fontSize="sm">Category</Text>
+                    <Menu>
+                      <MenuButton
+                        as={Button}
+                        rightIcon={<BsChevronDown />}
+                        variant="outline"
+                        textAlign="start"
+                        width="100%"
+                        overflow="hidden"
+                        fontWeight="normal"
+                      >
+                        {category
+                          ? categories.results.find(
+                              (categoryRes) => categoryRes.id === category
+                            )?.name
+                          : "Choose a category"}
+                      </MenuButton>
+                      <MenuList
+                        maxHeight={300}
+                        overflowY="scroll"
+                        zIndex={99999}
+                      >
+                        {categories.results.map((categoryRes) => (
+                          <MenuItem
+                            key={categoryRes.id}
+                            onClick={() => setCategory(categoryRes.id)}
+                          >
+                            {categoryRes.name}
+                          </MenuItem>
+                        ))}
+                      </MenuList>
+                    </Menu>
+                  </>
+                )}
               </Box>
             </Box>
           </Box>
