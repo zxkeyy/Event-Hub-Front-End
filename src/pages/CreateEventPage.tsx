@@ -2,15 +2,99 @@ import {
   Box,
   Button,
   Divider,
+  HStack,
   Heading,
+  IconButton,
   Input,
+  InputGroup,
+  InputRightElement,
+  Link,
+  Menu,
+  MenuButton,
+  MenuDivider,
+  MenuItem,
+  MenuList,
   Select,
+  Tab,
+  TabList,
+  TabPanel,
+  TabPanels,
+  Tabs,
   Text,
+  Textarea,
 } from "@chakra-ui/react";
 import AvatarEditor from "react-avatar-editor";
 import { useRef, useState } from "react";
 import SelectLocationMap from "../components/SelectLocationMap";
+import {
+  BsChevronDown,
+  BsGeoAltFill,
+  BsGeoFill,
+  BsInfoCircle,
+} from "react-icons/bs";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
+const wilayas = [
+  "Adrar",
+  "Chlef",
+  "Laghouat",
+  "Oum El Bouaghi",
+  "Batna",
+  "Béjaïa",
+  "Biskra",
+  "Béchar",
+  "Blida",
+  "Bouïra",
+  "Tamanrasset",
+  "Tébessa",
+  "Tlemcen",
+  "Tiaret",
+  "Tizi Ouzou",
+  "Algiers",
+  "Djelfa",
+  "Jijel",
+  "Sétif",
+  "Saïda",
+  "Skikda",
+  "Sidi Bel Abbès",
+  "Annaba",
+  "Guelma",
+  "Constantine",
+  "Médéa",
+  "Mostaganem",
+  "Msila",
+  "Mascara",
+  "Ouargla",
+  "Oran",
+  "El Bayadh",
+  "Illizi",
+  "Bordj Bou Arréridj",
+  "Boumerdès",
+  "El Tarf",
+  "Tindouf",
+  "Tissemsilt",
+  "El Oued",
+  "Khenchela",
+  "Souk Ahras",
+  "Tipaza",
+  "Mila",
+  "Aïn Defla",
+  "Naâma",
+  "Aïn Témouchent",
+  "Ghardaïa",
+  "Relizane",
+  "El MGhair",
+  "El Menia",
+  "Ouled Djellal",
+  "Bordj Baji Mokhtar",
+  "Béni Abbès",
+  "Timimoun",
+  "Touggourt",
+  "Djanet",
+  "Ain Salah",
+  "Ain Guezzam",
+];
 
 const CreateEventPage = () => {
   const [image, setImage] = useState<string>("");
@@ -21,8 +105,10 @@ const CreateEventPage = () => {
 
   const [isOnline, setIsOnline] = useState(false);
   const [startDate, setStartDate] = useState(new Date());
+  const [wilaya, setWilaya] = useState<number | null>(null);
   const [locationName, setLocationName] = useState("");
-  const [locationId, setLocationId] = useState("")
+  const [locationId, setLocationId] = useState("");
+  const [body, setBody] = useState("");
 
   return (
     <Box
@@ -119,6 +205,48 @@ const CreateEventPage = () => {
                     Online
                   </option>
                 </Select>
+                {!isOnline && (
+                  <>
+                    <InputGroup marginTop={2}>
+                      <Input value={locationName}></Input>
+                      <InputRightElement>
+                        <IconButton
+                          size="sm"
+                          aria-label="Choose location"
+                          icon={<BsGeoAltFill />}
+                        />
+                      </InputRightElement>
+                    </InputGroup>
+                    <Menu>
+                      <MenuButton
+                        as={Button}
+                        rightIcon={<BsChevronDown />}
+                        variant="outline"
+                        textAlign="start"
+                        width="100%"
+                        overflow="hidden"
+                        fontWeight="normal"
+                        marginTop={2}
+                      >
+                        {wilaya ? wilayas[wilaya - 1] : "Wilaya"}
+                      </MenuButton>
+                      <MenuList
+                        maxHeight={300}
+                        overflowY="scroll"
+                        zIndex={99999}
+                      >
+                        {[...Array(58).keys()].map((n) => (
+                          <MenuItem
+                            key={n + 1}
+                            onClick={() => setWilaya(n + 1)}
+                          >
+                            {wilayas[n]}
+                          </MenuItem>
+                        ))}
+                      </MenuList>
+                    </Menu>
+                  </>
+                )}
               </Box>
               <Box width="100%">
                 <SelectLocationMap
@@ -132,19 +260,67 @@ const CreateEventPage = () => {
                   setLocationId={(id) => setLocationId(id)}
                 />
               </Box>
+              <Box width="100%">
+                <Tabs isFitted>
+                  <TabList>
+                    <Tab>Details</Tab>
+                    <Tab>Preview</Tab>
+                  </TabList>
+                  <TabPanels>
+                    <TabPanel paddingX={1}>
+                      <Text fontSize="xs" textColor="whiteAlpha.600">
+                        <Link
+                          isExternal
+                          href="https://www.markdownguide.org/getting-started/"
+                        >
+                          <HStack>
+                            <Text>learn more about Markdown</Text>
+                            <BsInfoCircle />
+                          </HStack>
+                        </Link>
+                      </Text>
+
+                      <Textarea
+                        width="100%"
+                        height="300px"
+                        placeholder="Details about the event."
+                        value={body}
+                        onChange={(e) => setBody(e.currentTarget.value)}
+                      />
+                    </TabPanel>
+                    <TabPanel paddingX={1}>
+                      <Box
+                        border="1px"
+                        borderRadius={10}
+                        borderColor="whiteAlpha.300"
+                        paddingX={3}
+                      >
+                        <ReactMarkdown
+                          className="markdown"
+                          remarkPlugins={[remarkGfm]}
+                        >
+                          {body}
+                        </ReactMarkdown>
+                      </Box>
+                    </TabPanel>
+                  </TabPanels>
+                </Tabs>
+              </Box>
             </Box>
           </Box>
+          <Input
+            name="dont delete, used for image upload"
+            display="none"
+            ref={uploadImageRef}
+            type="file"
+            onChange={(e) =>
+              setImage(
+                e.target.files ? URL.createObjectURL(e.target.files[0]) : ""
+              )
+            }
+          />
         </form>
       </Box>
-      <Input
-        name="dont delete, used for image upload"
-        display="none"
-        ref={uploadImageRef}
-        type="file"
-        onChange={(e) =>
-          setImage(e.target.files ? URL.createObjectURL(e.target.files[0]) : "")
-        }
-      />
     </Box>
   );
 };
