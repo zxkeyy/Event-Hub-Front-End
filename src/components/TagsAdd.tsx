@@ -14,7 +14,7 @@ import {
 } from "@chakra-ui/react";
 import useTags, { postTag } from "../hookers/useTags";
 import { useRef, useState } from "react";
-import { BsPlus, BsPlusLg } from "react-icons/bs";
+import { BsPlusLg } from "react-icons/bs";
 
 interface Props {
   tags: number[];
