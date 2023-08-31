@@ -29,12 +29,12 @@ import SelectLocationMap from "../components/SelectLocationMap";
 import {
   BsChevronDown,
   BsGeoAltFill,
-  BsGeoFill,
   BsInfoCircle,
 } from "react-icons/bs";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import useCategories from "../hookers/useCategories";
+import TagsAdd from "../components/TagsAdd";
 
 const wilayas = [
   "Adrar",
@@ -115,6 +115,7 @@ const CreateEventPage = () => {
   const [locationId, setLocationId] = useState("");
   const [body, setBody] = useState("");
   const [category, setCategory] = useState<number>();
+  const [tags, setTags] = useState<number[]>([])
 
   return (
     <Box
@@ -200,11 +201,21 @@ const CreateEventPage = () => {
               </Box>
               <Box width="100%">
                 <Text fontSize="sm">Start Date and Time</Text>
-                <Input placeholder="Start Date" type="datetime-local" onChange={(e) => setStartDate(new Date(e.currentTarget.value))}></Input>
+                <Input
+                  placeholder="Start Date"
+                  type="datetime-local"
+                  onChange={(e) =>
+                    setStartDate(new Date(e.currentTarget.value))
+                  }
+                ></Input>
               </Box>
               <Box width="100%">
                 <Text fontSize="sm">End Date and Time</Text>
-                <Input placeholder="End Date" type="datetime-local" onChange={(e) => setEndDate(new Date(e.currentTarget.value))}></Input>
+                <Input
+                  placeholder="End Date"
+                  type="datetime-local"
+                  onChange={(e) => setEndDate(new Date(e.currentTarget.value))}
+                ></Input>
               </Box>
               <Box width="100%">
                 <Text fontSize="sm">Event Location</Text>
@@ -354,6 +365,10 @@ const CreateEventPage = () => {
                     </Menu>
                   </>
                 )}
+              </Box>
+              <Box width="100%" height={300}>
+              <Text fontSize="sm">Tags</Text>
+                <TagsAdd tags={tags} setTags={(tags) => setTags(tags)} />
               </Box>
             </Box>
           </Box>
