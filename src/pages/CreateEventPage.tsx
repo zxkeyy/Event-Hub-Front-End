@@ -25,15 +25,12 @@ import {
 import AvatarEditor from "react-avatar-editor";
 import { useRef, useState } from "react";
 import SelectLocationMap from "../components/SelectLocationMap";
-import {
-  BsChevronDown,
-  BsGeoAltFill,
-  BsInfoCircle,
-} from "react-icons/bs";
+import { BsChevronDown, BsGeoAltFill, BsInfoCircle } from "react-icons/bs";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import useCategories from "../hookers/useCategories";
 import TagsAdd from "../components/TagsAdd";
+import HostSelect from "../components/HostSelect";
 
 const wilayas = [
   "Adrar",
@@ -113,8 +110,9 @@ const CreateEventPage = () => {
   const [locationName, setLocationName] = useState("");
   const [locationId, setLocationId] = useState("");
   const [body, setBody] = useState("");
-  const [category, setCategory] = useState<number>();
-  const [tags, setTags] = useState<number[]>([])
+  const [category, setCategory] = useState<number | null>(null);
+  const [tags, setTags] = useState<number[]>([]);
+  const [hosts, setHosts] = useState<number[]>([]);
 
   return (
     <Box
@@ -365,9 +363,16 @@ const CreateEventPage = () => {
                   </>
                 )}
               </Box>
-              <Box width="100%" height={300}>
-              <Text fontSize="sm">Tags</Text>
+              <Box width="100%">
+                <Text fontSize="sm">Tags</Text>
                 <TagsAdd tags={tags} setTags={(tags) => setTags(tags)} />
+              </Box>
+              <Box width="100%">
+              <Text fontSize="sm">Hosts</Text>
+                <HostSelect
+                  hosts={hosts}
+                  setHosts={(hosts) => setHosts(hosts)}
+                />
               </Box>
             </Box>
           </Box>

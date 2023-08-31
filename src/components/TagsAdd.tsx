@@ -24,7 +24,7 @@ interface Props {
 const TagsAdd = ({ tags, setTags }: Props) => {
   const [search, setSearch] = useState("");
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { data: tagsRes, isLoading, refetch } = useTags();
+  const { data: tagsRes, refetch } = useTags();
   const input = useRef<HTMLInputElement>(null);
 
   const onNewTag = async (name: string) => {

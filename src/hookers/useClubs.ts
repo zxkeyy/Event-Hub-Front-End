@@ -9,10 +9,10 @@ export interface Club {
   image: string;
 }
 
-const useClubs = () =>
+const useClubs = (params?: {}) =>
   useQuery<GetResponse<Club>, Error>({
     queryKey: ["clubs"],
-    queryFn: apiClient.getAll,
+    queryFn: () => apiClient.getAll({params}),
     staleTime: 24 * 60 * 60 * 1000, //24h so mosh is happy
   });
 

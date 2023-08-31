@@ -1,0 +1,94 @@
+import {
+  Box,
+  Button,
+  CloseButton,
+  HStack,
+  Image,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
+} from "@chakra-ui/react";
+import { BsChevronDown } from "react-icons/bs";
+import useUser from "../hookers/useUser";
+import useClubs from "../hookers/useClubs";
+
+interface Props {
+  hosts: number[];
+  setHosts: (hosts: number[]) => void;
+}
+
+const HostSelect = ({ hosts, setHosts }: Props) => {
+  const userId = useUser()?.data.id;
+  const { data: clubs } = useClubs({ owner: userId });
+
+  return (
+    <Menu matchWidth>
+      <MenuButton
+        as={Button}
+        rightIcon={<BsChevronDown />}
+        variant="outline"
+        textAlign="start"
+        width="100%"
+        overflow="hidden"
+        fontWeight="normal"
+      >
+        Add a host
+      </MenuButton>
+      <MenuList maxHeight={300} overflowY="scroll" zIndex={99999}>
+        {clubs &&
+          clubs.results.map((club) => (
+            <MenuItem
+              onClick={() => {
+                if (!hosts.includes(club.id)) setHosts([...hosts, club.id]);
+              }}
+            >
+              <Image
+                boxSize="2rem"
+                borderRadius="full"
+                src={club.image}
+                alt="Simon the pensive"
+                mr="12px"
+              />
+              <span>{club.name}</span>
+            </MenuItem>
+          ))}
+      </MenuList>
+      {hosts.map((hostId) => {
+        const host = clubs?.results.find((club) => club.id === hostId);
+        if (host)
+          return (
+            <Box
+              key={hostId}
+              padding={3}
+              marginTop={2}
+              border="1px"
+              borderRadius={15}
+              borderColor="whiteAlpha.300"
+            >
+              <HStack display="flex" justifyContent="space-between">
+                <HStack>
+                  <Image
+                    boxSize="3rem"
+                    borderRadius="full"
+                    src={host.image}
+                    alt="Simon the pensive"
+                    mr="12px"
+                  />
+                  <span>{host.name}</span>
+                </HStack>
+
+                <CloseButton
+                  onClick={() =>
+                    setHosts([...hosts.filter((id) => hostId != id)])
+                  }
+                />
+              </HStack>
+            </Box>
+          );
+      })}
+    </Menu>
+  );
+};
+
+export default HostSelect;
