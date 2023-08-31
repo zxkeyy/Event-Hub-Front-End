@@ -5,6 +5,7 @@ import {
   HStack,
   Heading,
   IconButton,
+  Image,
   Input,
   InputGroup,
   InputRightElement,
@@ -30,7 +31,7 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import useCategories from "../hookers/useCategories";
 import TagsAdd from "../components/TagsAdd";
-import HostSelect from "../components/HostSelect";
+import { HostSelect } from "../components/HostSelect";
 
 const wilayas = [
   "Adrar",
@@ -94,14 +95,14 @@ const wilayas = [
 ];
 
 const CreateEventPage = () => {
-  const [image, setImage] = useState<string>("");
-  const [croppedImage, setCroppedImage] = useState<string>("");
   const editorRef = useRef<AvatarEditor>(null);
   const uploadImageRef = useRef<HTMLInputElement>(null);
   const [position, setPosition] = useState({ lat: 36.7538, lng: 3.0588 });
-
+  
   const { data: categories, isLoading } = useCategories();
-
+  
+  const [croppedImage, setCroppedImage] = useState<string>("");
+  const [image, setImage] = useState<string>("");
   const [isOnline, setIsOnline] = useState(false);
   const [name, setName] = useState("");
   const [startDate, setStartDate] = useState(new Date());
@@ -155,15 +156,16 @@ const CreateEventPage = () => {
               gap={3}
             >
               <Box
-                borderRadius={25}
+                borderRadius={0}
                 bgColor="gray"
                 overflow="hidden"
-                width="full"
+                width="fit-content"
               >
                 <AvatarEditor
                   ref={editorRef}
                   image={image}
-                  style={{ width: "100%", paddingTop: "100%" }}
+                  width={400}
+                  height={400}
                   border={0}
                   color={[255, 255, 255, 0.6]} // RGBA
                   scale={1}
@@ -175,10 +177,21 @@ const CreateEventPage = () => {
                         : ""
                     )
                   }
-                  onImageChange={() =>
+                  onPositionChange={() =>
                     setCroppedImage(
                       editorRef.current?.getImage()
                         ? editorRef.current?.getImage().toDataURL()
+                        : ""
+                    )}
+                />
+                <Input
+                  display="none"
+                  ref={uploadImageRef}
+                  type="file"
+                  onChange={(e) =>
+                    setImage(
+                      e.target.files
+                        ? URL.createObjectURL(e.target.files[0])
                         : ""
                     )
                   }
@@ -187,6 +200,7 @@ const CreateEventPage = () => {
               <Button onClick={() => uploadImageRef.current?.click()}>
                 Upload Image
               </Button>
+
               <Box width="100%">
                 <Text fontSize="sm">Event name</Text>
                 <Input
@@ -376,16 +390,6 @@ const CreateEventPage = () => {
               </Box>
             </Box>
           </Box>
-          <Input
-            display="none"
-            ref={uploadImageRef}
-            type="file"
-            onChange={(e) =>
-              setImage(
-                e.target.files ? URL.createObjectURL(e.target.files[0]) : ""
-              )
-            }
-          />
         </form>
       </Box>
     </Box>

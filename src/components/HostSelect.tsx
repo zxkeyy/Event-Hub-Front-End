@@ -20,7 +20,7 @@ interface Props {
   setHosts: (hosts: number[]) => void;
 }
 
-const HostSelect = ({ hosts, setHosts }: Props) => {
+export const HostSelect = ({ hosts, setHosts }: Props) => {
   const userId = useUser()?.data.id;
   const { data: clubs } = useClubs({ owner: userId });
 
@@ -41,6 +41,7 @@ const HostSelect = ({ hosts, setHosts }: Props) => {
         {clubs &&
           clubs.results.map((club) => (
             <MenuItem
+              key={club.id}
               onClick={() => {
                 if (!hosts.includes(club.id)) setHosts([...hosts, club.id]);
               }}
