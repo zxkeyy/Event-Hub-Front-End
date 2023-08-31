@@ -368,7 +368,7 @@ const CreateEventPage = () => {
                 <TagsAdd tags={tags} setTags={(tags) => setTags(tags)} />
               </Box>
               <Box width="100%">
-              <Text fontSize="sm">Hosts</Text>
+                <Text fontSize="sm">Hosts</Text>
                 <HostSelect
                   hosts={hosts}
                   setHosts={(hosts) => setHosts(hosts)}
@@ -377,7 +377,6 @@ const CreateEventPage = () => {
             </Box>
           </Box>
           <Input
-            name="dont delete, used for image upload"
             display="none"
             ref={uploadImageRef}
             type="file"

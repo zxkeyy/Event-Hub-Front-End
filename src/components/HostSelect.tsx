@@ -2,14 +2,16 @@ import {
   Box,
   Button,
   CloseButton,
+  Divider,
   HStack,
   Image,
+  Link,
   Menu,
   MenuButton,
   MenuItem,
   MenuList,
 } from "@chakra-ui/react";
-import { BsChevronDown } from "react-icons/bs";
+import { BsChevronDown, BsPlusLg } from "react-icons/bs";
 import useUser from "../hookers/useUser";
 import useClubs from "../hookers/useClubs";
 
@@ -53,6 +55,10 @@ const HostSelect = ({ hosts, setHosts }: Props) => {
               <span>{club.name}</span>
             </MenuItem>
           ))}
+        <Divider />
+        <Link href="/create-host" isExternal>
+          <MenuItem icon={<BsPlusLg />}>Add a new host</MenuItem>
+        </Link>
       </MenuList>
       {hosts.map((hostId) => {
         const host = clubs?.results.find((club) => club.id === hostId);
