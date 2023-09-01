@@ -12,8 +12,8 @@ import {
   MenuList,
 } from "@chakra-ui/react";
 import { BsChevronDown, BsPlusLg } from "react-icons/bs";
-import useUser from "../hookers/useUser";
-import useClubs from "../hookers/useClubs";
+import useUser from "../../hookers/useUser";
+import useClubs from "../../hookers/useClubs";
 
 interface Props {
   hosts: number[];

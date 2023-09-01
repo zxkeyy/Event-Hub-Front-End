@@ -19,7 +19,7 @@ import {
   ModalOverlay,
 } from "@chakra-ui/react";
 import { BsGeoAltFill, BsChevronDown } from "react-icons/bs";
-import SelectLocationMap from "./SelectLocationMap";
+import SelectLocationMap from "../SelectLocationMap";
 import { useState } from "react";
 
 const wilayas = [

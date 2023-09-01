@@ -12,7 +12,7 @@ import {
   TagLabel,
   useDisclosure,
 } from "@chakra-ui/react";
-import useTags, { postTag } from "../hookers/useTags";
+import useTags, { postTag } from "../../hookers/useTags";
 import { useRef, useState } from "react";
 import { BsPlusLg } from "react-icons/bs";
 

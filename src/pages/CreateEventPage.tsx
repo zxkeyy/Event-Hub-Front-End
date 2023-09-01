@@ -1,17 +1,11 @@
-import {
-  Box,
-  Divider,
-  Heading,
-  Input,
-  Text,
-} from "@chakra-ui/react";
+import { Box, Button, Divider, Heading, Input, Text } from "@chakra-ui/react";
 import { useState } from "react";
-import TagsAdd from "../components/TagsAdd";
-import { HostSelect } from "../components/HostSelect";
-import CategoryInput from "../components/CategoryInput";
-import DetailsInput from "../components/DetailsInput";
-import LocationInput from "../components/LocationInput";
-import ImageInput from "../components/ImageInput";
+import TagsAdd from "../components/CreateEvent/TagsAdd";
+import { HostSelect } from "../components/CreateEvent/HostSelect";
+import CategoryInput from "../components/CreateEvent/CategoryInput";
+import DetailsInput from "../components/CreateEvent/DetailsInput";
+import LocationInput from "../components/CreateEvent/LocationInput";
+import ImageInput from "../components/CreateEvent/ImageInput";
 
 const CreateEventPage = () => {
   const [croppedImage, setCroppedImage] = useState<string>("");
@@ -26,6 +20,10 @@ const CreateEventPage = () => {
   const [category, setCategory] = useState<number | null>(null);
   const [tags, setTags] = useState<number[]>([]);
   const [hosts, setHosts] = useState<number[]>([]);
+
+  const onSubmit = () => {
+    
+  }
 
   return (
     <Box
@@ -44,7 +42,7 @@ const CreateEventPage = () => {
         borderColor="whiteAlpha.200"
         bgColor="purple.900"
         padding={5}
-        width="60%"
+        width="30%"
         display="flex"
         alignItems="center"
         flexDirection="column"
@@ -61,7 +59,7 @@ const CreateEventPage = () => {
             flexDirection="column"
           >
             <Box
-              width="40%"
+              width="100%"
               display="flex"
               alignItems="center"
               flexDirection="column"
@@ -72,6 +70,13 @@ const CreateEventPage = () => {
                   setCroppedImage={(croppedImage) =>
                     setCroppedImage(croppedImage)
                   }
+                />
+              </Box>
+              <Box width="100%">
+                <Text fontSize="sm">Hosts</Text>
+                <HostSelect
+                  hosts={hosts}
+                  setHosts={(hosts) => setHosts(hosts)}
                 />
               </Box>
 
@@ -118,7 +123,8 @@ const CreateEventPage = () => {
                 />
               </Box>
               <Box width="100%">
-                <DetailsInput body={body} setBody={(body) => setBody(body)} />
+                <Text fontSize="sm">Tags</Text>
+                <TagsAdd tags={tags} setTags={(tags) => setTags(tags)} />
               </Box>
               <Box width="100%">
                 <Text fontSize="sm">Category</Text>
@@ -128,16 +134,12 @@ const CreateEventPage = () => {
                 />
               </Box>
               <Box width="100%">
-                <Text fontSize="sm">Tags</Text>
-                <TagsAdd tags={tags} setTags={(tags) => setTags(tags)} />
+                <DetailsInput body={body} setBody={(body) => setBody(body)} />
               </Box>
-              <Box width="100%">
-                <Text fontSize="sm">Hosts</Text>
-                <HostSelect
-                  hosts={hosts}
-                  setHosts={(hosts) => setHosts(hosts)}
-                />
-              </Box>
+              <Divider />
+              <Button type="submit" variant="solid" width="100%">
+                Create event
+              </Button>
             </Box>
           </Box>
         </form>
