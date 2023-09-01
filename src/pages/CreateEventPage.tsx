@@ -5,7 +5,6 @@ import {
   HStack,
   Heading,
   IconButton,
-  Image,
   Input,
   InputGroup,
   InputRightElement,
@@ -29,9 +28,9 @@ import SelectLocationMap from "../components/SelectLocationMap";
 import { BsChevronDown, BsGeoAltFill, BsInfoCircle } from "react-icons/bs";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import useCategories from "../hookers/useCategories";
 import TagsAdd from "../components/TagsAdd";
 import { HostSelect } from "../components/HostSelect";
+import CategoryInput from "../components/CategoryInput";
 
 const wilayas = [
   "Adrar",
@@ -98,9 +97,7 @@ const CreateEventPage = () => {
   const editorRef = useRef<AvatarEditor>(null);
   const uploadImageRef = useRef<HTMLInputElement>(null);
   const [position, setPosition] = useState({ lat: 36.7538, lng: 3.0588 });
-  
-  const { data: categories, isLoading } = useCategories();
-  
+
   const [croppedImage, setCroppedImage] = useState<string>("");
   const [image, setImage] = useState<string>("");
   const [isOnline, setIsOnline] = useState(false);
@@ -182,7 +179,8 @@ const CreateEventPage = () => {
                       editorRef.current?.getImage()
                         ? editorRef.current?.getImage().toDataURL()
                         : ""
-                    )}
+                    )
+                  }
                 />
                 <Input
                   display="none"
@@ -340,42 +338,10 @@ const CreateEventPage = () => {
                 </Tabs>
               </Box>
               <Box width="100%">
-                {categories && (
-                  <>
-                    <Text fontSize="sm">Category</Text>
-                    <Menu>
-                      <MenuButton
-                        as={Button}
-                        rightIcon={<BsChevronDown />}
-                        variant="outline"
-                        textAlign="start"
-                        width="100%"
-                        overflow="hidden"
-                        fontWeight="normal"
-                      >
-                        {category
-                          ? categories.results.find(
-                              (categoryRes) => categoryRes.id === category
-                            )?.name
-                          : "Choose a category"}
-                      </MenuButton>
-                      <MenuList
-                        maxHeight={300}
-                        overflowY="scroll"
-                        zIndex={99999}
-                      >
-                        {categories.results.map((categoryRes) => (
-                          <MenuItem
-                            key={categoryRes.id}
-                            onClick={() => setCategory(categoryRes.id)}
-                          >
-                            {categoryRes.name}
-                          </MenuItem>
-                        ))}
-                      </MenuList>
-                    </Menu>
-                  </>
-                )}
+                <CategoryInput
+                  category={category}
+                  setCategory={(category) => setCategory(category)}
+                />
               </Box>
               <Box width="100%">
                 <Text fontSize="sm">Tags</Text>
