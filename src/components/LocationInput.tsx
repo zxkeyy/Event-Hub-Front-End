@@ -9,8 +9,18 @@ import {
   MenuList,
   MenuItem,
   Select,
+  useDisclosure,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
 } from "@chakra-ui/react";
 import { BsGeoAltFill, BsChevronDown } from "react-icons/bs";
+import SelectLocationMap from "./SelectLocationMap";
+import { useState } from "react";
 
 const wilayas = [
   "Adrar",
@@ -79,6 +89,9 @@ interface Props {
   wilaya: number | null;
   setWilaya: (wilaya: number) => void;
   locationName: string;
+  setLocationName: (locationName: string) => void;
+  locationId: string;
+  setLocationId: (locationId: string) => void;
 }
 
 const LocationInput = ({
@@ -87,7 +100,13 @@ const LocationInput = ({
   wilaya,
   setWilaya,
   locationName,
+  setLocationName,
+  locationId,
+  setLocationId,
 }: Props) => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [position, setPosition] = useState({ lat: 36.7538, lng: 3.0588 });
+
   return (
     <>
       <Select>
@@ -101,12 +120,17 @@ const LocationInput = ({
       {!isOnline && (
         <>
           <InputGroup marginTop={2}>
-            <Input value={locationName} readOnly></Input>
+            <Input
+              value={locationName}
+              placeholder="Location name"
+              onChange={(e) => setLocationName(e.currentTarget.value)}
+            ></Input>
             <InputRightElement>
               <IconButton
                 size="sm"
                 aria-label="Choose location"
                 icon={<BsGeoAltFill />}
+                onClick={onOpen}
               />
             </InputRightElement>
           </InputGroup>
@@ -131,6 +155,30 @@ const LocationInput = ({
               ))}
             </MenuList>
           </Menu>
+          <Modal isOpen={isOpen} onClose={onClose} isCentered>
+            <ModalOverlay />
+            <ModalContent>
+              <ModalHeader>Choose a location</ModalHeader>
+              <ModalCloseButton />
+              <ModalBody>
+                <SelectLocationMap
+                  position={position}
+                  locationName={locationName}
+                  locationId={locationId}
+                  setPosition={(position: { lat: number; lng: number }) =>
+                    setPosition(position)
+                  }
+                  setLocationName={(name) => setLocationName(name)}
+                  setLocationId={(id) => setLocationId(id)}
+                />
+              </ModalBody>
+              <ModalFooter>
+                <Button colorScheme="purple" onClick={onClose}>
+                  Done
+                </Button>
+              </ModalFooter>
+            </ModalContent>
+          </Modal>
         </>
       )}
     </>

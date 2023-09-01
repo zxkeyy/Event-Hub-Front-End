@@ -1,26 +1,15 @@
-import {
-  Box,
-  Button,
-  Divider,
-  Heading,
-  Input,
-  Text,
-} from "@chakra-ui/react";
+import { Box, Button, Divider, Heading, Input, Text } from "@chakra-ui/react";
 import AvatarEditor from "react-avatar-editor";
 import { useRef, useState } from "react";
-import SelectLocationMap from "../components/SelectLocationMap";
 import TagsAdd from "../components/TagsAdd";
 import { HostSelect } from "../components/HostSelect";
 import CategoryInput from "../components/CategoryInput";
 import DetailsInput from "../components/DetailsInput";
 import LocationInput from "../components/LocationInput";
 
-
-
 const CreateEventPage = () => {
   const editorRef = useRef<AvatarEditor>(null);
   const uploadImageRef = useRef<HTMLInputElement>(null);
-  const [position, setPosition] = useState({ lat: 36.7538, lng: 3.0588 });
 
   const [croppedImage, setCroppedImage] = useState<string>("");
   const [image, setImage] = useState<string>("");
@@ -158,18 +147,11 @@ const CreateEventPage = () => {
                   wilaya={wilaya}
                   setWilaya={(wilaya) => setWilaya(wilaya)}
                   locationName={locationName}
-                />
-              </Box>
-              <Box width="100%">
-                <SelectLocationMap
-                  position={position}
-                  locationName={locationName}
-                  locationId={locationId}
-                  setPosition={(position: { lat: number; lng: number }) =>
-                    setPosition(position)
+                  setLocationName={(locationName) =>
+                    setLocationName(locationName)
                   }
-                  setLocationName={(name) => setLocationName(name)}
-                  setLocationId={(id) => setLocationId(id)}
+                  locationId={locationId}
+                  setLocationId={(locationId) => setLocationId(locationId)}
                 />
               </Box>
               <Box width="100%">
