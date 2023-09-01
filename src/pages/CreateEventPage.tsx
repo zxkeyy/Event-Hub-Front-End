@@ -3,86 +3,19 @@ import {
   Button,
   Divider,
   Heading,
-  IconButton,
   Input,
-  InputGroup,
-  InputRightElement,
-  Menu,
-  MenuButton,
-  MenuItem,
-  MenuList,
-  Select,
   Text,
 } from "@chakra-ui/react";
 import AvatarEditor from "react-avatar-editor";
 import { useRef, useState } from "react";
 import SelectLocationMap from "../components/SelectLocationMap";
-import { BsChevronDown, BsGeoAltFill } from "react-icons/bs";
 import TagsAdd from "../components/TagsAdd";
 import { HostSelect } from "../components/HostSelect";
 import CategoryInput from "../components/CategoryInput";
 import DetailsInput from "../components/DetailsInput";
+import LocationInput from "../components/LocationInput";
 
-const wilayas = [
-  "Adrar",
-  "Chlef",
-  "Laghouat",
-  "Oum El Bouaghi",
-  "Batna",
-  "Béjaïa",
-  "Biskra",
-  "Béchar",
-  "Blida",
-  "Bouïra",
-  "Tamanrasset",
-  "Tébessa",
-  "Tlemcen",
-  "Tiaret",
-  "Tizi Ouzou",
-  "Algiers",
-  "Djelfa",
-  "Jijel",
-  "Sétif",
-  "Saïda",
-  "Skikda",
-  "Sidi Bel Abbès",
-  "Annaba",
-  "Guelma",
-  "Constantine",
-  "Médéa",
-  "Mostaganem",
-  "Msila",
-  "Mascara",
-  "Ouargla",
-  "Oran",
-  "El Bayadh",
-  "Illizi",
-  "Bordj Bou Arréridj",
-  "Boumerdès",
-  "El Tarf",
-  "Tindouf",
-  "Tissemsilt",
-  "El Oued",
-  "Khenchela",
-  "Souk Ahras",
-  "Tipaza",
-  "Mila",
-  "Aïn Defla",
-  "Naâma",
-  "Aïn Témouchent",
-  "Ghardaïa",
-  "Relizane",
-  "El MGhair",
-  "El Menia",
-  "Ouled Djellal",
-  "Bordj Baji Mokhtar",
-  "Béni Abbès",
-  "Timimoun",
-  "Touggourt",
-  "Djanet",
-  "Ain Salah",
-  "Ain Guezzam",
-];
+
 
 const CreateEventPage = () => {
   const editorRef = useRef<AvatarEditor>(null);
@@ -219,56 +152,13 @@ const CreateEventPage = () => {
               </Box>
               <Box width="100%">
                 <Text fontSize="sm">Event Location</Text>
-                <Select>
-                  <option onClick={() => setIsOnline(false)} value="in person">
-                    In Person
-                  </option>
-                  <option onClick={() => setIsOnline(true)} value="online">
-                    Online
-                  </option>
-                </Select>
-                {!isOnline && (
-                  <>
-                    <InputGroup marginTop={2}>
-                      <Input value={locationName} readOnly></Input>
-                      <InputRightElement>
-                        <IconButton
-                          size="sm"
-                          aria-label="Choose location"
-                          icon={<BsGeoAltFill />}
-                        />
-                      </InputRightElement>
-                    </InputGroup>
-                    <Menu>
-                      <MenuButton
-                        as={Button}
-                        rightIcon={<BsChevronDown />}
-                        variant="outline"
-                        textAlign="start"
-                        width="100%"
-                        overflow="hidden"
-                        fontWeight="normal"
-                        marginTop={2}
-                      >
-                        {wilaya ? wilayas[wilaya - 1] : "Wilaya"}
-                      </MenuButton>
-                      <MenuList
-                        maxHeight={300}
-                        overflowY="scroll"
-                        zIndex={99999}
-                      >
-                        {[...Array(58).keys()].map((n) => (
-                          <MenuItem
-                            key={n + 1}
-                            onClick={() => setWilaya(n + 1)}
-                          >
-                            {wilayas[n]}
-                          </MenuItem>
-                        ))}
-                      </MenuList>
-                    </Menu>
-                  </>
-                )}
+                <LocationInput
+                  isOnline={isOnline}
+                  setIsOnline={(isOnline) => setIsOnline(isOnline)}
+                  wilaya={wilaya}
+                  setWilaya={(wilaya) => setWilaya(wilaya)}
+                  locationName={locationName}
+                />
               </Box>
               <Box width="100%">
                 <SelectLocationMap
@@ -286,6 +176,7 @@ const CreateEventPage = () => {
                 <DetailsInput body={body} setBody={(body) => setBody(body)} />
               </Box>
               <Box width="100%">
+                <Text fontSize="sm">Category</Text>
                 <CategoryInput
                   category={category}
                   setCategory={(category) => setCategory(category)}

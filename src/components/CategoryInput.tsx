@@ -4,8 +4,6 @@ import {
   Button,
   MenuList,
   MenuItem,
-  Box,
-  Text,
   Skeleton,
 } from "@chakra-ui/react";
 import { BsChevronDown } from "react-icons/bs";
@@ -23,8 +21,7 @@ const CategoryInput = ({ category, setCategory }: Props) => {
     <>
       {isLoading && <Skeleton width="100%" height={10} />}
       {categories && (
-        <Box>
-          <Text fontSize="sm">Category</Text>
+          
           <Menu matchWidth>
             <MenuButton
               as={Button}
@@ -52,7 +49,6 @@ const CategoryInput = ({ category, setCategory }: Props) => {
               ))}
             </MenuList>
           </Menu>
-        </Box>
       )}
     </>
   );
