@@ -2,35 +2,26 @@ import {
   Box,
   Button,
   Divider,
-  HStack,
   Heading,
   IconButton,
   Input,
   InputGroup,
   InputRightElement,
-  Link,
   Menu,
   MenuButton,
   MenuItem,
   MenuList,
   Select,
-  Tab,
-  TabList,
-  TabPanel,
-  TabPanels,
-  Tabs,
   Text,
-  Textarea,
 } from "@chakra-ui/react";
 import AvatarEditor from "react-avatar-editor";
 import { useRef, useState } from "react";
 import SelectLocationMap from "../components/SelectLocationMap";
-import { BsChevronDown, BsGeoAltFill, BsInfoCircle } from "react-icons/bs";
-import ReactMarkdown from "react-markdown";
-import remarkGfm from "remark-gfm";
+import { BsChevronDown, BsGeoAltFill } from "react-icons/bs";
 import TagsAdd from "../components/TagsAdd";
 import { HostSelect } from "../components/HostSelect";
 import CategoryInput from "../components/CategoryInput";
+import DetailsInput from "../components/DetailsInput";
 
 const wilayas = [
   "Adrar",
@@ -292,50 +283,7 @@ const CreateEventPage = () => {
                 />
               </Box>
               <Box width="100%">
-                <Tabs isFitted>
-                  <TabList>
-                    <Tab>Details</Tab>
-                    <Tab>Preview</Tab>
-                  </TabList>
-                  <TabPanels>
-                    <TabPanel paddingX={1}>
-                      <Link
-                        fontSize="xs"
-                        textColor="whiteAlpha.600"
-                        isExternal
-                        href="https://www.markdownguide.org/getting-started/"
-                      >
-                        <HStack>
-                          <Text>learn more about Markdown</Text>
-                          <BsInfoCircle />
-                        </HStack>
-                      </Link>
-
-                      <Textarea
-                        width="100%"
-                        height="300px"
-                        placeholder="Details about the event."
-                        value={body}
-                        onChange={(e) => setBody(e.currentTarget.value)}
-                      />
-                    </TabPanel>
-                    <TabPanel paddingX={1}>
-                      <Box
-                        border="1px"
-                        borderRadius={10}
-                        borderColor="whiteAlpha.300"
-                        paddingX={3}
-                      >
-                        <ReactMarkdown
-                          className="markdown"
-                          remarkPlugins={[remarkGfm]}
-                        >
-                          {body}
-                        </ReactMarkdown>
-                      </Box>
-                    </TabPanel>
-                  </TabPanels>
-                </Tabs>
+                <DetailsInput body={body} setBody={(body) => setBody(body)} />
               </Box>
               <Box width="100%">
                 <CategoryInput
