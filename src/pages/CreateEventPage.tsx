@@ -1,18 +1,20 @@
-import { Box, Button, Divider, Heading, Input, Text } from "@chakra-ui/react";
-import AvatarEditor from "react-avatar-editor";
-import { useRef, useState } from "react";
+import {
+  Box,
+  Divider,
+  Heading,
+  Input,
+  Text,
+} from "@chakra-ui/react";
+import { useState } from "react";
 import TagsAdd from "../components/TagsAdd";
 import { HostSelect } from "../components/HostSelect";
 import CategoryInput from "../components/CategoryInput";
 import DetailsInput from "../components/DetailsInput";
 import LocationInput from "../components/LocationInput";
+import ImageInput from "../components/ImageInput";
 
 const CreateEventPage = () => {
-  const editorRef = useRef<AvatarEditor>(null);
-  const uploadImageRef = useRef<HTMLInputElement>(null);
-
   const [croppedImage, setCroppedImage] = useState<string>("");
-  const [image, setImage] = useState<string>("");
   const [isOnline, setIsOnline] = useState(false);
   const [name, setName] = useState("");
   const [startDate, setStartDate] = useState(new Date());
@@ -65,52 +67,13 @@ const CreateEventPage = () => {
               flexDirection="column"
               gap={3}
             >
-              <Box
-                borderRadius={0}
-                bgColor="gray"
-                overflow="hidden"
-                width="fit-content"
-              >
-                <AvatarEditor
-                  ref={editorRef}
-                  image={image}
-                  width={400}
-                  height={400}
-                  border={0}
-                  color={[255, 255, 255, 0.6]} // RGBA
-                  scale={1}
-                  rotate={0}
-                  onImageReady={() =>
-                    setCroppedImage(
-                      editorRef.current?.getImage()
-                        ? editorRef.current?.getImage().toDataURL()
-                        : ""
-                    )
-                  }
-                  onPositionChange={() =>
-                    setCroppedImage(
-                      editorRef.current?.getImage()
-                        ? editorRef.current?.getImage().toDataURL()
-                        : ""
-                    )
-                  }
-                />
-                <Input
-                  display="none"
-                  ref={uploadImageRef}
-                  type="file"
-                  onChange={(e) =>
-                    setImage(
-                      e.target.files
-                        ? URL.createObjectURL(e.target.files[0])
-                        : ""
-                    )
+              <Box width="100%" marginTop={5}>
+                <ImageInput
+                  setCroppedImage={(croppedImage) =>
+                    setCroppedImage(croppedImage)
                   }
                 />
               </Box>
-              <Button onClick={() => uploadImageRef.current?.click()}>
-                Upload Image
-              </Button>
 
               <Box width="100%">
                 <Text fontSize="sm">Event name</Text>
