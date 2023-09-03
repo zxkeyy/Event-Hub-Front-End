@@ -1,4 +1,14 @@
-import { Box, Button, Divider, Heading, Input, Text } from "@chakra-ui/react";
+import {
+  Alert,
+  AlertDescription,
+  AlertIcon,
+  Box,
+  Button,
+  Divider,
+  Heading,
+  Input,
+  Text,
+} from "@chakra-ui/react";
 import { useState } from "react";
 import TagsAdd from "../components/CreateEvent/TagsAdd";
 import { HostSelect } from "../components/CreateEvent/HostSelect";
@@ -6,14 +16,14 @@ import CategoryInput from "../components/CreateEvent/CategoryInput";
 import DetailsInput from "../components/CreateEvent/DetailsInput";
 import LocationInput from "../components/CreateEvent/LocationInput";
 import ImageInput from "../components/CreateEvent/ImageInput";
-import useEvent, { postEvent } from "../hookers/useEvent";
+import { postEvent } from "../hookers/useEvent";
 
 const CreateEventPage = () => {
   const [croppedImage, setCroppedImage] = useState<string>("");
   const [isOnline, setIsOnline] = useState(false);
   const [name, setName] = useState("");
-  const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(new Date());
+  const [startDate, setStartDate] = useState<Date>();
+  const [endDate, setEndDate] = useState<Date>();
   const [wilaya, setWilaya] = useState<number | null>(null);
   const [locationName, setLocationName] = useState("");
   const [locationId, setLocationId] = useState("");
@@ -21,6 +31,7 @@ const CreateEventPage = () => {
   const [category, setCategory] = useState<number | null>(null);
   const [tags, setTags] = useState<number[]>([]);
   const [hosts, setHosts] = useState<number[]>([]);
+  const [errors, setErrors] = useState<any>({});
 
   function slugify(str: string) {
     return String(str)
@@ -42,16 +53,59 @@ const CreateEventPage = () => {
   }
 
   const onSubmit = async () => {
+    setErrors({});
+    let errors_temp: { [key: string]: any } = {};
+
+    if (!croppedImage) {
+      setErrors({ ...errors, image: ["image error"] });
+      errors_temp.image = ["image error"];
+    }
+    if (hosts.length < 1) {
+      setErrors({ ...errors, clubs: ["clubs error"] });
+      errors_temp.clubs = ["clubs error"];
+    }
+    if (!name) {
+      setErrors({ ...errors, name: ["name error"] });
+      errors_temp.name = ["name error"];
+    }
+    if (!startDate) {
+      setErrors({ ...errors, start_date: ["start date error"] });
+      errors_temp.start_date = ["start date error"];
+    }
+    if (!endDate) {
+      setErrors({ ...errors, end_date: ["end date error"] });
+      errors_temp.end_date = ["end date error"];
+    }
+    if (!locationName) {
+      setErrors({ ...errors, location_name: ["location name error"] });
+      errors_temp.location_name = ["location name error"];
+    }
+    if (!locationId) {
+      setErrors({ ...errors, location_id: ["location id error"] });
+      errors_temp.location_id = ["location id error"];
+    }
+    if (wilaya === null) {
+      setErrors({ ...errors, wilaya: ["wilaya is required"] });
+      errors_temp.wilaya = ["wilaya error"];
+    }
+    if (errors) {
+      setErrors(errors_temp);
+      window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+      return;
+    }
+
     const eventForm = new FormData();
     eventForm.append("name", name);
-    eventForm.append("start_date", startDate.toISOString());
-    eventForm.append("end_date", endDate.toISOString());
-    eventForm.append("image", await dataURLToFile(croppedImage));
+    eventForm.append("start_date", startDate ? startDate.toISOString() : "");
+    eventForm.append("end_date", endDate ? endDate.toISOString() : "");
     eventForm.append("location_name", isOnline ? "Online" : locationName);
     eventForm.append("location_id", isOnline ? "0" : locationId);
     eventForm.append("description", "");
     eventForm.append("body", body);
     eventForm.append("slug", slugify(name));
+    if (croppedImage) {
+      eventForm.append("image", await dataURLToFile(croppedImage));
+    }
     hosts.forEach((value) => {
       eventForm.append("clubs", value.toString());
     });
@@ -64,7 +118,13 @@ const CreateEventPage = () => {
 
     try {
       await postEvent(eventForm);
-    } catch (errorEx: any) {}
+    } catch (errorEx: any) {
+      console.log(errorEx);
+      if (errorEx.response && errorEx.response.status === 400) {
+        setErrors(errorEx.response.data);
+      }
+      console.log(errors);
+    }
   };
 
   return (
@@ -117,6 +177,7 @@ const CreateEventPage = () => {
                   setCroppedImage={(croppedImage) =>
                     setCroppedImage(croppedImage)
                   }
+                  error={errors.image}
                 />
               </Box>
               <Box width="100%">
@@ -124,12 +185,14 @@ const CreateEventPage = () => {
                 <HostSelect
                   hosts={hosts}
                   setHosts={(hosts) => setHosts(hosts)}
+                  error={errors.clubs}
                 />
               </Box>
 
               <Box width="100%">
                 <Text fontSize="sm">Event name</Text>
                 <Input
+                  isInvalid={errors.name}
                   placeholder="Event name"
                   type="text"
                   value={name}
@@ -139,6 +202,7 @@ const CreateEventPage = () => {
               <Box width="100%">
                 <Text fontSize="sm">Start Date and Time</Text>
                 <Input
+                  isInvalid={errors.start_date}
                   placeholder="Start Date"
                   type="datetime-local"
                   onChange={(e) =>
@@ -149,6 +213,7 @@ const CreateEventPage = () => {
               <Box width="100%">
                 <Text fontSize="sm">End Date and Time</Text>
                 <Input
+                  isInvalid={errors.end_date}
                   placeholder="End Date"
                   type="datetime-local"
                   onChange={(e) => setEndDate(new Date(e.currentTarget.value))}
@@ -167,6 +232,9 @@ const CreateEventPage = () => {
                   }
                   locationId={locationId}
                   setLocationId={(locationId) => setLocationId(locationId)}
+                  error_id={errors.location_id}
+                  error_name={errors.location_name}
+                  error_wilaya={errors.wilaya}
                 />
               </Box>
               <Box width="100%">
@@ -184,6 +252,14 @@ const CreateEventPage = () => {
                 <DetailsInput body={body} setBody={(body) => setBody(body)} />
               </Box>
               <Divider />
+              {errors.nonFieldError && (
+                <Alert status="error" variant="left-accent">
+                  <AlertIcon />
+                  <AlertDescription>
+                    {errors.nonFieldError[0] + "\n"}
+                  </AlertDescription>
+                </Alert>
+              )}
               <Button type="submit" variant="solid" width="100%">
                 Create event
               </Button>

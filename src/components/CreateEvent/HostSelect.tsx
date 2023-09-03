@@ -18,9 +18,10 @@ import useClubs from "../../hookers/useClubs";
 interface Props {
   hosts: number[];
   setHosts: (hosts: number[]) => void;
+  error: boolean;
 }
 
-export const HostSelect = ({ hosts, setHosts }: Props) => {
+export const HostSelect = ({ hosts, setHosts, error }: Props) => {
   const userId = useUser()?.data.id;
   const { data: clubs } = useClubs({ owner: userId });
 
@@ -28,6 +29,8 @@ export const HostSelect = ({ hosts, setHosts }: Props) => {
     <Menu matchWidth>
       <MenuButton
         as={Button}
+        border={error ? "2px" : "1px"}
+        borderColor={error ? "red.300" : "whiteAlpha.300"}
         rightIcon={<BsChevronDown />}
         variant="outline"
         textAlign="start"

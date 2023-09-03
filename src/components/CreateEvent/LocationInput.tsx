@@ -92,6 +92,9 @@ interface Props {
   setLocationName: (locationName: string) => void;
   locationId: string;
   setLocationId: (locationId: string) => void;
+  error_name: boolean;
+  error_id: boolean;
+  error_wilaya: boolean;
 }
 
 const LocationInput = ({
@@ -103,6 +106,9 @@ const LocationInput = ({
   setLocationName,
   locationId,
   setLocationId,
+  error_id,
+  error_name,
+  error_wilaya,
 }: Props) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [position, setPosition] = useState({ lat: 36.7538, lng: 3.0588 });
@@ -121,12 +127,15 @@ const LocationInput = ({
         <>
           <InputGroup marginTop={2}>
             <Input
+              isInvalid={error_name}
               value={locationName}
               placeholder="Location name"
               onChange={(e) => setLocationName(e.currentTarget.value)}
             ></Input>
             <InputRightElement>
               <IconButton
+                border={error_id ? "2px" : ""}
+                borderColor={error_id ? "red.300" : ""}
                 size="sm"
                 aria-label="Choose location"
                 icon={<BsGeoAltFill />}
@@ -137,6 +146,8 @@ const LocationInput = ({
           <Menu matchWidth>
             <MenuButton
               as={Button}
+              border={error_wilaya ? "2px" : "1px"}
+              borderColor={error_wilaya ? "red.300" : "whiteAlpha.300"}
               rightIcon={<BsChevronDown />}
               variant="outline"
               textAlign="start"

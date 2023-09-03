@@ -4,9 +4,10 @@ import AvatarEditor from "react-avatar-editor";
 
 interface Props {
   setCroppedImage: (croppedImage: string) => void;
+  error: boolean;
 }
 
-const ImageInput = ({ setCroppedImage }: Props) => {
+const ImageInput = ({ setCroppedImage, error }: Props) => {
   const editorRef = useRef<AvatarEditor>(null);
   const uploadImageRef = useRef<HTMLInputElement>(null);
   const box = useRef(null);
@@ -49,6 +50,7 @@ const ImageInput = ({ setCroppedImage }: Props) => {
           display="none"
           ref={uploadImageRef}
           type="file"
+          accept="image/*"
           onChange={(e) =>
             setImage(
               e.target.files ? URL.createObjectURL(e.target.files[0]) : ""
@@ -57,6 +59,8 @@ const ImageInput = ({ setCroppedImage }: Props) => {
         />
       </Box>
       <Button
+        border={error ? "2px" : ""}
+        borderColor={error ? "red.300" : ""}
         width="100%"
         borderTopRadius={0}
         onClick={() => uploadImageRef.current?.click()}
