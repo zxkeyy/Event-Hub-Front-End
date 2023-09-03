@@ -17,8 +17,13 @@ import DetailsInput from "../components/CreateEvent/DetailsInput";
 import LocationInput from "../components/CreateEvent/LocationInput";
 import ImageInput from "../components/CreateEvent/ImageInput";
 import { postEvent } from "../hookers/useEvent";
+import Auth from "../services/Auth";
 
 const CreateEventPage = () => {
+  if (!Auth.getToken()) {
+    window.location.href = "/login";
+  }
+
   const [croppedImage, setCroppedImage] = useState<string>("");
   const [isOnline, setIsOnline] = useState(false);
   const [name, setName] = useState("");

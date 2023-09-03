@@ -10,6 +10,8 @@ import {
   Alert,
   AlertDescription,
   AlertIcon,
+  Link,
+  Text,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import Auth from "../services/Auth";
@@ -75,6 +77,7 @@ const LoginPage = () => {
                 </Button>
               </InputRightElement>
             </InputGroup>
+            <Text fontSize="2xs">Don't have an account? <Link href="/register" textColor="purple.200">register here.</Link></Text>
             {errorMessage && (
               <Alert status="error" variant="left-accent">
                 <AlertIcon />
