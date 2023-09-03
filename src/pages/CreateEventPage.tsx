@@ -57,40 +57,32 @@ const CreateEventPage = () => {
     let errors_temp: { [key: string]: any } = {};
 
     if (!croppedImage) {
-      setErrors({ ...errors, image: ["image error"] });
       errors_temp.image = ["image error"];
     }
     if (hosts.length < 1) {
-      setErrors({ ...errors, clubs: ["clubs error"] });
       errors_temp.clubs = ["clubs error"];
     }
     if (!name) {
-      setErrors({ ...errors, name: ["name error"] });
       errors_temp.name = ["name error"];
     }
     if (!startDate) {
-      setErrors({ ...errors, start_date: ["start date error"] });
       errors_temp.start_date = ["start date error"];
     }
     if (!endDate) {
-      setErrors({ ...errors, end_date: ["end date error"] });
       errors_temp.end_date = ["end date error"];
     }
     if (!locationName) {
-      setErrors({ ...errors, location_name: ["location name error"] });
       errors_temp.location_name = ["location name error"];
     }
     if (!locationId) {
-      setErrors({ ...errors, location_id: ["location id error"] });
       errors_temp.location_id = ["location id error"];
     }
     if (wilaya === null) {
-      setErrors({ ...errors, wilaya: ["wilaya is required"] });
       errors_temp.wilaya = ["wilaya error"];
     }
     if (errors) {
       setErrors(errors_temp);
-      window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+      window.scrollTo({ top: 0, left: 0, behavior: "instant" });
       return;
     }
 
@@ -123,7 +115,8 @@ const CreateEventPage = () => {
       if (errorEx.response && errorEx.response.status === 400) {
         setErrors(errorEx.response.data);
       }
-      console.log(errors);
+      window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+      return;
     }
   };
 
