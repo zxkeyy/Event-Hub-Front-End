@@ -6,6 +6,7 @@ import CategoryInput from "../components/CreateEvent/CategoryInput";
 import DetailsInput from "../components/CreateEvent/DetailsInput";
 import LocationInput from "../components/CreateEvent/LocationInput";
 import ImageInput from "../components/CreateEvent/ImageInput";
+import useEvent, { postEvent } from "../hookers/useEvent";
 
 const CreateEventPage = () => {
   const [croppedImage, setCroppedImage] = useState<string>("");
@@ -21,9 +22,50 @@ const CreateEventPage = () => {
   const [tags, setTags] = useState<number[]>([]);
   const [hosts, setHosts] = useState<number[]>([]);
 
-  const onSubmit = () => {
-    
+  function slugify(str: string) {
+    return String(str)
+      .normalize("NFKD") // split accented characters into their base characters and diacritical marks
+      .replace(/[\u0300-\u036f]/g, "") // remove all the accents, which happen to be all in the \u03xx UNICODE block.
+      .trim() // trim leading or trailing whitespace
+      .toLowerCase() // convert to lowercase
+      .replace(/[^a-z0-9 -]/g, "") // remove non-alphanumeric characters
+      .replace(/\s+/g, "-") // replace spaces with hyphens
+      .replace(/-+/g, "-"); // remove consecutive hyphens
   }
+
+  async function dataURLToFile(dataURL: string) {
+    const blob = await fetch(dataURL).then((res) => res.blob());
+    return new File([blob], slugify(name) + "file.jpg", {
+      type: "image/jpeg",
+      lastModified: new Date().getTime(),
+    });
+  }
+
+  const onSubmit = async () => {
+    const eventForm = new FormData();
+    eventForm.append("name", name);
+    eventForm.append("start_date", startDate.toISOString());
+    eventForm.append("end_date", endDate.toISOString());
+    eventForm.append("image", await dataURLToFile(croppedImage));
+    eventForm.append("location_name", isOnline ? "Online" : locationName);
+    eventForm.append("location_id", isOnline ? "0" : locationId);
+    eventForm.append("description", "");
+    eventForm.append("body", body);
+    eventForm.append("slug", slugify(name));
+    hosts.forEach((value) => {
+      eventForm.append("clubs", value.toString());
+    });
+    tags.forEach((value) => {
+      eventForm.append("tags", value.toString());
+    });
+    if (category) {
+      eventForm.append("category", category?.toString());
+    }
+
+    try {
+      await postEvent(eventForm);
+    } catch (errorEx: any) {}
+  };
 
   return (
     <Box
@@ -51,7 +93,12 @@ const CreateEventPage = () => {
           Create event
         </Heading>
         <Divider />
-        <form>
+        <form
+          onSubmit={(req) => {
+            req.preventDefault();
+            onSubmit();
+          }}
+        >
           <Box
             width="full"
             display="flex"

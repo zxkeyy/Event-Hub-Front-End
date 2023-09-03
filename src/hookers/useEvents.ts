@@ -5,9 +5,9 @@ import APIClient, { GetResponse } from "../services/api-client";
 const apiClient = new APIClient<Event>("/events");
 
 export interface Event {
-  id: number;
+  id?: number;
   name: string;
-  image: string;
+  image: string | File;
   clubs: number[];
   start_date: string;
   end_date: string;

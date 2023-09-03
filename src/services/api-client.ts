@@ -34,7 +34,9 @@ class APIClient<T> {
   };
 
   post = (config: {}) => {
-    return axiosInstance.post(this.endpoint, config).then((res) => res.data);
+    return axiosInstance
+      .post(this.endpoint + "/", config)
+      .then((res) => res.data);
   };
 }
 

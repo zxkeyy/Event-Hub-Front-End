@@ -10,4 +10,8 @@ const useEvent = (slug: string) =>
     queryFn: () => apiClient.get(slug),
   });
 
+  export const postEvent = async (event: any) => {
+    return await apiClient.post(event);
+  };
+
 export default useEvent;
