@@ -25,8 +25,8 @@ const ImageInput = ({ setCroppedImage, error }: Props) => {
         <AvatarEditor
           ref={editorRef}
           image={image}
-          width={dimensions ? dimensions.borderBox.width : 388}
-          height={dimensions ? dimensions.borderBox.width : 388}
+          width={dimensions ? dimensions.borderBox.width : 470}
+          height={dimensions ? dimensions.borderBox.width : 470}
           border={0}
           color={[255, 255, 255, 0.6]} // RGBA
           scale={1}

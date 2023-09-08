@@ -67,7 +67,10 @@ const NavBar = () => {
             <MenuGroup title="Profile">
               <MenuDivider />
               <Link to="/profile" content="fit">
-                <MenuItem>My Account</MenuItem>
+                <MenuItem>Account</MenuItem>
+              </Link>
+              <Link to="/my-events" content="fit">
+                <MenuItem>My Events</MenuItem>
               </Link>
               <Link to="/logout" content="fit">
                 <MenuItem>Log out </MenuItem>

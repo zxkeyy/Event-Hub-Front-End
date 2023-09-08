@@ -7,7 +7,7 @@ const apiClient = new APIClient<Event>("/events");
 export interface Event {
   id?: number;
   name: string;
-  image: string | File;
+  image: string;
   clubs: number[];
   start_date: string;
   end_date: string;

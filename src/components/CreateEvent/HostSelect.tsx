@@ -22,7 +22,7 @@ interface Props {
 }
 
 export const HostSelect = ({ hosts, setHosts, error }: Props) => {
-  const userId = useUser()?.data.id;
+  const userId = useUser()?.data?.id;
   const { data: clubs } = useClubs({ owner: userId });
 
   return (
