@@ -2,9 +2,15 @@ import { Box, Button, Divider, HStack, Heading, Stack } from "@chakra-ui/react";
 import EventCardHorizontal from "../components/EventCardHorizontal";
 import useEvents from "../hookers/useEvents";
 import { BiLoaderCircle } from "react-icons/bi";
+import useUser from "../hookers/useUser";
 
 const MyEventsPage = () => {
-  const { data: events, isLoading } = useEvents();
+  const ownerId = useUser()?.data?.id;
+  const { data: events, isLoading } = useEvents({
+    
+    ordering: "start_date",
+    owner: ownerId,
+  });
 
   return (
     <Box

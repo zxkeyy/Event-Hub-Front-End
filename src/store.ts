@@ -11,7 +11,7 @@ interface UserInfoStore {
 
 export const useUserInfoStore = create<UserInfoStore>((set) => ({
   userInfo: { loggedIn: false },
-  setLoggedIn: (loggedIn) => set(() => ({ userInfo: { loggedIn} })),
+  setLoggedIn: (loggedIn) => set(() => ({ userInfo: { loggedIn } })),
 }));
 
 export interface EventQuery {
@@ -23,6 +23,7 @@ export interface EventQuery {
   end_date__lt?: string | null;
   end_date__gt?: string | null;
   tags?: number[];
+  owner?: number;
   ordering?: string;
   limit?: number;
 }
@@ -36,6 +37,7 @@ interface EventQueryStore {
   setStartDateLt: (start_date__lt: string | null) => void;
   setStartDateGt: (start_date__gt: string | null) => void;
   setTags: (tags: number[]) => void;
+  setOwner: (owner: number) => void;
 }
 
 const useEventQueryStore = create<EventQueryStore>((set) => ({
@@ -52,6 +54,8 @@ const useEventQueryStore = create<EventQueryStore>((set) => ({
     set((store) => ({ eventQuery: { ...store.eventQuery, start_date__gt } })),
   setTags: (tags) =>
     set((store) => ({ eventQuery: { ...store.eventQuery, tags } })),
+  setOwner: (owner) =>
+    set((store) => ({ eventQuery: { ...store.eventQuery, owner } })),
 }));
 
 export default useEventQueryStore;

@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import useEventQueryStore, { EventQuery } from "../store";
 import APIClient, { GetResponse } from "../services/api-client";
 
-const apiClient = new APIClient<Event>("/events");
+const apiClient = new APIClient<Event>("/events/");
 
 export interface Event {
   id?: number;
