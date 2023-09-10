@@ -7,11 +7,12 @@ import {
   GridItem,
   Heading,
   Image,
+  LinkBox,
+  LinkOverlay,
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
 import { Event } from "../hookers/useEvents";
-import { Link } from "react-router-dom";
 import fallBackImage from "../assets/image-not-found.png";
 import parseDate from "../services/parse-date";
 import { FaShare } from "react-icons/fa";
@@ -26,7 +27,7 @@ const EventCard2 = ({ event }: Props) => {
   const borderColor = useColorModeValue("gray.300", "gray.800");
 
   return (
-    <Link to={"/events/" + event.slug}>
+    <LinkBox>
       <Card
         bgColor={bgColor}
         border="1px"
@@ -54,9 +55,11 @@ const EventCard2 = ({ event }: Props) => {
               <Text fontSize="xs" color="">
                 {parseDate(event.start_date, event.end_date).toUpperCase()}
               </Text>
-              <Heading size="md" fontSize="md" noOfLines={2}>
-                {event.name}
-              </Heading>
+              <LinkOverlay href={"/events/" + event.slug}>
+                <Heading size="md" fontSize="md" noOfLines={2}>
+                  {event.name}
+                </Heading>
+              </LinkOverlay>
               <Text fontSize="xs" color="gray.500" noOfLines={1}>
                 {event.location_name}
               </Text>
@@ -82,6 +85,11 @@ const EventCard2 = ({ event }: Props) => {
                 colorScheme="purple"
                 fontSize="sm"
                 bgColor="purple.400"
+                onClick={() =>
+                  navigator.clipboard.writeText(
+                    window.location.host + "/events/" + event.slug
+                  )
+                }
               >
                 <FaShare />
               </Button>
@@ -89,7 +97,7 @@ const EventCard2 = ({ event }: Props) => {
           </Grid>
         </CardBody>
       </Card>
-    </Link>
+    </LinkBox>
   );
 };
 
