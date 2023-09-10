@@ -25,9 +25,11 @@ import { BiEdit } from "react-icons/bi";
 
 interface Props {
   event: Event;
+  onDelete: () => void;
+  onShare: () => void;
 }
 
-const EventCardHorizontal = ({ event }: Props) => {
+const EventCardHorizontal = ({ event, onDelete, onShare}: Props) => {
   const bgColor = useColorModeValue("white", "purple.900");
   const borderColor = useColorModeValue("gray.300", "gray.800");
 
@@ -95,8 +97,14 @@ const EventCardHorizontal = ({ event }: Props) => {
                 ></MenuButton>
                 <Portal>
                   <MenuList>
-                    <MenuItem>Share</MenuItem>
-                    <MenuItem>Delete Event</MenuItem>
+                    <MenuItem onClick={() => onShare()}>Share</MenuItem>
+                    <MenuItem
+                      onClick={() => {
+                        onDelete();
+                      }}
+                    >
+                      Delete Event
+                    </MenuItem>
                   </MenuList>
                 </Portal>
               </Menu>
