@@ -16,7 +16,7 @@ import ImageInput from "../components/CreateEvent/ImageInput";
 import LocationInput from "../components/CreateEvent/LocationInput";
 import TagsAdd from "../components/CreateEvent/TagsAdd";
 import { useParams } from "react-router-dom";
-import useEvent, { postEvent, putEvent } from "../hookers/useEvent";
+import useEvent, { putEvent } from "../hookers/useEvent";
 import { useEffect, useState } from "react";
 
 const EditEventPage = () => {
@@ -168,7 +168,7 @@ const EditEventPage = () => {
         flexDirection="column"
       >
         <Heading padding={2} fontSize="xl">
-          Create event
+          Update event
         </Heading>
         <Divider />
         <form
@@ -282,7 +282,7 @@ const EditEventPage = () => {
                 </Alert>
               )}
               <Button type="submit" variant="solid" width="100%">
-                Create event
+                Update event
               </Button>
             </Box>
           </Box>
