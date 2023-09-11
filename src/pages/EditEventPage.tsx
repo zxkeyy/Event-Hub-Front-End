@@ -16,12 +16,12 @@ import ImageInput from "../components/CreateEvent/ImageInput";
 import LocationInput from "../components/CreateEvent/LocationInput";
 import TagsAdd from "../components/CreateEvent/TagsAdd";
 import { useParams } from "react-router-dom";
-import useEvent, { postEvent } from "../hookers/useEvent";
+import useEvent, { postEvent, putEvent } from "../hookers/useEvent";
 import { useEffect, useState } from "react";
 
 const EditEventPage = () => {
   const { slug } = useParams();
-  const { data: event, isLoading, error } = useEvent(slug!);
+  const { data: event, isLoading } = useEvent(slug!);
 
   const [croppedImage, setCroppedImage] = useState<string>("");
   const [isOnline, setIsOnline] = useState(false);
@@ -100,8 +100,9 @@ const EditEventPage = () => {
     if (wilaya === null) {
       errors_temp.wilaya = ["wilaya error"];
     }
-    if (errors) {
+    if (JSON.stringify(errors_temp) != "{}") {
       setErrors(errors_temp);
+      console.log(errors);
       window.scrollTo({ top: 0, left: 0, behavior: "instant" });
       return;
     }
@@ -112,6 +113,7 @@ const EditEventPage = () => {
     eventForm.append("end_date", endDate ? endDate.toISOString() : "");
     eventForm.append("location_name", isOnline ? "Online" : locationName);
     eventForm.append("location_id", isOnline ? "0" : locationId);
+    eventForm.append("wilaya", wilaya ? wilaya?.toString() : "");
     eventForm.append("description", "");
     eventForm.append("body", body);
     eventForm.append("slug", slugify(name));
@@ -129,8 +131,9 @@ const EditEventPage = () => {
     }
 
     try {
-      await postEvent(eventForm);
+      await putEvent(slug!, eventForm);
     } catch (errorEx: any) {
+      console.log("catch");
       console.log(errorEx);
       if (errorEx.response && errorEx.response.status === 400) {
         setErrors(errorEx.response.data);

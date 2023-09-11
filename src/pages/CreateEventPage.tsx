@@ -85,7 +85,8 @@ const CreateEventPage = () => {
     if (wilaya === null) {
       errors_temp.wilaya = ["wilaya error"];
     }
-    if (errors) {
+    if (JSON.stringify(errors_temp) != "{}") {
+      console.log(errors_temp);
       setErrors(errors_temp);
       window.scrollTo({ top: 0, left: 0, behavior: "instant" });
       return;
@@ -97,6 +98,7 @@ const CreateEventPage = () => {
     eventForm.append("end_date", endDate ? endDate.toISOString() : "");
     eventForm.append("location_name", isOnline ? "Online" : locationName);
     eventForm.append("location_id", isOnline ? "0" : locationId);
+    eventForm.append("wilaya", wilaya ? wilaya?.toString() : "");
     eventForm.append("description", "");
     eventForm.append("body", body);
     eventForm.append("slug", slugify(name));

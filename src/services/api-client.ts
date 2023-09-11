@@ -39,6 +39,12 @@ class APIClient<T> {
       .then((res) => res.data);
   };
 
+  put = (slug:string, config: {}) => {
+    return axiosInstance
+      .put(this.endpoint + "/" + slug + "/", config)
+      .then((res) => res.data);
+  };
+
   delete = (id: number | string) => {
     return axiosInstance
       .delete(this.endpoint + "/" + id)

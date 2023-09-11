@@ -14,6 +14,10 @@ export const postEvent = async (event: any) => {
   return await apiClient.post(event);
 };
 
+export const putEvent = async (slug: string, event: any) => {
+  return await apiClient.put(slug, event);
+};
+
 export const deleteEvent = async (slug: string) => {
   return await apiClient.delete(slug);
 };
