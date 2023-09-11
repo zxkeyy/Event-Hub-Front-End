@@ -9,15 +9,17 @@ export interface Event {
   name: string;
   image: string;
   clubs: number[];
+  category: number;
+  tags: number[]
   start_date: string;
   end_date: string;
   location_name: string;
   location_id: string;
+  wilaya: number;
   description: string;
   body: string;
   slug: string;
 }
-
 
 const useEvents = (query?: EventQuery) => {
   const eventQuery = query ? query : useEventQueryStore((s) => s.eventQuery);
