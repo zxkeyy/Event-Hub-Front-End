@@ -140,6 +140,8 @@ const EditEventPage = () => {
     }
   };
 
+  if (isLoading) return null;
+
   return (
     <Box
       display="flex"
@@ -191,6 +193,7 @@ const EditEventPage = () => {
                     setCroppedImage(croppedImage)
                   }
                   error={errors.image}
+                  defaultImage={event?.image}
                 />
               </Box>
               <Box width="100%">

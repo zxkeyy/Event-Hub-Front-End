@@ -1,18 +1,23 @@
 import { Box, Button, Input, useDimensions } from "@chakra-ui/react";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import AvatarEditor from "react-avatar-editor";
 
 interface Props {
+  defaultImage?: string;
   setCroppedImage: (croppedImage: string) => void;
   error: boolean;
 }
 
-const ImageInput = ({ setCroppedImage, error }: Props) => {
+const ImageInput = ({ setCroppedImage, error, defaultImage }: Props) => {
   const editorRef = useRef<AvatarEditor>(null);
   const uploadImageRef = useRef<HTMLInputElement>(null);
   const box = useRef(null);
   const dimensions = useDimensions(box);
   const [image, setImage] = useState<string>("");
+
+  useEffect(() => {
+    if (defaultImage) setImage(defaultImage);
+  }, [defaultImage]);
 
   return (
     <Box width="100%" ref={box}>
@@ -23,6 +28,7 @@ const ImageInput = ({ setCroppedImage, error }: Props) => {
         width="fit-content"
       >
         <AvatarEditor
+          crossOrigin={"anonymous"}
           ref={editorRef}
           image={image}
           width={dimensions ? dimensions.borderBox.width : 470}
