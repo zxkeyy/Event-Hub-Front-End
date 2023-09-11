@@ -116,7 +116,7 @@ const EditEventPage = () => {
     eventForm.append("wilaya", wilaya ? wilaya?.toString() : "");
     eventForm.append("description", "");
     eventForm.append("body", body);
-    eventForm.append("slug", slugify(name));
+    eventForm.append("slug", slug!);
     if (croppedImage) {
       eventForm.append("image", await dataURLToFile(croppedImage));
     }

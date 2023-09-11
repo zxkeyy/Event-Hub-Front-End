@@ -16,6 +16,7 @@ import {
   MenuList,
   Portal,
   IconButton,
+  Link,
 } from "@chakra-ui/react";
 import { BsThreeDots } from "react-icons/bs";
 import parseDate from "../services/parse-date";
@@ -29,7 +30,7 @@ interface Props {
   onShare: () => void;
 }
 
-const EventCardHorizontal = ({ event, onDelete, onShare}: Props) => {
+const EventCardHorizontal = ({ event, onDelete, onShare }: Props) => {
   const bgColor = useColorModeValue("white", "purple.900");
   const borderColor = useColorModeValue("gray.300", "gray.800");
 
@@ -75,15 +76,17 @@ const EventCardHorizontal = ({ event, onDelete, onShare}: Props) => {
               </Text>
             </GridItem>
             <GridItem area="primary" padding={2}>
-              <Button
-                width="full"
-                colorScheme="purple"
-                fontSize="sm"
-                bgColor="purple.400"
-                leftIcon={<BiEdit />}
-              >
-                edit
-              </Button>
+              <Link href={"/events/" + event.slug + "/edit"}>
+                <Button
+                  width="full"
+                  colorScheme="purple"
+                  fontSize="sm"
+                  bgColor="purple.400"
+                  leftIcon={<BiEdit />}
+                >
+                  edit
+                </Button>
+              </Link>
             </GridItem>
             <GridItem area="secondary" padding={2}>
               <Menu>
