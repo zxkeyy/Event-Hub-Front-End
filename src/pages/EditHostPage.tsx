@@ -1,5 +1,5 @@
-import { useState } from "react";
-import Auth from "../services/Auth";
+import { useParams } from "react-router-dom";
+import useClub, { putClub } from "../hookers/useClub";
 import {
   Alert,
   AlertDescription,
@@ -11,18 +11,25 @@ import {
   Input,
   Text,
 } from "@chakra-ui/react";
-import ImageInput from "../components/CreateEvent/ImageInput";
 import DetailsInput from "../components/CreateEvent/DetailsInput";
-import { postClub } from "../hookers/useClub";
+import ImageInput from "../components/CreateEvent/ImageInput";
+import { useEffect, useState } from "react";
 
-const CreateHostPage = () => {
-  if (!Auth.getToken()) {
-    window.location.href = "/login";
-  }
+const EditHostPage = () => {
+  const { id } = useParams();
+  const { data: host, isLoading } = useClub(parseInt(id!));
+
   const [croppedImage, setCroppedImage] = useState<string>("");
   const [name, setName] = useState("");
   const [body, setBody] = useState("");
   const [errors, setErrors] = useState<any>({});
+
+  useEffect(() => {
+    if (host) {
+      setName(host.name);
+      setBody(host.body);
+    }
+  }, [host]);
 
   function slugify(str: string) {
     return String(str)
@@ -68,7 +75,7 @@ const CreateHostPage = () => {
     }
 
     try {
-      postClub(hostForm);
+      putClub(parseInt(id!), hostForm);
     } catch (errorEx: any) {
       console.log(errorEx);
       if (errorEx.response && errorEx.response.status === 400) {
@@ -78,6 +85,8 @@ const CreateHostPage = () => {
       return;
     }
   };
+
+  if (isLoading) return null;
 
   return (
     <Box
@@ -102,7 +111,7 @@ const CreateHostPage = () => {
         flexDirection="column"
       >
         <Heading padding={2} fontSize="xl">
-          Create Host
+          Edit Host
         </Heading>
         <Divider />
         <form
@@ -130,6 +139,7 @@ const CreateHostPage = () => {
                     setCroppedImage(croppedImage)
                   }
                   error={errors.image}
+                  defaultImage={host?.image}
                 />
               </Box>
               <Box width="100%">
@@ -155,7 +165,7 @@ const CreateHostPage = () => {
                 </Alert>
               )}
               <Button type="submit" variant="solid" width="100%">
-                Create Host
+                Edit Host
               </Button>
             </Box>
           </Box>
@@ -165,4 +175,4 @@ const CreateHostPage = () => {
   );
 };
 
-export default CreateHostPage;
+export default EditHostPage;

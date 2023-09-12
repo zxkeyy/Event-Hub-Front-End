@@ -14,6 +14,7 @@ import CreateEventPage from "./pages/CreateEventPage";
 import MyEventsPage from "./pages/MyEventsPage";
 import EditEventPage from "./pages/EditEventPage";
 import CreateHostPage from "./pages/CreateHostPage";
+import EditHostPage from "./pages/EditHostPage";
 
 const router = createBrowserRouter([
   {
@@ -34,6 +35,7 @@ const router = createBrowserRouter([
       { path: "old/events/:slug", element: <EventDetailPage /> },
       { path: "events/:slug", element: <EventDetailPage2 /> },
       { path: "events/:slug/edit", element: <EditEventPage /> },
+      { path: "hosts/:id/edit", element: <EditHostPage /> },
     ],
   },
 ]);

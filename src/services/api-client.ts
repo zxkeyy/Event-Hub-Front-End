@@ -39,7 +39,7 @@ class APIClient<T> {
       .then((res) => res.data);
   };
 
-  put = (slug:string, config: {}) => {
+  put = (slug:string | number, config: {}) => {
     return axiosInstance
       .put(this.endpoint + "/" + slug + "/", config)
       .then((res) => res.data);

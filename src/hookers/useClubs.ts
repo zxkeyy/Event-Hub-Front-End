@@ -6,13 +6,14 @@ const apiClient = new APIClient<Club>("/clubs");
 export interface Club {
   id: number;
   name: string;
+  body: string;
   image: string;
 }
 
 const useClubs = (params?: {}) =>
   useQuery<GetResponse<Club>, Error>({
     queryKey: ["clubs"],
-    queryFn: () => apiClient.getAll({params}),
+    queryFn: () => apiClient.getAll({ params }),
     staleTime: 24 * 60 * 60 * 1000, //24h so mosh is happy
   });
 

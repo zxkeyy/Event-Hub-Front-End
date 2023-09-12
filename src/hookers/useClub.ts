@@ -14,4 +14,8 @@ export const postClub = async (club: any) => {
   return await apiClient.post(club);
 };
 
+export const putClub = async (id: number, event: any) => {
+  return await apiClient.put(id, event);
+};
+
 export default useClub;
