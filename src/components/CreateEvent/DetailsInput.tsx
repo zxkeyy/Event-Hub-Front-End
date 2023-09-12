@@ -43,7 +43,7 @@ const DetailsInput = ({ body, setBody }: Props) => {
           <Textarea
             width="100%"
             minHeight="300px"
-            placeholder="Details about the event."
+            placeholder="Write a detailed description here."
             value={body}
             onChange={(e) => setBody(e.currentTarget.value)}
           />

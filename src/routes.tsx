@@ -13,6 +13,7 @@ import RegisterPage from "./pages/RegisterPage";
 import CreateEventPage from "./pages/CreateEventPage";
 import MyEventsPage from "./pages/MyEventsPage";
 import EditEventPage from "./pages/EditEventPage";
+import CreateHostPage from "./pages/CreateHostPage";
 
 const router = createBrowserRouter([
   {
@@ -28,6 +29,7 @@ const router = createBrowserRouter([
       { path: "old", element: <HomePage /> },
       { path: "events", element: <EventSearchPage /> },
       { path: "create-event", element: <CreateEventPage /> },
+      { path: "create-host", element: <CreateHostPage /> },
       { path: "my-events", element: <MyEventsPage /> },
       { path: "old/events/:slug", element: <EventDetailPage /> },
       { path: "events/:slug", element: <EventDetailPage2 /> },
