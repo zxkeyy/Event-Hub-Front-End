@@ -10,7 +10,7 @@ export interface Event {
   image: string;
   clubs: number[];
   category: number;
-  tags: number[]
+  tags: number[];
   start_date: string;
   end_date: string;
   location_name: string;
@@ -21,7 +21,7 @@ export interface Event {
   slug: string;
 }
 
-const useEvents = (query?: EventQuery) => {
+const useEvents = (query?: EventQuery, enabled?: boolean) => {
   const eventQuery = query ? query : useEventQueryStore((s) => s.eventQuery);
   return useQuery<GetResponse<Event>, Error>({
     queryKey: ["events", eventQuery],
@@ -32,6 +32,7 @@ const useEvents = (query?: EventQuery) => {
           indexes: null, // by default: false
         },
       }),
+    enabled: enabled,
   });
 };
 

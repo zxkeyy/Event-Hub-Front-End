@@ -1,34 +1,34 @@
 import {
+  useToast,
+  useDisclosure,
   AlertDialog,
   AlertDialogBody,
   AlertDialogContent,
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogOverlay,
-  Box,
   Button,
+  Box,
   Divider,
   HStack,
   Heading,
   Stack,
-  useDisclosure,
-  useToast,
 } from "@chakra-ui/react";
-import EventCardHorizontal from "../components/EventCardHorizontal";
-import useEvents from "../hookers/useEvents";
-import { BiLoaderCircle } from "react-icons/bi";
-import useUser from "../hookers/useUser";
-import { deleteEvent } from "../hookers/useEvent";
 import { useRef, useState } from "react";
+import useUser from "../hookers/useUser";
+import useClubs from "../hookers/useClubs";
+import { deleteClub } from "../hookers/useClub";
+import { BiLoaderCircle } from "react-icons/bi";
+import ClubCardHorizontal from "../components/ClubCardHorizontal";
 
-const MyEventsPage = () => {
+const MyHostsPage = () => {
   const userData = useUser();
   const toast = useToast();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef = useRef(null);
 
-  const onShare = (slug: string) => {
-    navigator.clipboard.writeText(window.location.host + "/events/" + slug);
+  const onShare = (id: number) => {
+    navigator.clipboard.writeText(window.location.host + "/hosts/" + id);
     toast({
       title: "Link Copied.",
       status: "success",
@@ -37,24 +37,25 @@ const MyEventsPage = () => {
       isClosable: true,
     });
   };
-  const [tempSlug, setTempSlug] = useState("");
-  const onDelete = async () => {
-    await deleteEvent(tempSlug);
-    setTempSlug("");
-    refetch();
-  };
 
   const {
-    data: events,
+    data: clubs,
     isLoading,
     refetch,
-  } = useEvents(
+  } = useClubs(
     {
       ordering: "name",
       owner: userData && userData.data ? userData.data.id : -1,
     },
     userData ? !userData.isLoading : false
   );
+
+  const [tempId, setTempId] = useState(0);
+  const onDelete = async () => {
+    await deleteClub(tempId);
+    setTempId(0);
+    refetch();
+  };
 
   return (
     <>
@@ -66,7 +67,7 @@ const MyEventsPage = () => {
         <AlertDialogOverlay>
           <AlertDialogContent>
             <AlertDialogHeader fontSize="lg" fontWeight="bold">
-              Delete Event
+              Delete Host
             </AlertDialogHeader>
 
             <AlertDialogBody>
@@ -82,7 +83,7 @@ const MyEventsPage = () => {
                 onClick={async () => {
                   onDelete();
                   toast({
-                    title: "Event Deleted.",
+                    title: "Host Deleted.",
                     status: "success",
                     position: "bottom-right",
                     duration: 5000,
@@ -143,16 +144,16 @@ const MyEventsPage = () => {
             alignItems="center"
             flexDirection="column"
           >
-            <Stack spacing={6}>
+            <Stack spacing={6} width="100%">
               {isLoading && <BiLoaderCircle />}
-              {events?.results.map((event) => (
-                <EventCardHorizontal
-                  key={event.id}
-                  event={event}
+              {clubs?.results.map((club) => (
+                <ClubCardHorizontal
+                  key={club.id}
+                  club={club}
                   onDelete={() => {
-                    setTempSlug(event.slug), onOpen();
+                    setTempId(club.id), onOpen();
                   }}
-                  onShare={() => onShare(event.slug)}
+                  onShare={() => onShare(club.id)}
                 />
               ))}
             </Stack>
@@ -163,4 +164,4 @@ const MyEventsPage = () => {
   );
 };
 
-export default MyEventsPage;
+export default MyHostsPage;

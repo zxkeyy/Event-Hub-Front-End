@@ -18,4 +18,8 @@ export const putClub = async (id: number, event: any) => {
   return await apiClient.put(id, event);
 };
 
+export const deleteClub = async (id: number) => {
+  return await apiClient.delete(id);
+};
+
 export default useClub;
