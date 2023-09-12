@@ -13,6 +13,7 @@ import {
 } from "@chakra-ui/react";
 import ImageInput from "../components/CreateEvent/ImageInput";
 import DetailsInput from "../components/CreateEvent/DetailsInput";
+import { postClub } from "../hookers/useClub";
 
 const CreateHostPage = () => {
   if (!Auth.getToken()) {
@@ -59,14 +60,15 @@ const CreateHostPage = () => {
       return;
     }
 
-    const eventForm = new FormData();
-    eventForm.append("name", name);
-    eventForm.append("body", body);
+    const hostForm = new FormData();
+    hostForm.append("name", name);
+    hostForm.append("body", body);
     if (croppedImage) {
-      eventForm.append("image", await dataURLToFile(croppedImage));
+      hostForm.append("image", await dataURLToFile(croppedImage));
     }
 
     try {
+      postClub(hostForm);
     } catch (errorEx: any) {
       console.log(errorEx);
       if (errorEx.response && errorEx.response.status === 400) {

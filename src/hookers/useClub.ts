@@ -10,4 +10,8 @@ const useClub = (clubId: number) =>
     queryFn: () => apiClient.get(clubId),
   });
 
+export const postClub = async (club: any) => {
+  return await apiClient.post(club);
+};
+
 export default useClub;
