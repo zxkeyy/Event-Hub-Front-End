@@ -91,13 +91,13 @@ const EditEventPage = () => {
     if (!endDate) {
       errors_temp.end_date = ["end date error"];
     }
-    if (!locationName) {
+    if (!isOnline && !locationName) {
       errors_temp.location_name = ["location name error"];
     }
-    if (!locationId) {
+    if (!isOnline && !locationId) {
       errors_temp.location_id = ["location id error"];
     }
-    if (wilaya === null) {
+    if (!isOnline && wilaya === null) {
       errors_temp.wilaya = ["wilaya error"];
     }
     if (JSON.stringify(errors_temp) != "{}") {
