@@ -72,6 +72,9 @@ const NavBar = () => {
               <Link to="/my-events" content="fit">
                 <MenuItem>My Events</MenuItem>
               </Link>
+              <Link to="/my-hosts" content="fit">
+                <MenuItem>My Hosts</MenuItem>
+              </Link>
               <Link to="/logout" content="fit">
                 <MenuItem>Log out </MenuItem>
               </Link>
