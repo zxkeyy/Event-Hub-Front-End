@@ -31,7 +31,7 @@ const MyEventsPage = () => {
     toast({
       title: "Link Copied.",
       status: "success",
-      position: "top-right",
+      position: "bottom-right",
       duration: 3000,
       isClosable: true,
     });
@@ -81,7 +81,7 @@ const MyEventsPage = () => {
                   toast({
                     title: "Event Deleted.",
                     status: "success",
-                    position: "top-right",
+                    position: "bottom-right",
                     duration: 5000,
                     isClosable: true,
                   });

@@ -11,6 +11,7 @@ import {
   LinkOverlay,
   Text,
   useColorModeValue,
+  useToast,
 } from "@chakra-ui/react";
 import { Event } from "../hookers/useEvents";
 import fallBackImage from "../assets/image-not-found.png";
@@ -23,6 +24,7 @@ interface Props {
 }
 
 const EventCard2 = ({ event }: Props) => {
+  const toast = useToast();
   const bgColor = useColorModeValue("white", "purple.900");
   const borderColor = useColorModeValue("gray.300", "gray.800");
 
@@ -85,11 +87,19 @@ const EventCard2 = ({ event }: Props) => {
                 colorScheme="purple"
                 fontSize="sm"
                 bgColor="purple.400"
-                onClick={() =>
+                onClick={() => {
                   navigator.clipboard.writeText(
                     window.location.host + "/events/" + event.slug
-                  )
-                }
+                  );
+                  toast({
+                    title: "Link Copied.",
+                    
+                    position: "bottom-right",
+                    status: "success",
+                    duration: 2000,
+                    isClosable: true,
+                  });
+                }}
               >
                 <FaShare />
               </Button>
