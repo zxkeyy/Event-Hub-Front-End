@@ -12,7 +12,6 @@ import {
   Text,
 } from "@chakra-ui/react";
 import logo from "../assets/logo.png";
-import ColorModeSwitch from "./ColorModeSwitch";
 import SearchField from "./SearchField";
 import { Link } from "react-router-dom";
 import useUser from "../hookers/useUser";
@@ -82,8 +81,6 @@ const NavBar = () => {
           </MenuList>
         </Menu>
       )}
-
-      <ColorModeSwitch />
     </HStack>
   );
 };
