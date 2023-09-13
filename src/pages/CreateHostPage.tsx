@@ -21,6 +21,7 @@ const CreateHostPage = () => {
   }
   const [croppedImage, setCroppedImage] = useState<string>("");
   const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
   const [body, setBody] = useState("");
   const [errors, setErrors] = useState<any>({});
 
@@ -53,6 +54,9 @@ const CreateHostPage = () => {
     if (!name) {
       errors_temp.name = ["name error"];
     }
+    if (!description) {
+      errors_temp.description = ["description error"];
+    }
     if (JSON.stringify(errors_temp) != "{}") {
       console.log(errors_temp);
       setErrors(errors_temp);
@@ -62,6 +66,7 @@ const CreateHostPage = () => {
 
     const hostForm = new FormData();
     hostForm.append("name", name);
+    hostForm.append("description", description);
     hostForm.append("body", body);
     if (croppedImage) {
       hostForm.append("image", await dataURLToFile(croppedImage));
@@ -140,6 +145,17 @@ const CreateHostPage = () => {
                   type="text"
                   value={name}
                   onChange={(e) => setName(e.currentTarget.value)}
+                ></Input>
+              </Box>
+              <Box width="100%">
+                <Text fontSize="sm">Short description</Text>
+                <Input
+                noOfLines={2}
+                  isInvalid={errors.description}
+                  placeholder="Description"
+                  type="text"
+                  value={description}
+                  onChange={(e) => setDescription(e.currentTarget.value)}
                 ></Input>
               </Box>
               <Box width="100%">

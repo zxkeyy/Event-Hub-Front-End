@@ -122,7 +122,7 @@ const MyHostsPage = () => {
             flexDirection="column"
             marginBottom={3}
           >
-            <Heading fontSize="2xl">Your Events</Heading>
+            <Heading fontSize="2xl">Your Hosts</Heading>
             <Divider marginY={2} />
             <HStack
               display="flex"
