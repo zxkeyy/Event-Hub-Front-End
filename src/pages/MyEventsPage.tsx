@@ -167,7 +167,7 @@ const MyEventsPage = () => {
             alignItems="center"
             flexDirection="column"
           >
-            <Stack spacing={6}>
+            <Stack spacing={6} width="100%">
               {isLoading && <BiLoaderCircle />}
               {events?.results.map((event) => (
                 <EventCardHorizontal

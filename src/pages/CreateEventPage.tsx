@@ -117,6 +117,7 @@ const CreateEventPage = () => {
 
     try {
       await postEvent(eventForm);
+      window.location.href = "/events/" + slugify(name);
     } catch (errorEx: any) {
       console.log(errorEx);
       if (errorEx.response && errorEx.response.status === 400) {

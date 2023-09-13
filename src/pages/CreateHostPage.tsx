@@ -74,6 +74,7 @@ const CreateHostPage = () => {
 
     try {
       postClub(hostForm);
+      window.location.href = "/my-hosts";
     } catch (errorEx: any) {
       console.log(errorEx);
       if (errorEx.response && errorEx.response.status === 400) {

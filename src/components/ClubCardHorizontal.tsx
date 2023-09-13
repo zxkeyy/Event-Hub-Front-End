@@ -100,7 +100,7 @@ const ClubCardHorizontal = ({ club, onDelete, onShare }: Props) => {
                         onDelete();
                       }}
                     >
-                      Delete club
+                      Delete host
                     </MenuItem>
                   </MenuList>
                 </Portal>

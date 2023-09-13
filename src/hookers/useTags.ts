@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import APIClient, { GetResponse } from "../services/api-client";
 
-const apiClient = new APIClient<Tag>("/tags/");
+const apiClient = new APIClient<Tag>("/tags");
 
 export interface Tag {
   id: number;
