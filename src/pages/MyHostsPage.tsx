@@ -13,6 +13,7 @@ import {
   HStack,
   Heading,
   Stack,
+  Link,
 } from "@chakra-ui/react";
 import { useRef, useState } from "react";
 import useUser from "../hookers/useUser";
@@ -20,8 +21,14 @@ import useClubs from "../hookers/useClubs";
 import { deleteClub } from "../hookers/useClub";
 import { BiLoaderCircle } from "react-icons/bi";
 import ClubCardHorizontal from "../components/ClubCardHorizontal";
+import { FcPlus } from "react-icons/fc";
+import Auth from "../services/Auth";
 
 const MyHostsPage = () => {
+  if (!Auth.getToken()) {
+    window.location.href = "/login";
+  }
+
   const userData = useUser();
   const toast = useToast();
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -128,12 +135,29 @@ const MyHostsPage = () => {
               display="flex"
               justifyContent="start"
               width="100%"
-              height={10}
+              
             >
-              <Button height="100%">Upcoming</Button>
-              <Button height="100%">Past</Button>
+              
             </HStack>
           </Box>
+          <Link href="/create-host">
+            <Box
+              border="1px"
+              borderRadius={15}
+              borderColor="whiteAlpha.200"
+              bgColor="purple.900"
+              padding={5}
+              display="flex"
+              alignItems="center"
+              flexDirection="column"
+              marginBottom={3}
+              fontWeight="bold"
+            >
+              Add a Host
+              <FcPlus size={40} />
+            </Box>
+          </Link>
+
           <Box
             border="1px"
             borderRadius={15}

@@ -14,6 +14,7 @@ import {
 import DetailsInput from "../components/CreateEvent/DetailsInput";
 import ImageInput from "../components/CreateEvent/ImageInput";
 import { useEffect, useState } from "react";
+import Auth from "../services/Auth";
 
 const EditHostPage = () => {
   const { id } = useParams();
@@ -26,9 +27,13 @@ const EditHostPage = () => {
   const [errors, setErrors] = useState<any>({});
 
   useEffect(() => {
+    if (!Auth.getToken()) {
+      window.location.href = "/login";
+    }
+
     if (host) {
       setName(host.name);
-      setDescription(host.description)
+      setDescription(host.description);
       setBody(host.body);
     }
   }, [host]);

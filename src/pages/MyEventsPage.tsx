@@ -20,8 +20,13 @@ import { BiLoaderCircle } from "react-icons/bi";
 import useUser from "../hookers/useUser";
 import { deleteEvent } from "../hookers/useEvent";
 import { useRef, useState } from "react";
+import Auth from "../services/Auth";
 
 const MyEventsPage = () => {
+  if (!Auth.getToken()) {
+    window.location.href = "/login";
+  }
+
   const userData = useUser();
   const toast = useToast();
   const { isOpen, onOpen, onClose } = useDisclosure();
