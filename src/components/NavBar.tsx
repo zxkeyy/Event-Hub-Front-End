@@ -5,8 +5,6 @@ import {
   Image,
   Menu,
   MenuButton,
-  MenuDivider,
-  MenuGroup,
   MenuItem,
   MenuList,
   Text,
@@ -24,6 +22,7 @@ const NavBar = () => {
     <HStack
       bgColor="purple.800"
       padding={2}
+      paddingX={15}
       position="sticky"
       top="0"
       zIndex={9999999}
@@ -59,25 +58,22 @@ const NavBar = () => {
       )}
       {Auth.getToken() && (
         <Menu>
-          <MenuButton as={Button} variant="link" fontSize="xs">
-            {!user?.isLoading && !user?.error && user?.data.username}
+          <MenuButton as={Button} variant="ghost" fontSize="xs" width="fit-content" paddingRight={7}>
+            user : {!user?.isLoading && !user?.error && user?.data.username}
           </MenuButton>
           <MenuList>
-            <MenuGroup title="Profile">
-              <MenuDivider />
-              <Link to="/profile" content="fit">
-                <MenuItem>Account</MenuItem>
-              </Link>
-              <Link to="/my-events" content="fit">
-                <MenuItem>My Events</MenuItem>
-              </Link>
-              <Link to="/my-hosts" content="fit">
-                <MenuItem>My Hosts</MenuItem>
-              </Link>
-              <Link to="/logout" content="fit">
-                <MenuItem>Log out </MenuItem>
-              </Link>
-            </MenuGroup>
+            <Link to="/profile" content="fit">
+              <MenuItem>Account</MenuItem>
+            </Link>
+            <Link to="/my-events" content="fit">
+              <MenuItem>My Events</MenuItem>
+            </Link>
+            <Link to="/my-hosts" content="fit">
+              <MenuItem>My Hosts</MenuItem>
+            </Link>
+            <Link to="/logout" content="fit">
+              <MenuItem>Log out </MenuItem>
+            </Link>
           </MenuList>
         </Menu>
       )}
