@@ -42,7 +42,7 @@ const RegisterPage = () => {
     }
     try {
       await Auth.register(username, email, password);
-      window.location.href = "/";
+      window.location.href = "/login";
     } catch (errorEx: any) {
       if (errorEx.response && errorEx.response.status === 400) {
         console.log(errorEx.response.data);
