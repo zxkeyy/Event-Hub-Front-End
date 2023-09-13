@@ -84,6 +84,7 @@ const EditHostPage = () => {
 
     try {
       putClub(parseInt(id!), hostForm);
+      window.location.href = "/my-hosts";
     } catch (errorEx: any) {
       console.log(errorEx);
       if (errorEx.response && errorEx.response.status === 400) {

@@ -137,6 +137,7 @@ const EditEventPage = () => {
 
     try {
       await putEvent(slug!, eventForm);
+      window.location.href = "/events/" + slug;
     } catch (errorEx: any) {
       console.log("catch");
       console.log(errorEx);
