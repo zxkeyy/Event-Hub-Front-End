@@ -10,6 +10,7 @@ import {
   Divider,
   HStack,
   Heading,
+  Link,
   Stack,
   useDisclosure,
   useToast,
@@ -21,6 +22,7 @@ import useUser from "../hookers/useUser";
 import { deleteEvent } from "../hookers/useEvent";
 import { useRef, useState } from "react";
 import Auth from "../services/Auth";
+import { FcPlus } from "react-icons/fc";
 
 const MyEventsPage = () => {
   if (!Auth.getToken()) {
@@ -138,6 +140,23 @@ const MyEventsPage = () => {
               <Button height="100%">Past</Button>
             </HStack>
           </Box>
+          <Link href="/create-event">
+            <Box
+              border="1px"
+              borderRadius={15}
+              borderColor="whiteAlpha.200"
+              bgColor="purple.900"
+              padding={5}
+              display="flex"
+              alignItems="center"
+              flexDirection="column"
+              marginBottom={3}
+              fontWeight="bold"
+            >
+              Add an Event
+              <FcPlus size={40} />
+            </Box>
+          </Link>
           <Box
             border="1px"
             borderRadius={15}

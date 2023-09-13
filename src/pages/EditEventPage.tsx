@@ -18,9 +18,13 @@ import TagsAdd from "../components/CreateEvent/TagsAdd";
 import { useParams } from "react-router-dom";
 import useEvent, { putEvent } from "../hookers/useEvent";
 import { useEffect, useState } from "react";
-
+import Auth from "../services/Auth";
 
 const EditEventPage = () => {
+  if (!Auth.getToken()) {
+    window.location.href = "/login";
+  }
+
   const { slug } = useParams();
   const { data: event, isLoading } = useEvent(slug!);
 
