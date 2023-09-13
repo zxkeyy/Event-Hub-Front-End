@@ -21,12 +21,14 @@ const EditHostPage = () => {
 
   const [croppedImage, setCroppedImage] = useState<string>("");
   const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
   const [body, setBody] = useState("");
   const [errors, setErrors] = useState<any>({});
 
   useEffect(() => {
     if (host) {
       setName(host.name);
+      setDescription(host.description)
       setBody(host.body);
     }
   }, [host]);
@@ -69,6 +71,7 @@ const EditHostPage = () => {
 
     const hostForm = new FormData();
     hostForm.append("name", name);
+    hostForm.append("description", description);
     hostForm.append("body", body);
     if (croppedImage) {
       hostForm.append("image", await dataURLToFile(croppedImage));
@@ -150,6 +153,17 @@ const EditHostPage = () => {
                   type="text"
                   value={name}
                   onChange={(e) => setName(e.currentTarget.value)}
+                ></Input>
+              </Box>
+              <Box width="100%">
+                <Text fontSize="sm">Short description</Text>
+                <Input
+                  noOfLines={2}
+                  isInvalid={errors.description}
+                  placeholder="Description"
+                  type="text"
+                  value={description}
+                  onChange={(e) => setDescription(e.currentTarget.value)}
                 ></Input>
               </Box>
               <Box width="100%">

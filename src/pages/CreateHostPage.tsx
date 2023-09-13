@@ -150,7 +150,7 @@ const CreateHostPage = () => {
               <Box width="100%">
                 <Text fontSize="sm">Short description</Text>
                 <Input
-                noOfLines={2}
+                  noOfLines={2}
                   isInvalid={errors.description}
                   placeholder="Description"
                   type="text"
