@@ -2,9 +2,7 @@ import { useParams } from "react-router-dom";
 import useClub from "../hookers/useClub";
 import {
   Box,
-  Center,
   Divider,
-  Grid,
   HStack,
   Heading,
   Image,
@@ -13,9 +11,6 @@ import {
   Text,
 } from "@chakra-ui/react";
 import MarkdownDetailsBox from "../components/MarkdownDetailsBox";
-import { MdCalendarMonth, MdLocationPin } from "react-icons/md";
-import OSMap from "../components/OSMap";
-import parseDate from "../services/parse-date";
 import EventCard2Slug from "../components/EventCard2Slug";
 
 const HostDetailsPage = () => {
@@ -57,30 +52,29 @@ const HostDetailsPage = () => {
                 </Box>
               </Box>
             </Box>
-            <Box
-              border="1px"
-              borderRadius={15}
-              borderColor="whiteAlpha.200"
-              bgColor="purple.900"
-              padding={5}
-              marginTop={2}
-              display="flex"
-              alignItems="center"
-              flexDirection="column"
-            >
-              <Heading fontSize="xl">Events</Heading>
-              <Divider marginY={2} />
-
-              {host.events.map((event) => (
-                <Box width="60%">
-                  <EventCard2Slug key={event.id} slug={event.slug} />
-                </Box>
-              ))}
-            </Box>
           </Box>
 
           <MarkdownDetailsBox markdown={host.body} />
         </Stack>
+        <Box
+          border="1px"
+          borderRadius={15}
+          borderColor="whiteAlpha.200"
+          bgColor="purple.900"
+          padding={5}
+          marginTop={2}
+          display="flex"
+          alignItems="center"
+          flexDirection="column"
+        >
+          <Heading fontSize="xl">Events</Heading>
+          <Divider marginY={2} />
+          <SimpleGrid columns={5} spacing={5}>
+            {host.events.map((event) => (
+              <EventCard2Slug key={event.id} slug={event.slug} />
+            ))}
+          </SimpleGrid>
+        </Box>
       </Box>
     </Box>
   );
