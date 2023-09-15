@@ -17,6 +17,7 @@ import CreateHostPage from "./pages/CreateHostPage";
 import EditHostPage from "./pages/EditHostPage";
 import MyHostsPage from "./pages/MyHostsPage";
 import ProfilePage from "./pages/ProfilePage";
+import HostDetailsPage from "./pages/HostDetailsPage";
 
 const router = createBrowserRouter([
   {
@@ -39,6 +40,7 @@ const router = createBrowserRouter([
       { path: "old/events/:slug", element: <EventDetailPage /> },
       { path: "events/:slug", element: <EventDetailPage2 /> },
       { path: "events/:slug/edit", element: <EditEventPage /> },
+      { path: "hosts/:id", element: <HostDetailsPage /> },
       { path: "hosts/:id/edit", element: <EditHostPage /> },
     ],
   },

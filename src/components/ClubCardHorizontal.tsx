@@ -60,7 +60,7 @@ const ClubCardHorizontal = ({ club, onDelete, onShare }: Props) => {
             paddingTop={0}
           >
             <GridItem area="title" paddingY={5}>
-              <LinkOverlay href={"/clubs/" + club.id}>
+              <LinkOverlay href={"/hosts/" + club.id}>
                 <Heading size="md" fontSize="md" noOfLines={2}>
                   {club.name}
                 </Heading>

@@ -62,14 +62,11 @@ const NavBar = () => {
             user : {!user?.isLoading && !user?.error && user?.data.username}
           </MenuButton>
           <MenuList>
-            <Link to="/profile" content="fit">
-              <MenuItem>Account</MenuItem>
-            </Link>
             <Link to="/my-events" content="fit">
-              <MenuItem>My Events</MenuItem>
+              <MenuItem>Your Events</MenuItem>
             </Link>
             <Link to="/my-hosts" content="fit">
-              <MenuItem>My Hosts</MenuItem>
+              <MenuItem>Your Hosts</MenuItem>
             </Link>
             <Link to="/logout" content="fit">
               <MenuItem>Log out </MenuItem>
