@@ -9,6 +9,7 @@ export interface Club {
   description: string;
   body: string;
   image: string;
+  events: [{ id: number; slug: string }];
 }
 
 const useClubs = (params?: {}, enabled?: boolean) =>
@@ -16,7 +17,7 @@ const useClubs = (params?: {}, enabled?: boolean) =>
     queryKey: ["clubs"],
     queryFn: () => apiClient.getAll({ params }),
     staleTime: 24 * 60 * 60 * 1000, //24h so mosh is happy
-    enabled: enabled
+    enabled: enabled,
   });
 
 export default useClubs;
