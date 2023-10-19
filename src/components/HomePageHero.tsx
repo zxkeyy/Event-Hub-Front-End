@@ -1,12 +1,16 @@
 import { Heading, HStack, Button, Text, Box } from "@chakra-ui/react";
+import { useRef } from "react";
+import { Link } from "react-router-dom";
 
 const HomePageHero = () => {
+  const ref = useRef(null);
+
   return (
     <Box
       bgImage={
         "https://unsplash.com/photos/9XngoIpxcEo/download?ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNjkyMTk3ODg5fA&force=true&w=2400"
       }
-      height={screen.availHeight - 162} // -150 for NavBar
+      height={screen.availHeight}
       bgSize="cover"
       bgPos="center"
       bgAttachment="fixed"
@@ -25,6 +29,9 @@ const HomePageHero = () => {
         </Text>
         <HStack>
           <Button
+            onClick={() => {
+              window.scrollTo(0, window.innerHeight)
+            }}
             size="lg"
             fontSize="4xl"
             padding={7}
@@ -34,16 +41,19 @@ const HomePageHero = () => {
           >
             Explore
           </Button>
-          <Button
-            size="lg"
-            fontSize="4xl"
-            borderRadius={4}
-            colorScheme="purple"
-            variant="outline"
-            color="purple.400"
-          >
-            Search
-          </Button>
+          <Link to="/events" content="fit">
+            <Button
+              size="lg"
+              fontSize="4xl"
+              borderRadius={4}
+              colorScheme="purple"
+              variant="outline"
+              color="purple.400"
+            >
+              Search
+            </Button>
+            <div ref={ref}></div>
+          </Link>
         </HStack>
       </div>
     </Box>
