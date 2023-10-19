@@ -21,10 +21,10 @@ const HomePageHero = () => {
       justifyContent="center"
     >
       <div>
-        <Heading fontSize="8xl" fontWeight="bold">
+        <Heading fontSize={{base: "xl", md: "4xl", xl: "7xl"}} fontWeight="bold">
           ALL EVENTS IN ONE PLACE
         </Heading>
-        <Text fontSize="2xl" fontWeight="bold">
+        <Text fontSize={{base: "1xl", xl: "2xl"}} fontWeight="bold">
           Looking for upcoming events?
         </Text>
         <HStack>
@@ -32,9 +32,9 @@ const HomePageHero = () => {
             onClick={() => {
               window.scrollTo(0, window.innerHeight)
             }}
-            size="lg"
-            fontSize="4xl"
-            padding={7}
+            size={{base:"md", md:"lg"}}
+            fontSize={{base:"2xl", md:"4xl"}}
+            padding={{base:5, md:7}}
             borderRadius={4}
             colorScheme="purple"
             bgColor="purple.400"
@@ -43,8 +43,8 @@ const HomePageHero = () => {
           </Button>
           <Link to="/events" content="fit">
             <Button
-              size="lg"
-              fontSize="4xl"
+              size={{base:"md", md:"lg"}}
+              fontSize={{base:"2xl", md:"4xl"}}
               borderRadius={4}
               colorScheme="purple"
               variant="outline"
